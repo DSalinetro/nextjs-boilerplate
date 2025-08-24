@@ -45,7 +45,7 @@ export default function Home() {
       id: 1,
       title: "AdorablyInkedxo Brand Ecosystem",
       description: "Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify. A vibrant, empathy-driven brand celebrating creativity and self-expression.",
-      image: "/images/flower-image.png",
+      image: "/images/adorably-inked-xo-brand-ecosystem.png",
       category: "Brand Design",
       link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     },
@@ -82,7 +82,7 @@ export default function Home() {
       id: 6,
       title: "Brand Identity Portfolio Collection",
       description: "Diverse collection of brand identities including Groove Records, Wonder Labs, Terra Sustainable Products, Aurelia, Peak Adventures, Nexus Tech, and Rooted Coffee - showcasing versatility across industries from music and science to sustainability and hospitality.",
-      image: "/images/brand-portfolio-grid.png",
+      image: "/images/branding.png",
       category: "Brand Design",
       link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     }
@@ -95,7 +95,7 @@ export default function Home() {
       readTime: "10 min read",
       date: "Jan 8, 2025",
       link: "https://www.daniellesalinetro.design/new-page-2",
-      image: "/images/empathy-audit-blog.png"
+      image: "/images/empathy-by-design.png"
     },
     {
       title: "Designing for Mental Health: Toolkit for Compassionate Creativity",
@@ -103,7 +103,7 @@ export default function Home() {
       readTime: "6 min read",
       date: "Dec 15, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: "/images/mental-health-blog.png"
+      image: "/images/designing-for-mental-health.png"
     },
     {
       title: "Beyond 'Why Didn't They Just Leave?'",
@@ -111,7 +111,7 @@ export default function Home() {
       readTime: "8 min read",
       date: "Nov 20, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: "/images/beyond-leave-blog.png"
+      image: "/images/beyond-why-didnt-they-just-leave.webp"
     },
     {
       title: "Every Child Deserves a Fair Start",
@@ -119,7 +119,7 @@ export default function Home() {
       readTime: "7 min read",
       date: "Oct 15, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: "/images/fair-start-blog.png"
+      image: "/images/every-child-deserves-a-fair-start.webp"
     },
     {
       title: "Designing with Empathy: My Creative Journey",
@@ -127,7 +127,7 @@ export default function Home() {
       readTime: "9 min read",
       date: "Sep 28, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: "/images/empathy-journey-blog.png"
+      image: "/images/designing-with-empathy-red-chair.jpg"
     }
   ];
 
