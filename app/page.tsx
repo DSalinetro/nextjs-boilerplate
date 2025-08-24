@@ -1,412 +1,625 @@
-'use client';
+import { motion } from 'motion/react';
+import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Github, Linkedin, Twitter, BookOpen } from 'lucide-react';
+import { Button } from './components/ui/button';
+import { Card, CardContent } from './components/ui/card';
+import { Badge } from './components/ui/badge';
+import artworkLaptop from 'figma:asset/0aa78c52e84bbfbcb25e473a0511c8e5f783d106.png';
+import artworkTypewriter from 'figma:asset/9a8caf493484326c5ac5dc2d457068c63251cf14.png';
+import heartsMindsLogo from 'figma:asset/26f7fb6cb2124b1f208c419b04e2cd4ccf5d2199.png';
+import businessCard from 'figma:asset/1971bc614d11d0811c246ec8fabdcd01c9e7402e.png';
+import letterhead from 'figma:asset/3678e41b8ebd9c03c21bb9e257d786434fdb3223.png';
+import professionalPhoto from 'figma:asset/04240392aa6b18c46dd57b22c3b7367b4f054a4d.png';
+import portfolioDocument from 'figma:asset/89bbf8d10ba0c20960748017f7fb4c2cd1994e7b.png';
+import heroRoseImage from 'figma:asset/2b43f7b77306406b7f303d25df435bcbe09f1b5a.png';
+import { useState, useEffect } from 'react';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+export default function App() {
+  const [activeSection, setActiveSection] = useState('home');
 
-/** Central place to map filenames in /public/images */
-const IMAGES = {
-  // Hero
-  hero: '/images/hero-rose.png', // <- make sure this exists
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  // Brand / portfolio pieces
-  typewriter: '/images/typewriter-roses.png',
-  logo: '/images/hearts-and-minds-logo.png',
-  businessCard: '/images/business-card.png',
-  letterhead: '/images/letterhead.png',
-  portrait: '/images/portrait.png',
-
-  // Blog covers (adjust names if yours differ)
-  mentalHealth: '/images/designing-for-mental-health.png',
-  beyondLeave: '/images/beyond-why-didnt-they-just-leave.png',
-  fairStart: '/images/every-child-deserves-a-fair-start.png',
-  empathyJourney: '/images/designing-with-empathy-red-chair.png',
-  empathyAudit: '/images/empathy-audit-typewriter.png',
-};
-
-/** Minimal card helper */
-function Card({
-  image,
-  title,
-  text,
-  link,
-}: {
-  image: string;
-  title: string;
-  text: string;
-  link?: string;
-}) {
-  const body = (
-    <div
-      style={{
-        overflow: 'hidden',
-        borderRadius: 16,
-        background: '#fff',
-        boxShadow:
-          '0 1px 2px rgba(0,0,0,.04), 0 12px 24px -8px rgba(16,24,40,.12)',
-      }}
-    >
-      <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
-        <img
-          src={image}
-          alt={title}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-            transition: 'transform .35s',
-          }}
-        />
-      </div>
-      <div style={{ padding: 16 }}>
-        <div
-          style={{
-            fontWeight: 700,
-            fontSize: 18,
-            marginBottom: 8,
-            color: '#0f172a',
-          }}
-        >
-          {title}
-        </div>
-        <div style={{ color: '#475569' }}>{text}</div>
-      </div>
-    </div>
-  );
-
-  if (!link) return body;
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{ textDecoration: 'none', color: 'inherit' }}
-    >
-      {body}
-    </a>
-  );
-}
-
-export default function Page() {
-  const [active, setActive] = useState<'home' | 'portfolio' | 'blogs' | 'figma' | 'about' | 'contact'>('home');
-
-  /** Smooth spy-scroll for nav highlighting */
+  // Update active section based on scroll position
   useEffect(() => {
-    const ids: Array<typeof active> = ['home', 'portfolio', 'blogs', 'figma', 'about', 'contact'];
-    const onScroll = () => {
-      const y = window.scrollY + 100;
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const { offsetTop: t, offsetHeight: h } = el;
-        if (y >= t && y < t + h) {
-          setActive(id);
-          break;
+    const handleScroll = () => {
+      const sections = ['home', 'portfolio', 'about', 'blogs', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
         }
       }
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const go = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const portfolioItems = [
+    {
+      id: 1,
+      title: "AdorablyInkedxo Brand Ecosystem",
+      description: "Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify",
+      image: artworkLaptop,
+      category: "Brand Design"
+    },
+    {
+      id: 2,
+      title: "Creative Storytelling & Visual Narratives",
+      description: "A poetic blend of vintage typewriter and natural beauty, symbolizing the power of empathy-driven storytelling",
+      image: artworkTypewriter,
+      category: "Conceptual Art"
+    },
+    {
+      id: 3,
+      title: "Hearts & Minds Foundation Identity",
+      description: "Complete brand identity system focusing on human connection and empathy-driven design principles",
+      image: heartsMindsLogo,
+      category: "Brand Design"
+    },
+    {
+      id: 4,
+      title: "Professional Business Card Design",
+      description: "Clean, elegant business card design featuring sophisticated typography and brand consistency",
+      image: businessCard,
+      category: "Print Design"
+    },
+    {
+      id: 5,
+      title: "Corporate Letterhead System",
+      description: "Professional letterhead design maintaining brand cohesion and corporate identity standards",
+      image: letterhead,
+      category: "Print Design"
+    },
+    {
+      id: 6,
+      title: "Portfolio & Brand Documentation",
+      description: "Comprehensive portfolio documentation showcasing empathy-driven design methodology and case studies",
+      image: portfolioDocument,
+      category: "Documentation"
+    }
+  ];
+
+  const blogPosts = [
+    {
+      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      excerpt: "A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.",
+      readTime: "10 min read",
+      date: "Jan 8, 2025",
+      link: "https://medium.com/@dsalinetro"
+    },
+    {
+      title: "Empathy in Design: Transforming Struggles into Strength",
+      excerpt: "How design can change real human lives by addressing pain points with compassion and understanding.",
+      readTime: "8 min read",
+      date: "Dec 20, 2024",
+      link: "https://medium.com/@dsalinetro"
+    },
+    {
+      title: "Designing with Empathy: My Creative Journey",
+      excerpt: "A personal reflection on the role of empathy in design practice and building authentic connections through creative work.",
+      readTime: "7 min read",
+      date: "Nov 15, 2024",
+      link: "https://medium.com/@dsalinetro"
+    },
+    {
+      title: "How Design Can Change the Conversation",
+      excerpt: "Exploring how thoughtful design choices can shift perspectives and create more inclusive dialogues.",
+      readTime: "9 min read",
+      date: "Oct 28, 2024",
+      link: "https://medium.com/@dsalinetro"
+    },
+    {
+      title: "Turning Awareness Into Action",
+      excerpt: "Strategies for moving beyond surface-level design thinking to create solutions that drive real behavioral change.",
+      readTime: "6 min read",
+      date: "Sep 18, 2024",
+      link: "https://medium.com/@dsalinetro"
+    }
+  ];
 
   return (
-    <div style={{ fontFamily: 'ui-sans-serif, system-ui' }}>
-      {/* NAV */}
-      <nav
+    <div className="min-h-screen">
+      {/* Navigation */}
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 64,
-          background: 'rgba(0,0,0,.5)',
-          backdropFilter: 'blur(8px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 50,
+          background: 'rgba(0,0,0,0.5)'
         }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
-        <div style={{ display: 'flex', gap: 24 }}>
-          {['home', 'portfolio', 'blogs', 'figma', 'about', 'contact'].map((id) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                go(id);
-              }}
-              style={{
-                color: active === id ? '#d4967d' : '#fff',
-                textDecoration: 'none',
-                fontWeight: 600,
-                transition: 'color .2s',
-              }}
-              onMouseEnter={(e) => ((e.currentTarget.style.color = '#ffd9ca'))}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = active === id ? '#d4967d' : '#fff')
-              }
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <motion.div 
+              className="text-xl font-bold text-white"
+              whileHover={{ scale: 1.05 }}
             >
-              {id[0].toUpperCase() + id.slice(1)}
-            </a>
-          ))}
-        </div>
-      </nav>
+              Danielle Salinetro
+            </motion.div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              {[
+                { id: 'home', label: 'Home' },
+                { id: 'portfolio', label: 'Portfolio' },
+                { id: 'about', label: 'About' },
+                { id: 'blogs', label: 'Blogs' },
+                { id: 'contact', label: 'Contact' }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    activeSection === item.id 
+                      ? 'text-[#d4967d]' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
-      {/* HERO */}
-      <section
-        id="home"
-        style={{
-          minHeight: '100vh',
-          backgroundImage: `url('${IMAGES.hero}')`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          display: 'grid',
-          placeItems: 'center',
-          padding: '0 24px',
-        }}
-        aria-label="Empathy by Design – hero"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          style={{
-            textAlign: 'center',
-            maxWidth: 900,
-            padding: 24,
-            background: 'rgba(0,0,0,.4)',
-            border: '1px solid rgba(255,255,255,.12)',
-            borderRadius: 20,
-            color: '#fff',
-          }}
-        >
-          <h1
-            style={{
-              margin: 0,
-              fontWeight: 800,
-              lineHeight: 1.1,
-              fontSize: 'clamp(36px,6vw,64px)',
-              textShadow: '0 4px 14px rgba(0,0,0,.45)',
-            }}
-          >
-            Empathy by Design
-          </h1>
-          <p
-            style={{
-              margin: '12px auto 0',
-              maxWidth: 640,
-              color: '#f6f2ef',
-              fontSize: 'clamp(16px,2.2vw,20px)',
-            }}
-          >
-            Creative Designer & Researcher · Empathy-Driven Branding, UX & Content
-          </p>
-
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 16, flexWrap: 'wrap' }}>
-            <a
-              href="#portfolio"
-              onClick={(e) => {
-                e.preventDefault();
-                go('portfolio');
-              }}
-              style={{
-                padding: '12px 16px',
-                borderRadius: 14,
-                fontWeight: 700,
-                color: '#fff',
-                background: 'linear-gradient(135deg,#d4967d,#c47f64)',
-                textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(212,150,125,.35)',
-              }}
-            >
-              View My Work
-            </a>
-            <a
-              href="https://daniellesalinetro.design"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '12px 16px',
-                borderRadius: 14,
-                fontWeight: 700,
-                color: '#fff',
-                border: '1.5px solid rgba(255,255,255,.65)',
-                background: 'rgba(255,255,255,.08)',
-                textDecoration: 'none',
-              }}
-            >
-              Visit Portfolio Site
-            </a>
+            <div className="flex items-center space-x-4">
+              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <BookOpen size={20} />
+              </a>
+              <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Linkedin size={20} />
+              </a>
+              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <ExternalLink size={20} />
+              </a>
+            </div>
           </div>
+        </div>
+      </motion.nav>
+
+      {/* Hero Section */}
+      <section 
+        id="home"
+        className="relative isolate block w-full min-h-screen bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${heroRoseImage})`
+        }}
+        aria-label="Empathy by Design hero"
+      >
+        {/* Refined overlay for the rose image */}
+        <motion.div 
+          className="absolute inset-0 z-0"
+          style={{
+            background: `
+              radial-gradient(1000px 800px at 30% 40%, rgba(212,150,125,0.15), transparent),
+              linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)
+            `
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+        />
+        
+        {/* Hero Content */}
+        <div className="grid place-items-center min-h-screen px-6 py-24 relative z-10">
+          <motion.div 
+            className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
+            style={{
+              background: 'rgba(0,0,0,0.35)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,.15)',
+              boxShadow: '0 20px 60px rgba(0,0,0,.4)'
+            }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.h1 
+              className="mb-2 text-white font-extrabold tracking-wide leading-tight"
+              style={{
+                fontSize: 'clamp(36px, 6vw, 64px)',
+                textShadow: '0 6px 20px rgba(0,0,0,.6)',
+                textWrap: 'balance'
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              Empathy by Design
+            </motion.h1>
+            
+            <motion.p 
+              className="mx-auto mb-5 max-w-3xl leading-relaxed"
+              style={{
+                color: '#f6f2ef',
+                fontSize: 'clamp(16px, 2.2vw, 20px)',
+                textShadow: '0 2px 8px rgba(0,0,0,.4)'
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              Creative Designer & Researcher · Empathy-Driven Branding, UX & Content
+            </motion.p>
+
+            <motion.div 
+              className="flex gap-3 justify-center flex-wrap mt-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <button
+                onClick={() => scrollToSection('portfolio')}
+                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
+                style={{
+                  background: 'linear-gradient(135deg, #d4967d, #c47f64)',
+                  boxShadow: '0 6px 20px rgba(212,150,125,.4)',
+                  backdropFilter: 'saturate(120%)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,125,.5)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,125,.4)';
+                }}
+              >
+                View My Work
+              </button>
+              
+              <a
+                href="https://daniellesalinetro.design"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
+                style={{
+                  border: '1.5px solid rgba(255,255,255,.7)',
+                  background: 'rgba(255,255,255,.12)',
+                  backdropFilter: 'saturate(120%)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,.12)';
+                }}
+              >
+                Visit Portfolio Site
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown className="text-white/70" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
         </motion.div>
       </section>
 
-      {/* PORTFOLIO – brand pieces */}
-      <section id="portfolio" style={{ padding: '80px 24px', background: '#f9fafb' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Portfolio</h2>
-        <div
-          style={{
-            display: 'grid',
-            gap: 24,
-            gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))',
-          }}
-        >
-          <Card
-            image={IMAGES.typewriter}
-            title="Creative Storytelling"
-            text="Vintage typewriter + florals."
-          />
-          <Card
-            image={IMAGES.logo}
-            title="Hearts & Minds Identity"
-            text="Empathy-centered identity system."
-          />
-          <Card
-            image={IMAGES.businessCard}
-            title="Business Card"
-            text="Elegant typographic system."
-          />
-          <Card
-            image={IMAGES.letterhead}
-            title="Letterhead System"
-            text="Cohesive corporate documents."
-          />
-          <Card
-            image={IMAGES.portrait}
-            title="Portrait"
-            text="Professional headshot / profile."
-          />
-        </div>
-      </section>
-
-      {/* BLOGS – your five Medium posts */}
-      <section id="blogs" style={{ padding: '80px 24px', background: '#fff' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Latest Insights</h2>
-        <div
-          style={{
-            display: 'grid',
-            gap: 24,
-            gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))',
-          }}
-        >
-          <Card
-            image={IMAGES.mentalHealth}
-            title="Designing for Mental Health"
-            text="Toolkit for Compassionate Creativity"
-            link="https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802"
-          />
-          <Card
-            image={IMAGES.beyondLeave}
-            title="Beyond 'Why Didn’t They Just Leave?'"
-            text="How design can change the conversation"
-            link="https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14"
-          />
-          <Card
-            image={IMAGES.fairStart}
-            title="Every Child Deserves a Fair Start"
-            text="Turning awareness into action"
-            link="https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393"
-          />
-          <Card
-            image={IMAGES.empathyJourney}
-            title="Designing with Empathy"
-            text="My creative journey"
-            link="https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5"
-          />
-          <Card
-            image={IMAGES.empathyAudit}
-            title="The Empathy Audit"
-            text="Evaluating design’s human impact"
-            link="https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5"
-          />
-        </div>
-      </section>
-
-      {/* OPTIONAL – Figma embed (leave if you want it) */}
-      <section id="figma" style={{ padding: '80px 24px', textAlign: 'center' }}>
-        <h2>Figma Prototype</h2>
-        <iframe
-          style={{
-            border: '1px solid #ccc',
-            borderRadius: 12,
-            width: '100%',
-            maxWidth: 980,
-            height: 480,
-          }}
-          src="https://www.figma.com/embed?embed_host=share&url=YOUR-FIGMA-LINK"
-          allowFullScreen
-        />
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" style={{ padding: '80px 24px', background: '#fff' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: 24 }}>About Me</h2>
-        <div
-          style={{
-            display: 'flex',
-            gap: 24,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
-          <p style={{ maxWidth: 640, color: '#475569', lineHeight: 1.7 }}>
-            I blend design, research, and storytelling to create human-centered
-            experiences with real impact. Empathy drives everything I make.
-          </p>
-          <div
-            style={{
-              width: 240,
-              height: 240,
-              borderRadius: '50%',
-              overflow: 'hidden',
-              boxShadow:
-                '0 1px 2px rgba(0,0,0,.05), 0 20px 40px -12px rgba(16,24,40,.25)',
-            }}
+      {/* Portfolio Section */}
+      <section id="portfolio" className="py-20 bg-gradient-to-br from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <img
-              src={IMAGES.portrait}
-              alt="Danielle Salinetro"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              Portfolio
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {portfolioItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="group cursor-pointer"
+              >
+                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <Badge variant="secondary" className="mb-3">
+                      {item.category}
+                    </Badge>
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-gray-600">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" style={{ padding: '80px 24px', background: '#0b1220', color: '#fff' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Let’s Connect</h2>
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ opacity: .9 }}>
-            Email:{' '}
-            <a
-              href="mailto:dsalinetro@pm.me"
-              style={{ color: '#ffd9ca', textDecoration: 'none' }}
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-12 items-center"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                I'm a creative professional blending design, research, and storytelling to create human-centered 
+                solutions that drive engagement and impact. As Founder & Creative Director of AdorablyInkedxo, 
+                I've built sustainable fashion brands from concept to launch while developing empathy-driven design methodologies.
+              </p>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                My approach combines thorough research, strategic thinking, and creative storytelling to build 
+                experiences that resonate on a human level. With experience managing influencer campaigns reaching 
+                850K+ followers and designing solutions for 20+ clients across tech, healthcare, and retail, 
+                I believe empathy is the foundation of great design.
+              </p>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                Currently pursuing my Google UX Certificate and Certified Professional Technical Communicator (CPTC), 
+                I'm passionate about translating complex data into compelling visuals and narratives that create 
+                meaningful connections between people and technology.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {['Empathy-Driven Design', 'Brand Identity', 'UX Research', 'Content Strategy', 'Visual Storytelling', 'Data Visualization'].map((skill) => (
+                  <Badge key={skill} variant="outline" className="px-4 py-2">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            <motion.div 
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             >
-              dsalinetro@pm.me
-            </a>
-          </p>
-          <p style={{ opacity: .9 }}>
-            Portfolio:{' '}
-            <a
-              href="https://daniellesalinetro.design"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#ffd9ca', textDecoration: 'none' }}
-            >
-              daniellesalinetro.design
-            </a>
-          </p>
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={professionalPhoto} 
+                  alt="Danielle Salinetro"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{ background: '#000', color: '#fff', padding: '24px 16px', textAlign: 'center' }}>
-        © {new Date().getFullYear()} Danielle Salinetro. All rights reserved.
+      {/* Blogs Section */}
+      <section id="blogs" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Latest Insights</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+              Thought leadership on empathy-driven design, human-centered experiences, and creating meaningful connections through creative work
+            </p>
+            <a 
+              href="https://medium.com/@dsalinetro" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+            >
+              Read all posts on Medium <ExternalLink size={16} />
+            </a>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => (
+              <motion.article
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="group cursor-pointer"
+                onClick={() => window.open(post.link, '_blank')}
+              >
+                <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#d4967d] transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-gray-900 text-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Ready to create something meaningful together? I'd love to collaborate on projects that prioritize 
+              human-centered design and empathy-driven solutions.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <Mail className="text-[#d4967d]" size={20} />
+                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#d4967d] transition-colors">
+                    dsalinetro@pm.me
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Phone className="text-[#d4967d]" size={20} />
+                  <a href="tel:636.252.5894" className="hover:text-[#d4967d] transition-colors">
+                    636.252.5894
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <MapPin className="text-[#d4967d]" size={20} />
+                  <span>Kansas City, MO (Remote)</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <ExternalLink className="text-[#d4967d]" size={20} />
+                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="hover:text-[#d4967d] transition-colors">
+                    daniellesalinetro.design
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
+                <div className="flex gap-4">
+                  <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" 
+                     className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                    <BookOpen size={20} />
+                  </a>
+                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer"
+                     className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                    <Linkedin size={20} />
+                  </a>
+                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer"
+                     className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                    <ExternalLink size={20} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                  <input 
+                    type="text" 
+                    id="name"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                  <input 
+                    type="email" 
+                    id="email"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
+                  <select 
+                    id="project"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
+                  >
+                    <option value="">Select project type</option>
+                    <option value="branding">Brand Identity & Design</option>
+                    <option value="ux">UX Research & Design</option>
+                    <option value="web">Website Design</option>
+                    <option value="content">Content Strategy</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                  <textarea 
+                    id="message" 
+                    rows={4}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent resize-none"
+                    placeholder="Tell me about your project and how we might work together..."
+                  ></textarea>
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#d4967d] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Send Message
+                </Button>
+              </form>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-white py-8">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
+            </div>
+            <div className="flex items-center gap-6">
+              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">
+                Email
+              </a>
+              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                Medium
+              </a>
+              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                Portfolio
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
