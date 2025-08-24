@@ -16,7 +16,8 @@ export default function Page() {
   const [active, setActive] = useState('home');
 
   useEffect(() => {
-    const ids = ['home', 'portfolio', 'about', 'contact'];
+    const ids = {['home', 'portfolio', 'figma', 'about', 'contact'].map(id => (
+;
     const onScroll = () => {
       const y = window.scrollY + 100;
       for (const id of ids) {
@@ -45,13 +46,22 @@ export default function Page() {
         display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50
       }}>
         <div style={{ display: 'flex', gap: 24 }}>
-          {['home', 'portfolio', 'about', 'contact'].map(id => (
-            <a key={id} href={`#${id}`} onClick={e => { e.preventDefault(); go(id); }}
-              style={{
-                color: active === id ? '#d4967d' : '#fff',
-                textDecoration: 'none', fontWeight: 600
-              }}>
-              {id[0].toUpperCase() + id.slice(1)}
+          {['home', 'portfolio', 'figma', 'about', 'contact'].map(id => (
+           <a
+  key={id}
+  href={`#${id}`}
+  onClick={e => { e.preventDefault(); go(id); }}
+  style={{
+    color: active === id ? '#d4967d' : '#fff',
+    textDecoration: 'none',
+    fontWeight: 600,
+    transition: 'color 0.3s',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.color = '#ffd699')}
+  onMouseLeave={e => (e.currentTarget.style.color = active === id ? '#d4967d' : '#fff')}
+>
+  {id[0].toUpperCase() + id.slice(1)}
+</a>
             </a>
           ))}
         </div>
@@ -89,7 +99,17 @@ export default function Page() {
           <Card image={IMAGES.businessCard} title="Business Card" text="Elegant typographic system." />
         </div>
       </section>
-
+{/* FIGMA EMBED */}
+<section id="figma" style={{ padding: "80px 24px", textAlign: "center" }}>
+  <h2>Figma Prototype</h2>
+  <iframe
+    style={{ border: "1px solid #ccc", borderRadius: "12px" }}
+    width="800"
+    height="450"
+    src="https://www.figma.com/embed?embed_host=share&url=YOUR-FIGMA-LINK"
+    allowFullScreen
+  ></iframe>
+</section>
       {/* ABOUT */}
       <section id="about" style={{ padding: '80px 24px', background: '#fff' }}>
         <h2 style={{ marginBottom: 24 }}>About Me</h2>
