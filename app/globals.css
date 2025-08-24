@@ -1,17 +1,19 @@
-/* Tailwind v3: standard directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 single import */
+@import "tailwindcss";
 
-/* Light theme tokens */
+/* Theme tokens */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --rose-accent: rgba(212, 150, 125, 0.85);
 }
 
-/* Optional: theme variables you can reference */
-:root {
-  --rose-accent: rgba(212, 150, 125, 0.85);
+/* Optional Tailwind v4 theme variables */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 /* Dark mode (system) */
@@ -22,32 +24,26 @@
   }
 }
 
-/* Base element styles */
-html {
-  scroll-behavior: smooth;
-}
+/* Base */
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Helps avoid blue tap highlight on mobile */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
+* { -webkit-tap-highlight-color: transparent; }
 
-/* Accessible focus style that works over dark/light */
 :focus-visible {
   outline: 2px solid var(--rose-accent);
   outline-offset: 2px;
 }
 
-/* ---------- Reusable utilities (v3: use class + @apply) ---------- */
-.btn-primary {
+/* ---------- Custom utilities (Tailwind v4 @utility) ---------- */
+@utility .btn-primary {
   @apply inline-flex items-center justify-center gap-2
          rounded-2xl px-6 py-3 font-semibold
          bg-rose-400/90 text-neutral-900
@@ -57,7 +53,7 @@ body {
          transition;
 }
 
-.btn-secondary {
+@utility .btn-secondary {
   @apply inline-flex items-center justify-center gap-2
          rounded-2xl px-6 py-3 font-semibold
          border border-white/20 text-white
@@ -67,12 +63,12 @@ body {
          transition;
 }
 
-.glass-card {
+@utility .glass-card {
   @apply rounded-3xl border border-white/10
          bg-neutral-900/60 backdrop-blur-xl
          shadow-2xl;
 }
 
-.page-container {
+@utility .page-container {
   @apply mx-auto max-w-7xl px-6 sm:px-8;
 }
