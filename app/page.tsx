@@ -48,6 +48,10 @@ export default function Home() {
           </svg>
         </div>
       </section>
+      {/* Tailwind test box — remove after verifying */}
+<div className="m-8 h-24 w-24 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold">
+  Test
+</div>
     </main>
   );
 }
