@@ -9,8 +9,15 @@ import heartsMindsLogo from 'figma:asset/26f7fb6cb2124b1f208c419b04e2cd4ccf5d219
 import businessCard from 'figma:asset/1971bc614d11d0811c246ec8fabdcd01c9e7402e.png';
 import letterhead from 'figma:asset/3678e41b8ebd9c03c21bb9e257d786434fdb3223.png';
 import professionalPhoto from 'figma:asset/04240392aa6b18c46dd57b22c3b7367b4f054a4d.png';
-import portfolioDocument from 'figma:asset/89bbf8d10ba0c20960748017f7fb4c2cd1994e7b.png';
+import brandPortfolioGrid from 'figma:asset/c252732621c47f29ed893b21ce834f531a95032d.png';
 import heroRoseImage from 'figma:asset/2b43f7b77306406b7f303d25df435bcbe09f1b5a.png';
+import flowerImage from 'figma:asset/dc5da0f6afea5c1a48aead616a7263992d5d322d.png';
+import mentalHealthBlogImage from 'figma:asset/0aa78c52e84bbfbcb25e473a0511c8e5f783d106.png';
+import beyondLeaveBlogImage from 'figma:asset/3342cc0d380adc4783c0c42b1b419ee3b45e75a9.png';
+import fairStartBlogImage from 'figma:asset/14d667d00f53a80472a610ae88d8eb1b8d91a537.png';
+import empathyJourneyBlogImage from 'figma:asset/6399a823951f334d126d92b130aeaa40224ebf4c.png';
+import empathyAuditBlogImage from 'figma:asset/3ead14f5ea20556a8c1278606c3157f3d855a2f8.png';
+import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -50,44 +57,47 @@ export default function App() {
     {
       id: 1,
       title: "AdorablyInkedxo Brand Ecosystem",
-      description: "Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify",
-      image: artworkLaptop,
-      category: "Brand Design"
+      description: "Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify. A vibrant, empathy-driven brand celebrating creativity and self-expression.",
+      image: flowerImage,
+      category: "Brand Design",
+      link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     },
     {
       id: 2,
       title: "Creative Storytelling & Visual Narratives",
-      description: "A poetic blend of vintage typewriter and natural beauty, symbolizing the power of empathy-driven storytelling",
+      description: "A poetic blend of vintage typewriter and natural beauty, symbolizing the power of empathy-driven storytelling in design and human connection.",
       image: artworkTypewriter,
       category: "Conceptual Art"
     },
     {
       id: 3,
       title: "Hearts & Minds Foundation Identity",
-      description: "Complete brand identity system focusing on human connection and empathy-driven design principles",
+      description: "Complete brand identity system focusing on human connection and empathy-driven design principles. A comprehensive case study in compassionate branding.",
       image: heartsMindsLogo,
-      category: "Brand Design"
+      category: "Brand Design",
+      link: "https://dsalinetro.github.io/daniellesalinetro.github.io/Hearts-Minds-Foundation.html"
     },
     {
       id: 4,
       title: "Professional Business Card Design",
-      description: "Clean, elegant business card design featuring sophisticated typography and brand consistency",
+      description: "Clean, elegant business card design featuring sophisticated typography and brand consistency with strategic layout for maximum impact.",
       image: businessCard,
       category: "Print Design"
     },
     {
       id: 5,
       title: "Corporate Letterhead System",
-      description: "Professional letterhead design maintaining brand cohesion and corporate identity standards",
+      description: "Professional letterhead design maintaining brand cohesion and corporate identity standards with attention to detail and hierarchy.",
       image: letterhead,
       category: "Print Design"
     },
     {
       id: 6,
-      title: "Portfolio & Brand Documentation",
-      description: "Comprehensive portfolio documentation showcasing empathy-driven design methodology and case studies",
-      image: portfolioDocument,
-      category: "Documentation"
+      title: "Brand Identity Portfolio Collection",
+      description: "Diverse collection of brand identities including Groove Records, Wonder Labs, Terra Sustainable Products, Aurelia, Peak Adventures, Nexus Tech, and Rooted Coffee - showcasing versatility across industries from music and science to sustainability and hospitality.",
+      image: brandPortfolioGrid,
+      category: "Brand Design",
+      link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     }
   ];
 
@@ -97,35 +107,40 @@ export default function App() {
       excerpt: "A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.",
       readTime: "10 min read",
       date: "Jan 8, 2025",
-      link: "https://medium.com/@dsalinetro"
+      link: "https://www.daniellesalinetro.design/new-page-2",
+      image: empathyAuditBlogImage
     },
     {
-      title: "Empathy in Design: Transforming Struggles into Strength",
-      excerpt: "How design can change real human lives by addressing pain points with compassion and understanding.",
+      title: "Designing for Mental Health: Toolkit for Compassionate Creativity",
+      excerpt: "Strategies for moving beyond surface-level design thinking to create solutions that support mental wellness and human flourishing.",
+      readTime: "6 min read",
+      date: "Dec 15, 2024",
+      link: "https://medium.com/@dsalinetro",
+      image: mentalHealthBlogImage
+    },
+    {
+      title: "Beyond 'Why Didn't They Just Leave?'",
+      excerpt: "How design can change conversation and create more compassionate dialogues around complex human experiences.",
       readTime: "8 min read",
-      date: "Dec 20, 2024",
-      link: "https://medium.com/@dsalinetro"
+      date: "Nov 20, 2024",
+      link: "https://medium.com/@dsalinetro",
+      image: beyondLeaveBlogImage
+    },
+    {
+      title: "Every Child Deserves a Fair Start",
+      excerpt: "Turning awareness into action through empathy-driven design that creates real impact for vulnerable communities.",
+      readTime: "7 min read",
+      date: "Oct 15, 2024",
+      link: "https://medium.com/@dsalinetro",
+      image: fairStartBlogImage
     },
     {
       title: "Designing with Empathy: My Creative Journey",
       excerpt: "A personal reflection on the role of empathy in design practice and building authentic connections through creative work.",
-      readTime: "7 min read",
-      date: "Nov 15, 2024",
-      link: "https://medium.com/@dsalinetro"
-    },
-    {
-      title: "How Design Can Change the Conversation",
-      excerpt: "Exploring how thoughtful design choices can shift perspectives and create more inclusive dialogues.",
       readTime: "9 min read",
-      date: "Oct 28, 2024",
-      link: "https://medium.com/@dsalinetro"
-    },
-    {
-      title: "Turning Awareness Into Action",
-      excerpt: "Strategies for moving beyond surface-level design thinking to create solutions that drive real behavioral change.",
-      readTime: "6 min read",
-      date: "Sep 18, 2024",
-      link: "https://medium.com/@dsalinetro"
+      date: "Sep 28, 2024",
+      link: "https://medium.com/@dsalinetro",
+      image: empathyJourneyBlogImage
     }
   ];
 
@@ -323,9 +338,17 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               Portfolio
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
+            <a 
+              href="https://www.daniellesalinetro.design/branding-portfolio-collection" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+            >
+              View Complete Portfolio Collection <ExternalLink size={16} />
+            </a>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -338,26 +361,52 @@ export default function App() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ y: -10 }}
                 className="group cursor-pointer"
+                onClick={() => item.link && window.open(item.link, '_blank')}
               >
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
                     <img 
                       src={item.image} 
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className={`transition-transform duration-300 group-hover:scale-105 ${
+                        item.category === 'Print Design' 
+                          ? 'w-auto h-full max-h-full object-contain shadow-md' 
+                          : 'w-full h-full object-cover'
+                      }`}
                     />
                   </div>
                   <CardContent className="p-6">
-                    <Badge variant="secondary" className="mb-3">
-                      {item.category}
-                    </Badge>
-                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge variant="secondary">
+                        {item.category}
+                      </Badge>
+                      {item.link && <ExternalLink size={16} className="text-gray-400 group-hover:text-[#d4967d] transition-colors" />}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">{item.title}</h3>
                     <p className="text-gray-600">{item.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
+
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="text-gray-600 mb-4">Interested in seeing a detailed project case study?</p>
+            <a 
+              href="https://www.daniellesalinetro.design/project-case-study" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#d4967d] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c47f64] transition-colors"
+            >
+              View Case Study <ExternalLink size={16} />
+            </a>
+          </motion.div>
         </div>
       </section>
 
@@ -428,14 +477,24 @@ export default function App() {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Thought leadership on empathy-driven design, human-centered experiences, and creating meaningful connections through creative work
             </p>
-            <a 
-              href="https://medium.com/@dsalinetro" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
-            >
-              Read all posts on Medium <ExternalLink size={16} />
-            </a>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <a 
+                href="https://medium.com/@dsalinetro" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+              >
+                Read all posts on Medium <ExternalLink size={16} />
+              </a>
+              <a 
+                href="https://www.daniellesalinetro.design/new-page-2" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+              >
+                View Empathy Audit <ExternalLink size={16} />
+              </a>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -451,6 +510,13 @@ export default function App() {
                 onClick={() => window.open(post.link, '_blank')}
               >
                 <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
                       <span>{post.date}</span>
@@ -612,9 +678,6 @@ export default function App() {
                 Email
               </a>
               <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                Medium
-              </a>
-              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 Portfolio
               </a>
             </div>
