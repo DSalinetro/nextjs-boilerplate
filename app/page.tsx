@@ -1,5 +1,5 @@
-// app/maintenance/page.tsx
-export default function Maintenance() {
+// app/page.tsx
+export default function Home() {
   return (
     <main
       style={{
@@ -32,15 +32,7 @@ export default function Maintenance() {
           New portfolio experience coming soon.
         </p>
 
-        <div
-          style={{
-            marginTop: 24,
-            display: "flex",
-            gap: 12,
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
+        <div style={{ marginTop: 24, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
           <a
             href="mailto:dsalinetro@pm.me"
             style={{
