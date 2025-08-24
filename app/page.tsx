@@ -1,57 +1,30 @@
 // app/page.tsx
 export default function Home() {
   return (
-    <main className="min-h-screen bg-neutral-900 text-white">
-      {/* HERO */}
-      <section className="relative pt-28 pb-24">
-        {/* Background image + gradient overlay */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[url('/images/rose-hero.jpg')] bg-cover bg-center opacity-60"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/70 via-neutral-900/60 to-neutral-900"></div>
-        </div>
-
-        <div className="page-container">
-          <div className="max-w-3xl glass-card p-8 md:p-12">
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
-              Empathy by Design
-            </h1>
-            <p className="mt-4 text-lg md:text-xl text-neutral-200">
-              Creative Designer &amp; Researcher · Empathy-Driven Branding, UX &amp; Content
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a href="/portfolio" className="btn-primary">
-                View My Work
-              </a>
-              <a
-                href="https://daniellesalinetro.design"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-              >
-                Visit Portfolio Site
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Subtle chevron */}
-        <div className="absolute left-1/2 -bottom-6 -translate-x-1/2 opacity-70">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M6 9l6 6 6-6"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      </section>
-      {/* Tailwind test box — remove after verifying */}
-<div className="m-8 h-24 w-24 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold">
-  Test
-</div>
-    </main>
-  );
-}
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
+        background: "#0b0b0b",
+        color: "#f5f5f5",
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+        padding: "24px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 720,
+          textAlign: "center",
+          padding: "32px 28px",
+          borderRadius: 16,
+          border: "1px solid rgba(255,255,255,0.12)",
+          background: "rgba(255,255,255,0.04)",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <h1 style={{ fontSize: "40px", lineHeight: 1.1, margin: 0, fontWeight: 800 }}>
+          Empathy by Design
+        </h1>
+        <p styl
