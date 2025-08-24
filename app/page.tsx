@@ -10,8 +10,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/70 via-neutral-900/60 to-neutral-900"></div>
         </div>
 
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="max-w-3xl rounded-3xl border border-white/10 bg-neutral-900/60 p-8 md:p-12 shadow-2xl backdrop-blur-xl">
+        <div className="page-container">
+          <div className="max-w-3xl glass-card p-8 md:p-12">
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
               Empathy by Design
             </h1>
@@ -20,7 +20,9 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href="/portfolio" className="btn-primary">View My Work</a>
+              <a href="/portfolio" className="btn-primary">
+                View My Work
+              </a>
               <a
                 href="https://daniellesalinetro.design"
                 target="_blank"
@@ -36,7 +38,13 @@ export default function Home() {
         {/* Subtle chevron */}
         <div className="absolute left-1/2 -bottom-6 -translate-x-1/2 opacity-70">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </section>
