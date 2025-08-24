@@ -1,26 +1,13 @@
+'use client';
+
 import { motion } from 'motion/react';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Github, Linkedin, Twitter, BookOpen } from 'lucide-react';
-import { Button } from './components/ui/button';
-import { Card, CardContent } from './components/ui/card';
-import { Badge } from './components/ui/badge';
-import artworkLaptop from 'figma:asset/0aa78c52e84bbfbcb25e473a0511c8e5f783d106.png';
-import artworkTypewriter from 'figma:asset/9a8caf493484326c5ac5dc2d457068c63251cf14.png';
-import heartsMindsLogo from 'figma:asset/26f7fb6cb2124b1f208c419b04e2cd4ccf5d2199.png';
-import businessCard from 'figma:asset/1971bc614d11d0811c246ec8fabdcd01c9e7402e.png';
-import letterhead from 'figma:asset/3678e41b8ebd9c03c21bb9e257d786434fdb3223.png';
-import professionalPhoto from 'figma:asset/04240392aa6b18c46dd57b22c3b7367b4f054a4d.png';
-import brandPortfolioGrid from 'figma:asset/c252732621c47f29ed893b21ce834f531a95032d.png';
-import heroRoseImage from 'figma:asset/2b43f7b77306406b7f303d25df435bcbe09f1b5a.png';
-import flowerImage from 'figma:asset/dc5da0f6afea5c1a48aead616a7263992d5d322d.png';
-import mentalHealthBlogImage from 'figma:asset/0aa78c52e84bbfbcb25e473a0511c8e5f783d106.png';
-import beyondLeaveBlogImage from 'figma:asset/3342cc0d380adc4783c0c42b1b419ee3b45e75a9.png';
-import fairStartBlogImage from 'figma:asset/14d667d00f53a80472a610ae88d8eb1b8d91a537.png';
-import empathyJourneyBlogImage from 'figma:asset/6399a823951f334d126d92b130aeaa40224ebf4c.png';
-import empathyAuditBlogImage from 'figma:asset/3ead14f5ea20556a8c1278606c3157f3d855a2f8.png';
-import { ImageWithFallback } from './components/figma/ImageWithFallback';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useState, useEffect } from 'react';
 
-export default function App() {
+export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
 
   // Smooth scroll function
@@ -58,7 +45,7 @@ export default function App() {
       id: 1,
       title: "AdorablyInkedxo Brand Ecosystem",
       description: "Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify. A vibrant, empathy-driven brand celebrating creativity and self-expression.",
-      image: flowerImage,
+      image: "/images/flower-image.png",
       category: "Brand Design",
       link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     },
@@ -66,14 +53,14 @@ export default function App() {
       id: 2,
       title: "Creative Storytelling & Visual Narratives",
       description: "A poetic blend of vintage typewriter and natural beauty, symbolizing the power of empathy-driven storytelling in design and human connection.",
-      image: artworkTypewriter,
+      image: "/images/artwork-typewriter.png",
       category: "Conceptual Art"
     },
     {
       id: 3,
       title: "Hearts & Minds Foundation Identity",
       description: "Complete brand identity system focusing on human connection and empathy-driven design principles. A comprehensive case study in compassionate branding.",
-      image: heartsMindsLogo,
+      image: "/images/hearts-minds-logo.png",
       category: "Brand Design",
       link: "https://dsalinetro.github.io/daniellesalinetro.github.io/Hearts-Minds-Foundation.html"
     },
@@ -81,21 +68,21 @@ export default function App() {
       id: 4,
       title: "Professional Business Card Design",
       description: "Clean, elegant business card design featuring sophisticated typography and brand consistency with strategic layout for maximum impact.",
-      image: businessCard,
+      image: "/images/business-card.png",
       category: "Print Design"
     },
     {
       id: 5,
       title: "Corporate Letterhead System",
       description: "Professional letterhead design maintaining brand cohesion and corporate identity standards with attention to detail and hierarchy.",
-      image: letterhead,
+      image: "/images/letterhead.png",
       category: "Print Design"
     },
     {
       id: 6,
       title: "Brand Identity Portfolio Collection",
       description: "Diverse collection of brand identities including Groove Records, Wonder Labs, Terra Sustainable Products, Aurelia, Peak Adventures, Nexus Tech, and Rooted Coffee - showcasing versatility across industries from music and science to sustainability and hospitality.",
-      image: brandPortfolioGrid,
+      image: "/images/brand-portfolio-grid.png",
       category: "Brand Design",
       link: "https://www.daniellesalinetro.design/branding-portfolio-collection"
     }
@@ -108,7 +95,7 @@ export default function App() {
       readTime: "10 min read",
       date: "Jan 8, 2025",
       link: "https://www.daniellesalinetro.design/new-page-2",
-      image: empathyAuditBlogImage
+      image: "/images/empathy-audit-blog.png"
     },
     {
       title: "Designing for Mental Health: Toolkit for Compassionate Creativity",
@@ -116,7 +103,7 @@ export default function App() {
       readTime: "6 min read",
       date: "Dec 15, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: mentalHealthBlogImage
+      image: "/images/mental-health-blog.png"
     },
     {
       title: "Beyond 'Why Didn't They Just Leave?'",
@@ -124,7 +111,7 @@ export default function App() {
       readTime: "8 min read",
       date: "Nov 20, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: beyondLeaveBlogImage
+      image: "/images/beyond-leave-blog.png"
     },
     {
       title: "Every Child Deserves a Fair Start",
@@ -132,7 +119,7 @@ export default function App() {
       readTime: "7 min read",
       date: "Oct 15, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: fairStartBlogImage
+      image: "/images/fair-start-blog.png"
     },
     {
       title: "Designing with Empathy: My Creative Journey",
@@ -140,7 +127,7 @@ export default function App() {
       readTime: "9 min read",
       date: "Sep 28, 2024",
       link: "https://medium.com/@dsalinetro",
-      image: empathyJourneyBlogImage
+      image: "/images/empathy-journey-blog.png"
     }
   ];
 
@@ -207,7 +194,7 @@ export default function App() {
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
         style={{
-          backgroundImage: `url(${heroRoseImage})`
+          backgroundImage: `url(/images/hero-rose.png)`
         }}
         aria-label="Empathy by Design hero"
       >
@@ -453,7 +440,7 @@ export default function App() {
             >
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src={professionalPhoto} 
+                  src="/images/professional-photo.png" 
                   alt="Danielle Salinetro"
                   className="w-full h-full object-cover"
                 />
@@ -678,6 +665,9 @@ export default function App() {
                 Email
               </a>
               <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                Medium
+              </a>
+              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 Portfolio
               </a>
             </div>
