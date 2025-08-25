@@ -48,10 +48,38 @@ export default function HomeDesign() {
       link: "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
       image: "/images/empathy-rose.png"
     },
-    { title: "Designing for Mental Health", excerpt: "Strategies for compassionate creativity.", readTime: "6 min read", date: "Dec 15, 2024", link: "https://medium.com/@dsalinetro", image: "/images/designing-for-mental-health.png" },
-    { title: "Beyond 'Why Didn’t They Just Leave?'", excerpt: "Creating more compassionate dialogues.", readTime: "8 min read", date: "Nov 20, 2024", link: "https://medium.com/@dsalinetro", image: "/images/beyond-why-didnt-they-just-leave.webp" },
-    { title: "Every Child Deserves a Fair Start", excerpt: "Turning awareness into action.", readTime: "7 min read", date: "Oct 15, 2024", link: "https://medium.com/@dsalinetro", image: "/images/every-child-deserves-a-fair-start.webp" },
-    { title: "Designing with Empathy: My Journey", excerpt: "Building authentic connections through creative work.", readTime: "9 min read", date: "Sep 28, 2024", link: "https://medium.com/@dsalinetro", image: "/images/designing-with-empathy-red-chair.jpg" }
+    {
+      title: "Designing for Mental Health",
+      excerpt: "Strategies for compassionate creativity.",
+      readTime: "6 min read",
+      date: "Dec 15, 2024",
+      link: "https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802",
+      image: "/images/designing-for-mental-health.png"
+    },
+    {
+      title: "Beyond 'Why Didn’t They Just Leave?'",
+      excerpt: "Creating more compassionate dialogues.",
+      readTime: "8 min read",
+      date: "Nov 20, 2024",
+      link: "https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14",
+      image: "/images/beyond-why-didnt-they-just-leave.webp"
+    },
+    {
+      title: "Every Child Deserves a Fair Start",
+      excerpt: "Turning awareness into action.",
+      readTime: "7 min read",
+      date: "Oct 15, 2024",
+      link: "https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393",
+      image: "/images/every-child-deserves-a-fair-start.webp"
+    },
+    {
+      title: "Designing with Empathy: My Journey",
+      excerpt: "Building authentic connections through creative work.",
+      readTime: "9 min read",
+      date: "Sep 28, 2024",
+      link: "https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5",
+      image: "/images/designing-with-empathy-red-chair.jpg"
+    }
   ];
 
   return (
@@ -200,10 +228,15 @@ export default function HomeDesign() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ y: -10 }}
-                className="group cursor-pointer"
-                onClick={() => item.link && window.open(item.link, '_blank')}
+                className="group"
               >
-                <div className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl bg-white">
+                <a
+                  href={item.link || '#'}
+                  target={item.link ? '_blank' : undefined}
+                  rel={item.link ? 'noopener noreferrer' : undefined}
+                  className="block overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl bg-white"
+                  aria-label={item.link ? `${item.title} — open project` : item.title}
+                >
                   <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
                     <img
                       src={item.image}
@@ -219,7 +252,7 @@ export default function HomeDesign() {
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">{item.title}</h3>
                     <p className="text-gray-600">{item.description}</p>
                   </div>
-                </div>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -265,18 +298,37 @@ export default function HomeDesign() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group cursor-pointer"
-                onClick={() => window.open(post.link, '_blank')}
+                className="group"
               >
                 <div className="h-full shadow-md hover:shadow-lg transition-all duration-300 rounded-xl bg-white">
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <a
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${post.title} — open article on Medium`}
+                    >
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </a>
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
                       <span>{post.date}</span><span>•</span><span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#d4967d] transition-colors">{post.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#d4967d] transition-colors">
+                      <a
+                        href={post.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                      >
+                        {post.title}
+                      </a>
+                    </h3>
                     <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
                   </div>
                 </div>
