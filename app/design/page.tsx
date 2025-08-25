@@ -39,72 +39,72 @@ export default function DesignPage() {
   }, []);
 
   // -------------------- PORTFOLIO --------------------
-  const portfolioItems = [
-    {
-      id: 1,
-      title: 'AdorablyInkedxo Brand Ecosystem',
-      description:
-        'Complete sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.',
-      image: '/images/adorably-inked-xo-brand-ecosystem.png',
-      category: 'Brand Design',
-      link: '/work/adorably-inkedxo',
-    },
-    {
-      id: 2,
-      title: 'Creative Storytelling & Visual Narratives',
-      description:
-        'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
-      image: '/images/typewriter-roses.png',
-      category: 'Conceptual Art',
-      // per your note, this one should go to your Medium article:
-      link: 'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-    },
-    {
-      id: 3,
-      title: 'Hearts & Minds Foundation Identity',
-      description:
-        'Complete identity system focused on human connection and empathy-driven principles.',
-      image: '/images/hearts-and-minds-logo.png',
-      category: 'Brand Design',
-      link: '/work/hearts-and-minds',
-    },
-    {
-      id: 4,
-      title: 'Professional Business Card Design',
-      description:
-        'Clean, elegant business card design with sophisticated typography and layout.',
-      image: '/images/business-card.png',
-      category: 'Print Design',
-      link: '/work/business-card',
-    },
-    {
-      id: 5,
-      title: 'Corporate Letterhead System',
-      description:
-        'Cohesive letterhead maintaining brand cohesion and hierarchy.',
-      image: '/images/letterhead.png',
-      category: 'Print Design',
-      link: '/work/letterhead',
-    },
-    {
-      id: 6,
-      title: 'Brand Identity Portfolio Collection',
-      description:
-        'Selected identities across music, science, sustainability, hospitality, and tech.',
-      image: '/images/branding.png',
-      category: 'Brand Design',
-      link: '/work/brand-identity',
-    },
-    {
-      id: 7,
-      title: 'Empathy by Design — Hero Artwork',
-      description: 'Photography & art direction for a warm, emotive hero visual.',
-      image: '/images/moody-library.png', // primary card image
-      category: 'Photography',
-      link: '/work/empathy-by-design',
-    },
-  ] as const;
-
+  // ---------- PORTFOLIO CARDS (updated links & images) ----------
+const portfolioItems = [
+  {
+    id: 1,
+    title: 'AdorablyInkedxo Brand Ecosystem',
+    description:
+      'Complete sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.',
+    image: '/images/adorably-inked-xo-brand-ecosystem.png',
+    category: 'Brand Design',
+    link: '/design/work/adorably-inkedxo',
+  },
+  {
+    id: 2,
+    title: 'Creative Storytelling & Visual Narratives',
+    description:
+      'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
+    image: '/images/typewriter-roses.png',
+    category: 'Conceptual Art',
+    // this one goes to your Medium profile (external)
+    link: 'https://medium.com/@dsalinetro',
+  },
+  {
+    id: 3,
+    title: 'Hearts & Minds Foundation Identity',
+    description:
+      'Complete identity system focused on human connection and empathy-driven principles.',
+    image: '/images/hearts-and-minds-logo.png',
+    category: 'Brand Design',
+    link: '/design/work/hearts-and-minds',
+  },
+  {
+    id: 4,
+    title: 'Professional Business Card Design',
+    description:
+      'Clean, elegant business card design with sophisticated typography and layout.',
+    image: '/images/business-card.png',
+    category: 'Print Design',
+    link: '/design/work/business-card',
+  },
+  {
+    id: 5,
+    title: 'Corporate Letterhead System',
+    description:
+      'Cohesive letterhead maintaining brand cohesion and hierarchy.',
+    image: '/images/letterhead.png',
+    category: 'Print Design',
+    link: '/design/work/letterhead',
+  },
+  {
+    id: 6,
+    title: 'Brand Identity Portfolio Collection',
+    description:
+      'Selected identities across music, science, sustainability, hospitality, and tech.',
+    image: '/images/branding.png',
+    category: 'Brand Design',
+    link: '/design/work/brand-identity',
+  },
+  {
+    id: 7,
+    title: 'Empathy by Design — Hero Artwork',
+    description: 'Photography & art direction for a warm, emotive hero visual.',
+    image: '/images/moody-library.png', // per your note
+    category: 'Photography',
+    link: '/design/work/empathy-by-design',
+  },
+] as const;
   // -------------------- BLOGS --------------------
   const blogPosts = [
     {
