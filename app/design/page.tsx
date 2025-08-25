@@ -40,7 +40,14 @@ export default function HomeDesign() {
   ];
 
   const blogPosts = [
-    { title: "The Empathy Audit", excerpt: "Measuring emotional outcomes in design.", readTime: "10 min read", date: "Jan 8, 2025", link: "https://www.daniellesalinetro.design/new-page-2", image: "/images/empathy-by-design.png" },
+    {
+      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      excerpt: "Measuring emotional outcomes in design.",
+      readTime: "10 min read",
+      date: "Jan 8, 2025",
+      link: "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
+      image: "/images/empathy-rose.png"
+    },
     { title: "Designing for Mental Health", excerpt: "Strategies for compassionate creativity.", readTime: "6 min read", date: "Dec 15, 2024", link: "https://medium.com/@dsalinetro", image: "/images/designing-for-mental-health.png" },
     { title: "Beyond 'Why Didn’t They Just Leave?'", excerpt: "Creating more compassionate dialogues.", readTime: "8 min read", date: "Nov 20, 2024", link: "https://medium.com/@dsalinetro", image: "/images/beyond-why-didnt-they-just-leave.webp" },
     { title: "Every Child Deserves a Fair Start", excerpt: "Turning awareness into action.", readTime: "7 min read", date: "Oct 15, 2024", link: "https://medium.com/@dsalinetro", image: "/images/every-child-deserves-a-fair-start.webp" },
@@ -91,51 +98,84 @@ export default function HomeDesign() {
       </motion.nav>
 
       {/* HERO */}
-      <section id="home" className="relative isolate block w-full min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(/images/rose-hero.png)` }} aria-label="Empathy by Design hero">
-        <motion.div className="absolute inset-0 z-0"
+      <section
+        id="home"
+        className="relative isolate block w-full min-h-screen bg-cover bg-center"
+        style={{ backgroundImage: `url(/images/field-of-flowers.png)` }}
+        aria-label="Empathy by Design hero"
+      >
+        <motion.div
+          className="absolute inset-0 z-0"
           style={{
             background: `
               radial-gradient(1000px 800px at 30% 40%, rgba(212,150,125,0.15), transparent),
               linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)
             `
           }}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }} />
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+        />
 
         <div className="grid place-items-center min-h-screen px-6 py-24 relative z-10">
-          <motion.div className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
+          <motion.div
+            className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
             style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,.15)' }}
-            initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-            <motion.h1 className="mb-2 text-white font-extrabold tracking-wide leading-tight"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.h1
+              className="mb-2 text-white font-extrabold tracking-wide leading-tight"
               style={{ fontSize: 'clamp(36px, 6vw, 64px)', textShadow: '0 6px 20px rgba(0,0,0,.6)' }}
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               Empathy by Design
             </motion.h1>
 
-            <motion.p className="mx-auto mb-5 max-w-3xl leading-relaxed"
+            <motion.p
+              className="mx-auto mb-5 max-w-3xl leading-relaxed"
               style={{ color: '#f6f2ef', fontSize: 'clamp(16px, 2.2vw, 20px)', textShadow: '0 2px 8px rgba(0,0,0,.4)' }}
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7 }}>
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
               Creative Designer & Researcher · Empathy-Driven Branding, UX & Content
             </motion.p>
 
-            <motion.div className="flex gap-3 justify-center flex-wrap mt-2"
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.9 }}>
-              <button onClick={() => scrollToSection('portfolio')}
+            <motion.div
+              className="flex gap-3 justify-center flex-wrap mt-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <button
+                onClick={() => scrollToSection('portfolio')}
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white transition-all hover:-translate-y-0.5"
-                style={{ background: 'linear-gradient(135deg, #d4967d, #c47f64)', boxShadow: '0 6px 20px rgba(212,150,125,.4)' }}>
+                style={{ background: 'linear-gradient(135deg, #d4967d, #c47f64)', boxShadow: '0 6px 20px rgba(212,150,125,.4)' }}
+              >
                 View My Work
               </button>
-              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer"
+              <a
+                href="https://daniellesalinetro.design"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white transition-all hover:-translate-y-0.5"
-                style={{ border: '1.5px solid rgba(255,255,255,.7)', background: 'rgba(255,255,255,.12)' }}>
+                style={{ border: '1.5px solid rgba(255,255,255,.7)', background: 'rgba(255,255,255,.12)' }}
+              >
                 Visit Portfolio Site
               </a>
             </motion.div>
           </motion.div>
         </div>
 
-        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-          animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
           <ChevronDown className="text-white/70" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
         </motion.div>
       </section>
@@ -153,13 +193,23 @@ export default function HomeDesign() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }} whileHover={{ y: -10 }} className="group cursor-pointer"
-                onClick={() => item.link && window.open(item.link, '_blank')}>
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="group cursor-pointer"
+                onClick={() => item.link && window.open(item.link, '_blank')}
+              >
                 <div className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl bg-white">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
-                    <img src={item.image} alt={item.title}
-                      className={`transition-transform duration-300 group-hover:scale-105 ${item.category === 'Print Design' ? 'w-auto h-full max-h-full object-contain' : 'w-full h-full object-cover'}`} />
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className={`transition-transform duration-300 group-hover:scale-105 ${item.category === 'Print Design' ? 'w-auto h-full max-h-full object-contain' : 'w-full h-full object-cover'}`}
+                    />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
@@ -208,9 +258,16 @@ export default function HomeDesign() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post, i) => (
-              <motion.article key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }} whileHover={{ y: -5 }}
-                className="group cursor-pointer" onClick={() => window.open(post.link, '_blank')}>
+              <motion.article
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="group cursor-pointer"
+                onClick={() => window.open(post.link, '_blank')}
+              >
                 <div className="h-full shadow-md hover:shadow-lg transition-all duration-300 rounded-xl bg-white">
                   <div className="aspect-[16/10] overflow-hidden">
                     <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
