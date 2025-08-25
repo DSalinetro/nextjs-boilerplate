@@ -82,15 +82,15 @@ export default function PortfolioCollection() {
       link: '/work/brand-identity',
     },
     {
-      id: 7,
-      title: 'Empathy by Design — Hero Artwork',
-      description:
-        'Photography & art direction for a warm, emotive hero visual.',
-      image: '/images/field-of-flowers.png',
-      category: 'Photography',
-      tags: ['art direction', 'photo'],
-      // no link yet; card will be non-clickable by design
-    },
+  id: 7,
+  title: 'Empathy by Design — Hero Artwork',
+  description: 'Photography & art direction for a warm, emotive hero visual.',
+  image: '/images/field-of-flowers.png',
+  category: 'Photography',
+  tags: ['art direction', 'photo'],
+  link: '/work/empathy-by-design',   // ← add this when you’re ready
+  // external: false   // (omit or leave false)
+},
   ];
 
   const categories = useMemo(() => {
