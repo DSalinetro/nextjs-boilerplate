@@ -1,7 +1,9 @@
 export default function AdorablyInkedxo() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
-      <a href="/portfolio" className="text-sm text-gray-500 hover:text-gray-800">← Back to Portfolio</a>
+      <Link href="/#portfolio" className="text-sm text-gray-500 hover:text-[#d4967d]">
+  &larr; Back to Portfolio
+</Link>
       <h1 className="mt-4 text-4xl font-bold">AdorablyInkedxo Brand Ecosystem</h1>
       <p className="mt-3 text-gray-600">Sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.</p>
 
