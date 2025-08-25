@@ -1,11 +1,14 @@
 // app/page.tsx
-'use client';
 
 import Design from './design/page';
 
-// Optional maintenance toggle via env:
-// NEXT_PUBLIC_MAINTENANCE=true
-const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE === 'true';
+// Read either server-only or public env, treat anything else as "off".
+const isMaintenance =
+  (process.env.MAINTENANCE_MODE ?? process.env.NEXT_PUBLIC_MAINTENANCE) === 'true';
+
+export default function Page() {
+  return isMaintenance ? <Maintenance /> : <Design />;
+}
 
 function Maintenance() {
   return (
@@ -16,8 +19,4 @@ function Maintenance() {
       </div>
     </main>
   );
-}
-
-export default function Page() {
-  return isMaintenance ? <Maintenance /> : <Design />;
 }
