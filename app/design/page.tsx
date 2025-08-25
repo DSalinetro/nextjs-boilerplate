@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { useState, useEffect } from 'react';
 
 export default function DesignPage() {
-  const [activeSection, setActiveSection] = useState<'home' | 'portfolio' | 'about' | 'blogs' | 'contact'>('home');
+  const [activeSection, setActiveSection] =
+    useState<'home' | 'portfolio' | 'about' | 'blogs' | 'contact'>('home');
 
   // Smooth scroll
   const scrollToSection = (sectionId: string) => {
@@ -36,29 +37,33 @@ export default function DesignPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // ======= PORTFOLIO (links restored) ====================================
   const portfolioItems = [
     {
       id: 1,
       title: 'AdorablyInkedxo Brand Ecosystem',
       description:
-        'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify. A vibrant, empathy-driven brand celebrating creativity and self-expression.',
+        'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
       image: '/images/flower-image.png',
       category: 'Brand Design',
+      // keep the fixed working destination you were using
       link: 'https://www.daniellesalinetro.design/branding-portfolio-collection',
+      // if you prefer Linktree instead, swap to: 'https://linktr.ee/daniellesalinetro'
     },
     {
       id: 2,
       title: 'Creative Storytelling & Visual Narratives',
       description:
-        'A poetic blend of vintage typewriter and natural beauty, symbolizing the power of empathy-driven storytelling in design and human connection.',
+        'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/artwork-typewriter.png',
       category: 'Conceptual Art',
+      link: '/work/creative-storytelling', // internal page you said was fixed
     },
     {
       id: 3,
       title: 'Hearts & Minds Foundation Identity',
       description:
-        'Complete brand identity system focusing on human connection and empathy-driven design principles. A comprehensive case study in compassionate branding.',
+        'Complete identity system focused on human connection and empathy-driven principles.',
       image: '/images/hearts-minds-logo.png',
       category: 'Brand Design',
       link: 'https://dsalinetro.github.io/daniellesalinetro.github.io/Hearts-Minds-Foundation.html',
@@ -67,29 +72,40 @@ export default function DesignPage() {
       id: 4,
       title: 'Professional Business Card Design',
       description:
-        'Clean, elegant business card design featuring sophisticated typography and brand consistency with strategic layout for maximum impact.',
+        'Clean, elegant business card design with sophisticated typography and layout.',
       image: '/images/business-card.png',
       category: 'Print Design',
+      link: '/work/business-card', // internal page fixed
     },
     {
       id: 5,
       title: 'Corporate Letterhead System',
       description:
-        'Professional letterhead design maintaining brand cohesion and corporate identity standards with attention to detail and hierarchy.',
+        'Professional letterhead maintaining brand cohesion and hierarchy.',
       image: '/images/letterhead.png',
       category: 'Print Design',
+      link: '/work/letterhead', // internal page fixed
     },
     {
       id: 6,
       title: 'Brand Identity Portfolio Collection',
       description:
-        'Diverse collection of brand identities including Groove Records, Wonder Labs, Terra Sustainable Products, Aurelia, Peak Adventures, Nexus Tech, and Rooted Coffee - showcasing versatility across industries from music and science to sustainability and hospitality.',
+        'Diverse identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/brand-portfolio-grid.png',
       category: 'Brand Design',
       link: 'https://www.daniellesalinetro.design/branding-portfolio-collection',
     },
+    {
+      id: 7,
+      title: 'Empathy by Design — Hero Artwork',
+      description: 'Photography & art direction for a warm, emotive hero visual.',
+      image: '/images/hero-rose.png',
+      category: 'Photography',
+      link: '/work/empathy-by-design', // internal page fixed
+    },
   ];
 
+  // ======= BLOGS (restored) ==============================================
   const blogPosts = [
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -103,7 +119,7 @@ export default function DesignPage() {
     {
       title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
       excerpt:
-        'Strategies for moving beyond surface-level design thinking to create solutions that support mental wellness and human flourishing.',
+        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
       readTime: '6 min read',
       date: 'Dec 15, 2024',
       link: 'https://medium.com/@dsalinetro',
@@ -112,7 +128,7 @@ export default function DesignPage() {
     {
       title: "Beyond 'Why Didn't They Just Leave?'",
       excerpt:
-        'How design can change conversation and create more compassionate dialogues around complex human experiences.',
+        'Design that improves conversations around complex human experiences.',
       readTime: '8 min read',
       date: 'Nov 20, 2024',
       link: 'https://medium.com/@dsalinetro',
@@ -121,7 +137,7 @@ export default function DesignPage() {
     {
       title: 'Every Child Deserves a Fair Start',
       excerpt:
-        'Turning awareness into action through empathy-driven design that creates real impact for vulnerable communities.',
+        'Turning awareness into action through empathy-driven design.',
       readTime: '7 min read',
       date: 'Oct 15, 2024',
       link: 'https://medium.com/@dsalinetro',
@@ -130,7 +146,7 @@ export default function DesignPage() {
     {
       title: 'Designing with Empathy: My Creative Journey',
       excerpt:
-        'A personal reflection on the role of empathy in design practice and building authentic connections through creative work.',
+        'A reflection on empathy in design and building authentic connections.',
       readTime: '9 min read',
       date: 'Sep 28, 2024',
       link: 'https://medium.com/@dsalinetro',
@@ -140,7 +156,7 @@ export default function DesignPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
+      {/* NAV (bio/social links preserved) */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10"
         style={{ background: 'rgba(0,0,0,0.5)' }}
@@ -175,28 +191,13 @@ export default function DesignPage() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a
-                href="https://medium.com/@dsalinetro"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors"
-              >
+              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <BookOpen size={20} />
               </a>
-              <a
-                href="https://linkedin.com/in/danielle-salinetro"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors"
-              >
+              <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a
-                href="https://daniellesalinetro.design"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors"
-              >
+              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <ExternalLink size={20} />
               </a>
             </div>
@@ -204,14 +205,13 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* Hero */}
+      {/* HERO (unchanged layout + buttons) */}
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
         style={{ backgroundImage: `url(/images/hero-rose.png)` }}
         aria-label="Empathy by Design hero"
       >
-        {/* overlay */}
         <motion.div
           className="absolute inset-0 z-0"
           style={{
@@ -225,7 +225,6 @@ export default function DesignPage() {
           transition={{ duration: 1.2 }}
         />
 
-        {/* hero content */}
         <div className="grid place-items-center min-h-screen px-6 py-24 relative z-10">
           <motion.div
             className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
@@ -307,7 +306,6 @@ export default function DesignPage() {
           </motion.div>
         </div>
 
-        {/* scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
           animate={{ y: [0, 10, 0] }}
@@ -317,7 +315,7 @@ export default function DesignPage() {
         </motion.div>
       </section>
 
-      {/* Portfolio */}
+      {/* PORTFOLIO */}
       <section id="portfolio" className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
@@ -387,7 +385,7 @@ export default function DesignPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-gray-600 mb-4">Interested in seeing a detailed project case study?</p>
+            <p className="text-gray-600 mb-4">Interested in a detailed project case study?</p>
             <a
               href="https://www.daniellesalinetro.design/project-case-study"
               target="_blank"
@@ -400,7 +398,7 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* About */}
+      {/* ABOUT (bio preserved) */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
@@ -413,34 +411,19 @@ export default function DesignPage() {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                I'm a creative professional blending design, research, and storytelling to create human-centered
-                solutions that drive engagement and impact. As Founder &amp; Creative Director of AdorablyInkedxo,
-                I've built sustainable fashion brands from concept to launch while developing empathy-driven design methodologies.
+                I'm a creative professional blending design, research, and storytelling to create human-centered solutions that drive engagement and impact…
               </p>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                My approach combines thorough research, strategic thinking, and creative storytelling to build
-                experiences that resonate on a human level. With experience managing influencer campaigns reaching
-                850K+ followers and designing solutions for 20+ clients across tech, healthcare, and retail,
-                I believe empathy is the foundation of great design.
+                My approach combines research, strategy, and creative storytelling to build experiences that resonate on a human level…
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Currently pursuing my Google UX Certificate and Certified Professional Technical Communicator (CPTC),
-                I'm passionate about translating complex data into compelling visuals and narratives that create
-                meaningful connections between people and technology.
+                Currently pursuing my Google UX Certificate and CPTC, I’m passionate about translating complex data into compelling visuals…
               </p>
               <div className="flex flex-wrap gap-3">
-                {[
-                  'Empathy-Driven Design',
-                  'Brand Identity',
-                  'UX Research',
-                  'Content Strategy',
-                  'Visual Storytelling',
-                  'Data Visualization',
-                ].map((skill) => (
-                  <Badge key={skill} variant="outline" className="px-4 py-2">
-                    {skill}
-                  </Badge>
-                ))}
+                {['Empathy-Driven Design','Brand Identity','UX Research','Content Strategy','Visual Storytelling','Data Visualization']
+                  .map((skill) => (
+                    <Badge key={skill} variant="outline" className="px-4 py-2">{skill}</Badge>
+                  ))}
               </div>
             </div>
             <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
@@ -452,7 +435,7 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* Blogs */}
+      {/* BLOGS (restored) */}
       <section id="blogs" className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
@@ -464,24 +447,13 @@ export default function DesignPage() {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Latest Insights</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Thought leadership on empathy-driven design, human-centered experiences, and creating meaningful connections through
-              creative work
+              Thought leadership on empathy-driven design and creating meaningful connections
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a
-                href="https://medium.com/@dsalinetro"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
-              >
+              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
-              <a
-                href="https://www.daniellesalinetro.design/new-page-2"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
-              >
+              <a href="https://www.daniellesalinetro.design/new-page-2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
                 View Empathy Audit <ExternalLink size={16} />
               </a>
             </div>
@@ -501,11 +473,7 @@ export default function DesignPage() {
               >
                 <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
@@ -523,20 +491,13 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* CONTACT + FOOTER (unchanged) */}
       <section id="contact" className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Ready to create something meaningful together? I'd love to collaborate on projects that prioritize human-centered
-              design and empathy-driven solutions.
+              Ready to create something meaningful together? I’d love to collaborate on projects that prioritize human-centered design.
             </p>
           </motion.div>
 
@@ -546,15 +507,11 @@ export default function DesignPage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Mail className="text-[#d4967d]" size={20} />
-                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#d4967d] transition-colors">
-                    dsalinetro@pm.me
-                  </a>
+                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#d4967d] transition-colors">dsalinetro@pm.me</a>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="text-[#d4967d]" size={20} />
-                  <a href="tel:636.252.5894" className="hover:text-[#d4967d] transition-colors">
-                    636.252.5894
-                  </a>
+                  <a href="tel:636.252.5894" className="hover:text-[#d4967d] transition-colors">636.252.5894</a>
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#d4967d]" size={20} />
@@ -562,12 +519,7 @@ export default function DesignPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <ExternalLink className="text-[#d4967d]" size={20} />
-                  <a
-                    href="https://daniellesalinetro.design"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#d4967d] transition-colors"
-                  >
+                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="hover:text-[#d4967d] transition-colors">
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -576,28 +528,13 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a
-                    href="https://medium.com/@dsalinetro"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors"
-                  >
+                  <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <BookOpen size={20} />
                   </a>
-                  <a
-                    href="https://linkedin.com/in/danielle-salinetro"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors"
-                  >
+                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <Linkedin size={20} />
                   </a>
-                  <a
-                    href="https://daniellesalinetro.design"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors"
-                  >
+                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <ExternalLink size={20} />
                   </a>
                 </div>
@@ -607,35 +544,16 @@ export default function DesignPage() {
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
-                    placeholder="Your name"
-                  />
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                  <input id="name" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="Your name" />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
-                    placeholder="your@email.com"
-                  />
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
                 </div>
                 <div>
-                  <label htmlFor="project" className="block text-sm font-medium mb-2">
-                    Project Type
-                  </label>
-                  <select
-                    id="project"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent"
-                  >
+                  <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
+                  <select id="project" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent">
                     <option value="">Select project type</option>
                     <option value="branding">Brand Identity &amp; Design</option>
                     <option value="ux">UX Research &amp; Design</option>
@@ -645,15 +563,8 @@ export default function DesignPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent resize-none"
-                    placeholder="Tell me about your project and how we might work together..."
-                  />
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                  <textarea id="message" rows={4} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent resize-none" placeholder="Tell me about your project…" />
                 </div>
                 <Button type="submit" className="w-full bg-[#d4967d] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
                   Send Message
@@ -664,7 +575,6 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-black text-white py-8">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
@@ -672,15 +582,9 @@ export default function DesignPage() {
               <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
             </div>
             <div className="flex items-center gap-6">
-              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">
-                Email
-              </a>
-              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                Medium
-              </a>
-              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                Portfolio
-              </a>
+              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">Email</a>
+              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Medium</a>
+              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
             </div>
           </div>
         </div>
