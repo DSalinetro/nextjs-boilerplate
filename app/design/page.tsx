@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 
-// If you put the UI files at /components/ui as we discussed, these relative imports will work.
-// If you use "@/components/...", switch these three lines to that alias instead.
+// Use relative imports to avoid the alias error on Vercel
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -16,18 +15,16 @@ export default function DesignPage() {
   const [activeSection, setActiveSection] =
     useState<'home' | 'portfolio' | 'about' | 'blogs' | 'contact'>('home');
 
-  // Smooth scroll
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Update active section on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'portfolio', 'about', 'blogs', 'contact'] as const;
+    const onScroll = () => {
+      const ids = ['home', 'portfolio', 'about', 'blogs', 'contact'] as const;
       const y = window.scrollY + 100;
-      for (const id of sections) {
+      for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
         const { offsetTop, offsetHeight } = el;
@@ -37,17 +34,17 @@ export default function DesignPage() {
         }
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ======= PORTFOLIO (filenames + routes match your repo) ================
+  // -------------------- PORTFOLIO --------------------
   const portfolioItems = [
     {
       id: 1,
       title: 'AdorablyInkedxo Brand Ecosystem',
       description:
-        'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
+        'Complete sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.',
       image: '/images/adorably-inked-xo-brand-ecosystem.png',
       category: 'Brand Design',
       link: '/work/adorably-inkedxo',
@@ -59,7 +56,8 @@ export default function DesignPage() {
         'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/typewriter-roses.png',
       category: 'Conceptual Art',
-      link: '/work/creative-storytelling',
+      // per your note, this one should go to your Medium article:
+      link: 'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
     },
     {
       id: 3,
@@ -83,7 +81,7 @@ export default function DesignPage() {
       id: 5,
       title: 'Corporate Letterhead System',
       description:
-        'Professional letterhead maintaining brand cohesion and hierarchy.',
+        'Cohesive letterhead maintaining brand cohesion and hierarchy.',
       image: '/images/letterhead.png',
       category: 'Print Design',
       link: '/work/letterhead',
@@ -92,7 +90,7 @@ export default function DesignPage() {
       id: 6,
       title: 'Brand Identity Portfolio Collection',
       description:
-        'Diverse identities across music, science, sustainability, hospitality, and tech.',
+        'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
       category: 'Brand Design',
       link: '/work/brand-identity',
@@ -101,13 +99,13 @@ export default function DesignPage() {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
       description: 'Photography & art direction for a warm, emotive hero visual.',
-      image: '/images/moody-library.png', // primary card image (you also have /images/Flowers.png)
+      image: '/images/moody-library.png', // primary card image
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
-  ];
+  ] as const;
 
-  // ======= BLOGS (image mapping per your list) ===========================
+  // -------------------- BLOGS --------------------
   const blogPosts = [
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -115,8 +113,9 @@ export default function DesignPage() {
         'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
       readTime: '10 min read',
       date: 'Jan 8, 2025',
-      link: 'https://www.daniellesalinetro.design/new-page-2',
-      image: '/images/empathy-by-design.png', // you specified this for Empathy Audit
+      link:
+        'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+      image: '/images/empathy-by-design.png',
     },
     {
       title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
@@ -124,22 +123,23 @@ export default function DesignPage() {
         'Strategies for moving beyond surface-level design thinking to support mental wellness.',
       readTime: '6 min read',
       date: 'Dec 15, 2024',
-      link: 'https://medium.com/@dsalinetro',
+      link:
+        'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
       image: '/images/designing-for-mental-health.png',
     },
     {
       title: "Beyond 'Why Didn't They Just Leave?'",
       excerpt:
-        'Design that improves conversations around complex human experiences.',
+        'How design can change the conversation around complex human experiences.',
       readTime: '8 min read',
       date: 'Nov 20, 2024',
-      link: 'https://medium.com/@dsalinetro',
+      link:
+        'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
       image: '/images/beyond-why-didnt-they-just-leave.webp',
     },
     {
       title: 'Every Child Deserves a Fair Start',
-      excerpt:
-        'Turning awareness into action through empathy-driven design.',
+      excerpt: 'Turning awareness into action through empathy-driven design.',
       readTime: '7 min read',
       date: 'Oct 15, 2024',
       link: 'https://medium.com/@dsalinetro',
@@ -154,7 +154,7 @@ export default function DesignPage() {
       link: 'https://medium.com/@dsalinetro',
       image: '/images/designing-with-empathy-red-chair.jpg',
     },
-  ];
+  ] as const;
 
   return (
     <div className="min-h-screen">
@@ -207,7 +207,7 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* HERO (uses your field-of-flowers.png) */}
+      {/* HERO – field-of-flowers.png */}
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
@@ -275,12 +275,8 @@ export default function DesignPage() {
                   boxShadow: '0 6px 20px rgba(212,150,125,.4)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,125,.5)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,125,.4)';
-                }}
+                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,125,.5)')}
+                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,125,.4)')}
               >
                 View My Work
               </button>
@@ -295,12 +291,8 @@ export default function DesignPage() {
                   background: 'rgba(255,255,255,.12)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,.18)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,.12)';
-                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
               >
                 Visit Portfolio Site
               </a>
@@ -317,7 +309,7 @@ export default function DesignPage() {
         </motion.div>
       </section>
 
-      {/* PORTFOLIO */}
+      {/* PORTFOLIO GRID */}
       <section id="portfolio" className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
@@ -363,10 +355,7 @@ export default function DesignPage() {
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
                       {item.link && (
-                        <ExternalLink
-                          size={16}
-                          className="text-gray-400 group-hover:text-[#d4967d] transition-colors"
-                        />
+                        <ExternalLink size={16} className="text-gray-400 group-hover:text-[#d4967d] transition-colors" />
                       )}
                     </div>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">
@@ -420,13 +409,13 @@ export default function DesignPage() {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                I'm a creative professional blending design, research, and storytelling to create human-centered solutions that drive engagement and impact…
+                I'm a creative professional blending design, research, and storytelling to create human-centered solutions that drive engagement and impact.
               </p>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                My approach combines research, strategy, and creative storytelling to build experiences that resonate on a human level…
+                My approach combines research, strategy, and creative storytelling to build experiences that resonate on a human level.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Currently pursuing my Google UX Certificate and CPTC, I’m passionate about translating complex data into compelling visuals…
+                Currently pursuing my Google UX Certificate and CPTC, I’m passionate about translating complex data into compelling visuals.
               </p>
               <div className="flex flex-wrap gap-3">
                 {['Empathy-Driven Design','Brand Identity','UX Research','Content Strategy','Visual Storytelling','Data Visualization']
@@ -469,13 +458,13 @@ export default function DesignPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {blogPosts.map((post, i) => (
               <motion.article
-                key={index}
+                key={i}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
                 className="group cursor-pointer"
                 onClick={() => window.open(post.link, '_blank')}
