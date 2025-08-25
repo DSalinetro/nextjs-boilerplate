@@ -3,8 +3,7 @@
 
 import Design from './design/page';
 
-// Set this in your env (Vercel → Project → Settings → Environment Variables)
-// or in a local .env.local:
+// Optional maintenance toggle via env:
 // NEXT_PUBLIC_MAINTENANCE=true
 const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE === 'true';
 
