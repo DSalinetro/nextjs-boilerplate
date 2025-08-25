@@ -3,9 +3,13 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
+
+// If you put the UI files at /components/ui as we discussed, these relative imports will work.
+// If you use "@/components/...", switch these three lines to that alias instead.
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
+
 import { useState, useEffect } from 'react';
 
 export default function DesignPage() {
@@ -25,12 +29,11 @@ export default function DesignPage() {
       const y = window.scrollY + 100;
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el) {
-          const { offsetTop, offsetHeight } = el;
-          if (y >= offsetTop && y < offsetTop + offsetHeight) {
-            setActiveSection(id);
-            break;
-          }
+        if (!el) continue;
+        const { offsetTop, offsetHeight } = el;
+        if (y >= offsetTop && y < offsetTop + offsetHeight) {
+          setActiveSection(id);
+          break;
         }
       }
     };
@@ -38,119 +41,121 @@ export default function DesignPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ======= PORTFOLIO (links use your /work folders) ======================
+  // ======= PORTFOLIO (filenames + routes match your repo) ================
   const portfolioItems = [
-  {
-    id: 1,
-    title: 'AdorablyInkedxo Brand Ecosystem',
-    description:
-      'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
-    image: '/images/adorably-inked-xo-brand-ecosystem.png',
-    category: 'Brand Design',
-    link: '/work/adorably-inkedxo',
-  },
-  {
-    id: 2,
-    title: 'Creative Storytelling & Visual Narratives',
-    description:
-      'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
-    image: '/images/typewriter-roses.png',
-    category: 'Conceptual Art',
-    link: '/work/creative-storytelling',
-  },
-  {
-    id: 3,
-    title: 'Hearts & Minds Foundation Identity',
-    description:
-      'Complete identity system focused on human connection and empathy-driven principles.',
-    image: '/images/hearts-and-minds-logo.png',
-    category: 'Brand Design',
-    link: '/work/hearts-and-minds',
-  },
-  {
-    id: 4,
-    title: 'Professional Business Card Design',
-    description:
-      'Clean, elegant business card design with sophisticated typography and layout.',
-    image: '/images/business-card.png',
-    category: 'Print Design',
-    link: '/work/business-card',
-  },
-  {
-    id: 5,
-    title: 'Corporate Letterhead System',
-    description:
-      'Professional letterhead maintaining brand cohesion and hierarchy.',
-    image: '/images/letterhead.png',
-    category: 'Print Design',
-    link: '/work/letterhead',
-  },
-  {
-    id: 6,
-    title: 'Brand Identity Portfolio Collection',
-    description:
-      'Diverse identities across music, science, sustainability, hospitality, and tech.',
-    image: '/images/branding.png',
-    category: 'Brand Design',
-    link: '/work/brand-identity',
-  },
-  {
-    id: 7,
-    title: 'Empathy by Design — Hero Artwork',
-    description: 'Photography & art direction for a warm, emotive hero visual.',
-    image: '/images/empathy-by-design.png',
-    category: 'Photography',
-    link: '/work/empathy-by-design',
-  },
-];
-  // ======= BLOGS =========================================================
+    {
+      id: 1,
+      title: 'AdorablyInkedxo Brand Ecosystem',
+      description:
+        'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
+      image: '/images/adorably-inked-xo-brand-ecosystem.png',
+      category: 'Brand Design',
+      link: '/work/adorably-inkedxo',
+    },
+    {
+      id: 2,
+      title: 'Creative Storytelling & Visual Narratives',
+      description:
+        'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
+      image: '/images/typewriter-roses.png',
+      category: 'Conceptual Art',
+      link: '/work/creative-storytelling',
+    },
+    {
+      id: 3,
+      title: 'Hearts & Minds Foundation Identity',
+      description:
+        'Complete identity system focused on human connection and empathy-driven principles.',
+      image: '/images/hearts-and-minds-logo.png',
+      category: 'Brand Design',
+      link: '/work/hearts-and-minds',
+    },
+    {
+      id: 4,
+      title: 'Professional Business Card Design',
+      description:
+        'Clean, elegant business card design with sophisticated typography and layout.',
+      image: '/images/business-card.png',
+      category: 'Print Design',
+      link: '/work/business-card',
+    },
+    {
+      id: 5,
+      title: 'Corporate Letterhead System',
+      description:
+        'Professional letterhead maintaining brand cohesion and hierarchy.',
+      image: '/images/letterhead.png',
+      category: 'Print Design',
+      link: '/work/letterhead',
+    },
+    {
+      id: 6,
+      title: 'Brand Identity Portfolio Collection',
+      description:
+        'Diverse identities across music, science, sustainability, hospitality, and tech.',
+      image: '/images/branding.png',
+      category: 'Brand Design',
+      link: '/work/brand-identity',
+    },
+    {
+      id: 7,
+      title: 'Empathy by Design — Hero Artwork',
+      description: 'Photography & art direction for a warm, emotive hero visual.',
+      image: '/images/moody-library.png', // primary card image (you also have /images/Flowers.png)
+      category: 'Photography',
+      link: '/work/empathy-by-design',
+    },
+  ];
+
+  // ======= BLOGS (image mapping per your list) ===========================
   const blogPosts = [
-  {
-    title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-    excerpt:
-      'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-    readTime: '10 min read',
-    date: 'Jan 8, 2025',
-    link: 'https://www.daniellesalinetro.design/new-page-2',
-    image: '/images/field-of-flowers.png',
-  },
-  {
-    title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-    excerpt:
-      'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-    readTime: '6 min read',
-    date: 'Dec 15, 2024',
-    link: 'https://medium.com/@dsalinetro',
-    image: '/images/designing-for-mental-health.png',
-  },
-  {
-    title: "Beyond 'Why Didn't They Just Leave?'",
-    excerpt:
-      'Design that improves conversations around complex human experiences.',
-    readTime: '8 min read',
-    date: 'Nov 20, 2024',
-    link: 'https://medium.com/@dsalinetro',
-    image: '/images/beyond-why-didnt-they-just-leave.webp',
-  },
-  {
-    title: 'Every Child Deserves a Fair Start',
-    excerpt:
-      'Turning awareness into action through empathy-driven design.',
-    readTime: '7 min read',
-    date: 'Oct 15, 2024',
-    link: 'https://medium.com/@dsalinetro',
-    image: '/images/every-child-deserves-a-fair-start.webp',
-  },
-  {
-    title: 'Designing with Empathy: My Creative Journey',
-    excerpt:
-      'A reflection on empathy in design and building authentic connections.',
-    readTime: '9 min read',
-    date: 'Sep 28, 2024',
-    link: 'https://medium.com/@dsalinetro',
-    image: '/images/designing-with-empathy-red-chair.jpg',
-  },
-];
+    {
+      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      excerpt:
+        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
+      readTime: '10 min read',
+      date: 'Jan 8, 2025',
+      link: 'https://www.daniellesalinetro.design/new-page-2',
+      image: '/images/empathy-by-design.png', // you specified this for Empathy Audit
+    },
+    {
+      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
+      excerpt:
+        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
+      readTime: '6 min read',
+      date: 'Dec 15, 2024',
+      link: 'https://medium.com/@dsalinetro',
+      image: '/images/designing-for-mental-health.png',
+    },
+    {
+      title: "Beyond 'Why Didn't They Just Leave?'",
+      excerpt:
+        'Design that improves conversations around complex human experiences.',
+      readTime: '8 min read',
+      date: 'Nov 20, 2024',
+      link: 'https://medium.com/@dsalinetro',
+      image: '/images/beyond-why-didnt-they-just-leave.webp',
+    },
+    {
+      title: 'Every Child Deserves a Fair Start',
+      excerpt:
+        'Turning awareness into action through empathy-driven design.',
+      readTime: '7 min read',
+      date: 'Oct 15, 2024',
+      link: 'https://medium.com/@dsalinetro',
+      image: '/images/every-child-deserves-a-fair-start.webp',
+    },
+    {
+      title: 'Designing with Empathy: My Creative Journey',
+      excerpt:
+        'A reflection on empathy in design and building authentic connections.',
+      readTime: '9 min read',
+      date: 'Sep 28, 2024',
+      link: 'https://medium.com/@dsalinetro',
+      image: '/images/designing-with-empathy-red-chair.jpg',
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* NAV */}
@@ -202,11 +207,11 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* HERO */}
+      {/* HERO (uses your field-of-flowers.png) */}
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(/images/rose-hero.png)` }}
+        style={{ backgroundImage: `url(/images/field-of-flowers.png)` }}
         aria-label="Empathy by Design hero"
       >
         <motion.div
@@ -399,24 +404,6 @@ export default function DesignPage() {
               );
             })}
           </div>
-
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="text-gray-600 mb-4">Interested in a detailed project case study?</p>
-            <a
-              href="https://www.daniellesalinetro.design/project-case-study"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#d4967d] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c47f64] transition-colors"
-            >
-              View Case Study <ExternalLink size={16} />
-            </a>
-          </motion.div>
         </div>
       </section>
 
@@ -450,7 +437,7 @@ export default function DesignPage() {
             </div>
             <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/images/professional-photo.png" alt="Danielle Salinetro" className="w-full h-full object-cover" />
+                <img src="/images/portrait.png" alt="Danielle Salinetro" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </motion.div>
