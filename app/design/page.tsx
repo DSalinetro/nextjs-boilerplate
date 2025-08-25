@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -37,7 +38,7 @@ export default function DesignPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ======= PORTFOLIO (links restored) ====================================
+  // ======= PORTFOLIO (links use your /work folders) ======================
   const portfolioItems = [
     {
       id: 1,
@@ -46,9 +47,7 @@ export default function DesignPage() {
         'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
       image: '/images/flower-image.png',
       category: 'Brand Design',
-      // keep the fixed working destination you were using
-      link: 'https://www.daniellesalinetro.design/branding-portfolio-collection',
-      // if you prefer Linktree instead, swap to: 'https://linktr.ee/daniellesalinetro'
+      link: '/work/adorably-inkedxo',
     },
     {
       id: 2,
@@ -57,7 +56,7 @@ export default function DesignPage() {
         'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/artwork-typewriter.png',
       category: 'Conceptual Art',
-      link: '/work/creative-storytelling', // internal page you said was fixed
+      link: '/work/creative-storytelling',
     },
     {
       id: 3,
@@ -66,7 +65,7 @@ export default function DesignPage() {
         'Complete identity system focused on human connection and empathy-driven principles.',
       image: '/images/hearts-minds-logo.png',
       category: 'Brand Design',
-      link: 'https://dsalinetro.github.io/daniellesalinetro.github.io/Hearts-Minds-Foundation.html',
+      link: '/work/hearts-and-minds',
     },
     {
       id: 4,
@@ -75,7 +74,7 @@ export default function DesignPage() {
         'Clean, elegant business card design with sophisticated typography and layout.',
       image: '/images/business-card.png',
       category: 'Print Design',
-      link: '/work/business-card', // internal page fixed
+      link: '/work/business-card',
     },
     {
       id: 5,
@@ -84,7 +83,7 @@ export default function DesignPage() {
         'Professional letterhead maintaining brand cohesion and hierarchy.',
       image: '/images/letterhead.png',
       category: 'Print Design',
-      link: '/work/letterhead', // internal page fixed
+      link: '/work/letterhead',
     },
     {
       id: 6,
@@ -93,7 +92,7 @@ export default function DesignPage() {
         'Diverse identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/brand-portfolio-grid.png',
       category: 'Brand Design',
-      link: 'https://www.daniellesalinetro.design/branding-portfolio-collection',
+      link: '/work/brand-identity',
     },
     {
       id: 7,
@@ -101,11 +100,11 @@ export default function DesignPage() {
       description: 'Photography & art direction for a warm, emotive hero visual.',
       image: '/images/hero-rose.png',
       category: 'Photography',
-      link: '/work/empathy-by-design', // internal page fixed
+      link: '/work/empathy-by-design',
     },
   ];
 
-  // ======= BLOGS (restored) ==============================================
+  // ======= BLOGS =========================================================
   const blogPosts = [
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -156,7 +155,7 @@ export default function DesignPage() {
 
   return (
     <div className="min-h-screen">
-      {/* NAV (bio/social links preserved) */}
+      {/* NAV */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10"
         style={{ background: 'rgba(0,0,0,0.5)' }}
@@ -205,7 +204,7 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* HERO (unchanged layout + buttons) */}
+      {/* HERO */}
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
@@ -342,17 +341,9 @@ export default function DesignPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
-                className="group cursor-pointer"
-                onClick={() => item.link && window.open(item.link, '_blank')}
-              >
+            {portfolioItems.map((item, index) => {
+              const isExternal = !!item.link && /^https?:\/\//.test(item.link);
+              const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
                     <img
@@ -368,14 +359,47 @@ export default function DesignPage() {
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
-                      {item.link && <ExternalLink size={16} className="text-gray-400 group-hover:text-[#d4967d] transition-colors" />}
+                      {item.link && (
+                        <ExternalLink
+                          size={16}
+                          className="text-gray-400 group-hover:text-[#d4967d] transition-colors"
+                        />
+                      )}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">{item.title}</h3>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">
+                      {item.title}
+                    </h3>
                     <p className="text-gray-600">{item.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
+              );
+
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  whileHover={{ y: -10 }}
+                  className="group"
+                >
+                  {item.link ? (
+                    isExternal ? (
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
+                        {CardEl}
+                      </a>
+                    ) : (
+                      <Link href={item.link} className="block" aria-label={item.title}>
+                        {CardEl}
+                      </Link>
+                    )
+                  ) : (
+                    CardEl
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
@@ -398,7 +422,7 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* ABOUT (bio preserved) */}
+      {/* ABOUT */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
@@ -435,7 +459,7 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* BLOGS (restored) */}
+      {/* BLOGS */}
       <section id="blogs" className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
@@ -491,7 +515,7 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* CONTACT + FOOTER (unchanged) */}
+      {/* CONTACT + FOOTER */}
       <section id="contact" className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
