@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Search, ChevronLeft } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 type Project = {
   id: number;
@@ -15,11 +15,17 @@ type Project = {
   link?: string; // internal link like /work/...
 };
 
-export default function PortfolioCollection() {
+export default function Design() {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState<string>('All');
 
-  // ---- Data ---------------------------------------------------------------
+  // ---------------- Hero Config (edit these paths/texts) ----------------
+  const heroImage = '/images/field-of-flowers.png'; // <-- set your hero image path
+  const heroTitle = 'Empathy by Design';
+  const heroSubtitle =
+    'Crafted visuals and systems that put people first—branding, print, and conceptual work.';
+  // ---------------------------------------------------------------------
+
   const projects: Project[] = [
     {
       id: 1,
@@ -88,11 +94,11 @@ export default function PortfolioCollection() {
       image: '/images/field-of-flowers.png',
       category: 'Photography',
       tags: ['art direction', 'photo'],
-      link: '/work/empathy-by-design', // create this page when ready
+      link: '/work/empathy-by-design',
     },
   ];
 
-  // ---- Derived values -----------------------------------------------------
+  // Derived
   const categories = useMemo(() => {
     const set = new Set<string>(['All']);
     projects.forEach((p) => set.add(p.category));
@@ -112,21 +118,46 @@ export default function PortfolioCollection() {
     });
   }, [projects, active, query]);
 
-  // ---- UI ----------------------------------------------------------------
   return (
     <div className="min-h-screen bg-white">
-      {/* Top bar */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900"
-          >
-            <ChevronLeft size={18} />
-            Back to Home
-          </Link>
+      {/* HERO */}
+      <section className="relative h-[60vh] md:h-[72vh] w-full overflow-hidden">
+        <img
+          src={heroImage}
+          alt={heroTitle}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* gradient + darken */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
+        <div className="relative z-10 h-full max-w-6xl mx-auto px-6 flex flex-col justify-end pb-10">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow">
+            {heroTitle}
+          </h1>
+          <p className="mt-3 max-w-2xl text-white/90 text-base md:text-lg">
+            {heroSubtitle}
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="#portfolio"
+              className="inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-white bg-[#d4967d] hover:opacity-90 transition"
+            >
+              View Portfolio
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-xl px-5 py-2.5 border border-white/70 text-white hover:bg-white/10 transition"
+            >
+              Contact
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <div className="relative w-full max-w-md">
+      {/* SEARCH + FILTERS */}
+      <section className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+          <div className="text-lg font-semibold text-gray-900">Portfolio</div>
+          <div className="relative w-full md:max-w-md">
             <Search
               size={18}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -140,7 +171,6 @@ export default function PortfolioCollection() {
           </div>
         </div>
 
-        {/* Category pills */}
         <div className="max-w-6xl mx-auto px-6 pb-4 flex flex-wrap gap-2">
           {categories.map((c) => (
             <button
@@ -156,80 +186,64 @@ export default function PortfolioCollection() {
             </button>
           ))}
         </div>
-      </header>
+      </section>
 
-      {/* Title */}
-      <div className="max-w-6xl mx-auto px-6 mt-8 mb-6">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-          Portfolio Collection
-        </h1>
-        <p className="mt-3 text-gray-600 max-w-2xl">
-          A curated selection of branding, print, photography, and conceptual work.
-          Filter by category or search to jump to a project quickly.
-        </p>
-      </div>
-
-      {/* Grid */}
-      <div className="max-w-6xl mx-auto px-6 pb-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filtered.map((p, idx) => {
-          const Card = (
-            <motion.article
-              key={p.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
-              className="group rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="aspect-[4/3] bg-gray-100 overflow-hidden">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-700">
-                    {p.category}
-                  </span>
-                  {p.link && (
-                    <ExternalLink
-                      size={16}
-                      className="text-gray-400 group-hover:text-[#d4967d] transition-colors"
-                    />
+      {/* GRID */}
+      <section id="portfolio" className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filtered.map((p, idx) => {
+            const Card = (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                className="group rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="aspect-[4/3] bg-gray-100 overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-700">
+                      {p.category}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold leading-snug group-hover:text-[#d4967d] transition-colors">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600">{p.description}</p>
+                  {(p.tags?.length ?? 0) > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {p.tags!.map((t) => (
+                        <span
+                          key={t}
+                          className="text-xs px-2 py-1 rounded-full border border-gray-200 text-gray-600"
+                        >
+                          #{t}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
-                <h3 className="text-lg font-semibold leading-snug group-hover:text-[#d4967d] transition-colors">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm text-gray-600">{p.description}</p>
-                {(p.tags?.length ?? 0) > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {p.tags!.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs px-2 py-1 rounded-full border border-gray-200 text-gray-600"
-                      >
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </motion.article>
-          );
+              </motion.article>
+            );
 
-          // Wrap with <Link> when we have an internal link
-          return p.link ? (
-            <Link key={p.id} href={p.link} aria-label={p.title}>
-              {Card}
-            </Link>
-          ) : (
-            Card
-          );
-        })}
-      </div>
+            return p.link ? (
+              <Link key={p.id} href={p.link} aria-label={p.title}>
+                {Card}
+              </Link>
+            ) : (
+              Card
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
