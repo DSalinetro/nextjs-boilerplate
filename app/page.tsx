@@ -13,6 +13,7 @@ function Maintenance() {
   );
 }
 
-export default function Page() {
+// app/page.tsx
+export { default } from './design/page';
   return isMaintenance ? <Maintenance /> : <Design />;
 }
