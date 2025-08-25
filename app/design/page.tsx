@@ -40,119 +40,117 @@ export default function DesignPage() {
 
   // ======= PORTFOLIO (links use your /work folders) ======================
   const portfolioItems = [
-    {
-      id: 1,
-      title: 'AdorablyInkedxo Brand Ecosystem',
-      description:
-        'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
-      image: '/images/flower-image.png',
-      category: 'Brand Design',
-      link: '/work/adorably-inkedxo',
-    },
-    {
-      id: 2,
-      title: 'Creative Storytelling & Visual Narratives',
-      description:
-        'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
-      image: '/images/artwork-typewriter.png',
-      category: 'Conceptual Art',
-      link: '/work/creative-storytelling',
-    },
-    {
-      id: 3,
-      title: 'Hearts & Minds Foundation Identity',
-      description:
-        'Complete identity system focused on human connection and empathy-driven principles.',
-      image: '/images/hearts-minds-logo.png',
-      category: 'Brand Design',
-      link: '/work/hearts-and-minds',
-    },
-    {
-      id: 4,
-      title: 'Professional Business Card Design',
-      description:
-        'Clean, elegant business card design with sophisticated typography and layout.',
-      image: '/images/business-card.png',
-      category: 'Print Design',
-      link: '/work/business-card',
-    },
-    {
-      id: 5,
-      title: 'Corporate Letterhead System',
-      description:
-        'Professional letterhead maintaining brand cohesion and hierarchy.',
-      image: '/images/letterhead.png',
-      category: 'Print Design',
-      link: '/work/letterhead',
-    },
-    {
-      id: 6,
-      title: 'Brand Identity Portfolio Collection',
-      description:
-        'Diverse identities across music, science, sustainability, hospitality, and tech.',
-      image: '/images/brand-portfolio-grid.png',
-      category: 'Brand Design',
-      link: '/work/brand-identity',
-    },
-    {
-      id: 7,
-      title: 'Empathy by Design — Hero Artwork',
-      description: 'Photography & art direction for a warm, emotive hero visual.',
-      image: '/images/hero-rose.png',
-      category: 'Photography',
-      link: '/work/empathy-by-design',
-    },
-  ];
-
+  {
+    id: 1,
+    title: 'AdorablyInkedxo Brand Ecosystem',
+    description:
+      'Complete sustainable fashion brand with packaging, photography, and e-commerce platform built on Shopify.',
+    image: '/images/adorably-inked-xo-brand-ecosystem.png',
+    category: 'Brand Design',
+    link: '/work/adorably-inkedxo',
+  },
+  {
+    id: 2,
+    title: 'Creative Storytelling & Visual Narratives',
+    description:
+      'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
+    image: '/images/typewriter-roses.png',
+    category: 'Conceptual Art',
+    link: '/work/creative-storytelling',
+  },
+  {
+    id: 3,
+    title: 'Hearts & Minds Foundation Identity',
+    description:
+      'Complete identity system focused on human connection and empathy-driven principles.',
+    image: '/images/hearts-and-minds-logo.png',
+    category: 'Brand Design',
+    link: '/work/hearts-and-minds',
+  },
+  {
+    id: 4,
+    title: 'Professional Business Card Design',
+    description:
+      'Clean, elegant business card design with sophisticated typography and layout.',
+    image: '/images/business-card.png',
+    category: 'Print Design',
+    link: '/work/business-card',
+  },
+  {
+    id: 5,
+    title: 'Corporate Letterhead System',
+    description:
+      'Professional letterhead maintaining brand cohesion and hierarchy.',
+    image: '/images/letterhead.png',
+    category: 'Print Design',
+    link: '/work/letterhead',
+  },
+  {
+    id: 6,
+    title: 'Brand Identity Portfolio Collection',
+    description:
+      'Diverse identities across music, science, sustainability, hospitality, and tech.',
+    image: '/images/branding.png',
+    category: 'Brand Design',
+    link: '/work/brand-identity',
+  },
+  {
+    id: 7,
+    title: 'Empathy by Design — Hero Artwork',
+    description: 'Photography & art direction for a warm, emotive hero visual.',
+    image: '/images/empathy-by-design.png',
+    category: 'Photography',
+    link: '/work/empathy-by-design',
+  },
+];
   // ======= BLOGS =========================================================
   const blogPosts = [
-    {
-      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-      excerpt:
-        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-      readTime: '10 min read',
-      date: 'Jan 8, 2025',
-      link: 'https://www.daniellesalinetro.design/new-page-2',
-      image: '/images/empathy-audit-blog.png',
-    },
-    {
-      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-      excerpt:
-        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-      readTime: '6 min read',
-      date: 'Dec 15, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/mental-health-blog.png',
-    },
-    {
-      title: "Beyond 'Why Didn't They Just Leave?'",
-      excerpt:
-        'Design that improves conversations around complex human experiences.',
-      readTime: '8 min read',
-      date: 'Nov 20, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/beyond-leave-blog.png',
-    },
-    {
-      title: 'Every Child Deserves a Fair Start',
-      excerpt:
-        'Turning awareness into action through empathy-driven design.',
-      readTime: '7 min read',
-      date: 'Oct 15, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/fair-start-blog.png',
-    },
-    {
-      title: 'Designing with Empathy: My Creative Journey',
-      excerpt:
-        'A reflection on empathy in design and building authentic connections.',
-      readTime: '9 min read',
-      date: 'Sep 28, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/empathy-journey-blog.png',
-    },
-  ];
-
+  {
+    title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+    excerpt:
+      'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
+    readTime: '10 min read',
+    date: 'Jan 8, 2025',
+    link: 'https://www.daniellesalinetro.design/new-page-2',
+    image: '/images/field-of-flowers.png',
+  },
+  {
+    title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
+    excerpt:
+      'Strategies for moving beyond surface-level design thinking to support mental wellness.',
+    readTime: '6 min read',
+    date: 'Dec 15, 2024',
+    link: 'https://medium.com/@dsalinetro',
+    image: '/images/designing-for-mental-health.png',
+  },
+  {
+    title: "Beyond 'Why Didn't They Just Leave?'",
+    excerpt:
+      'Design that improves conversations around complex human experiences.',
+    readTime: '8 min read',
+    date: 'Nov 20, 2024',
+    link: 'https://medium.com/@dsalinetro',
+    image: '/images/beyond-why-didnt-they-just-leave.webp',
+  },
+  {
+    title: 'Every Child Deserves a Fair Start',
+    excerpt:
+      'Turning awareness into action through empathy-driven design.',
+    readTime: '7 min read',
+    date: 'Oct 15, 2024',
+    link: 'https://medium.com/@dsalinetro',
+    image: '/images/every-child-deserves-a-fair-start.webp',
+  },
+  {
+    title: 'Designing with Empathy: My Creative Journey',
+    excerpt:
+      'A reflection on empathy in design and building authentic connections.',
+    readTime: '9 min read',
+    date: 'Sep 28, 2024',
+    link: 'https://medium.com/@dsalinetro',
+    image: '/images/designing-with-empathy-red-chair.jpg',
+  },
+];
   return (
     <div className="min-h-screen">
       {/* NAV */}
@@ -208,7 +206,7 @@ export default function DesignPage() {
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(/images/hero-rose.png)` }}
+        style={{ backgroundImage: `url(/images/rose-hero.png)` }}
         aria-label="Empathy by Design hero"
       >
         <motion.div
