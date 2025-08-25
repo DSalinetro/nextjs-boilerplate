@@ -105,56 +105,58 @@ const portfolioItems = [
     link: '/design/work/empathy-by-design',
   },
 ] as const;
-  // -------------------- BLOGS --------------------
-  const blogPosts = [
-    {
-      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-      excerpt:
-        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-      readTime: '10 min read',
-      date: 'Jan 8, 2025',
-      link:
-        'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-      image: '/images/empathy-by-design.png',
-    },
-    {
-      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-      excerpt:
-        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-      readTime: '6 min read',
-      date: 'Dec 15, 2024',
-      link:
-        'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
-      image: '/images/designing-for-mental-health.png',
-    },
-    {
-      title: "Beyond 'Why Didn't They Just Leave?'",
-      excerpt:
-        'How design can change the conversation around complex human experiences.',
-      readTime: '8 min read',
-      date: 'Nov 20, 2024',
-      link:
-        'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
-      image: '/images/beyond-why-didnt-they-just-leave.webp',
-    },
-    {
-      title: 'Every Child Deserves a Fair Start',
-      excerpt: 'Turning awareness into action through empathy-driven design.',
-      readTime: '7 min read',
-      date: 'Oct 15, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/every-child-deserves-a-fair-start.webp',
-    },
-    {
-      title: 'Designing with Empathy: My Creative Journey',
-      excerpt:
-        'A reflection on empathy in design and building authentic connections.',
-      readTime: '9 min read',
-      date: 'Sep 28, 2024',
-      link: 'https://medium.com/@dsalinetro',
-      image: '/images/designing-with-empathy-red-chair.jpg',
-    },
-  ] as const;
+ // -------------------- BLOGS --------------------
+const blogPosts = [
+  {
+    title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+    excerpt:
+      'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
+    readTime: '10 min read',
+    date: 'Jan 8, 2025',
+    link:
+      'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+    image: '/images/empathy-rose.png', // ✅ updated image
+  },
+  {
+    title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
+    excerpt:
+      'Strategies for moving beyond surface-level design thinking to support mental wellness.',
+    readTime: '6 min read',
+    date: 'Dec 15, 2024',
+    link:
+      'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
+    image: '/images/designing-for-mental-health.png',
+  },
+  {
+    title: "Beyond 'Why Didn't They Just Leave?'",
+    excerpt:
+      'How design can change the conversation around complex human experiences.',
+    readTime: '8 min read',
+    date: 'Nov 20, 2024',
+    link:
+      'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
+    image: '/images/beyond-why-didnt-they-just-leave.webp',
+  },
+  {
+    title: 'Every Child Deserves a Fair Start',
+    excerpt: 'Turning awareness into action through empathy-driven design.',
+    readTime: '7 min read',
+    date: 'Oct 15, 2024',
+    link:
+      'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393', // ✅ updated link
+    image: '/images/every-child-deserves-a-fair-start.webp',
+  },
+  {
+    title: 'Designing with Empathy: My Creative Journey',
+    excerpt:
+      'A reflection on empathy in design and building authentic connections.',
+    readTime: '9 min read',
+    date: 'Sep 28, 2024',
+    link:
+      'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5', // ✅ updated link
+    image: '/images/designing-with-empathy-red-chair.jpg',
+  },
+] as const;
 
   return (
     <div className="min-h-screen">
