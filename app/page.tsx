@@ -1,5 +1,11 @@
+// app/page.tsx
+'use client';
+
 import Design from './design/page';
 
+// Set this in your env (Vercel → Project → Settings → Environment Variables)
+// or in a local .env.local:
+// NEXT_PUBLIC_MAINTENANCE=true
 const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE === 'true';
 
 function Maintenance() {
@@ -13,7 +19,6 @@ function Maintenance() {
   );
 }
 
-// app/page.tsx
-export { default } from './design/page';
+export default function Page() {
   return isMaintenance ? <Maintenance /> : <Design />;
 }
