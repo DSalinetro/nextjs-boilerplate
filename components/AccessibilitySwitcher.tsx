@@ -58,16 +58,16 @@ export default function AccessibilitySwitcher() {
     // ⬅️ moved to bottom-left
     <div className="fixed bottom-5 left-5 z-[9999]">
       <button
-        onClick={() => setOpen(v => !v)}
-        aria-expanded={open}
-        aria-controls="a11y-panel"
-        className="btn-primary shadow-lg flex items-center gap-2"
-        title="Accessibility / Perspective Switcher"
-        style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
-      >
-        <Accessibility className="h-4 w-4" aria-hidden="true" />
-        Accessibility
-      </button>
+  onClick={() => setOpen(v => !v)}
+  aria-expanded={open}
+  aria-controls="a11y-panel"
+  className="btn-secondary shadow-lg flex items-center gap-2"  // was btn-primary
+  title="Accessibility / Perspective Switcher"
+  style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
+>
+  <Accessibility className="h-4 w-4" aria-hidden="true" />
+  Accessibility
+</button>
 
       {open && (
         <div
