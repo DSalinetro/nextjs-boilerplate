@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 
-// ✅ this file is app/design/page.tsx, so "../../" is correct
+// this file is app/design/page.tsx, so "../../" is correct for reaching app/components/*
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -38,7 +38,7 @@ export default function DesignPage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ---------- PORTFOLIO CARDS (internal links use /work/*) ----------
+  // ---------- PORTFOLIO CARDS ----------
   const portfolioItems = [
     {
       id: 1,
@@ -56,7 +56,7 @@ export default function DesignPage() {
         'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/typewriter-roses.png',
       category: 'Conceptual Art',
-      // goes to your Medium profile (external)
+      // external: Medium profile
       link: 'https://medium.com/@dsalinetro',
     },
     {
@@ -93,7 +93,8 @@ export default function DesignPage() {
         'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
       category: 'Brand Design',
-      link: '/work/brand-identity',
+      // open the live collection directly
+      link: 'https://dsalinetro.github.io/branding-portfolio/',
     },
     {
       id: 7,
@@ -105,7 +106,7 @@ export default function DesignPage() {
     },
   ] as const;
 
-  // ---------- BLOGS (fixed links + images) ----------
+  // ---------- BLOGS ----------
   const blogPosts = [
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -209,7 +210,7 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* HERO: field-of-flowers.png */}
+      {/* HERO */}
       <section
         id="home"
         className="relative isolate block w-full min-h-screen bg-cover bg-center"
@@ -460,7 +461,12 @@ export default function DesignPage() {
               <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
-              <a href="https://www.daniellesalinetro.design/new-page-2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
+              <a
+                href="https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+              >
                 View Empathy Audit <ExternalLink size={16} />
               </a>
             </div>
