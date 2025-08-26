@@ -1,16 +1,12 @@
+// FILE: app/admin/page.tsx
+// A placeholder protected page so you can verify the guard works.
 export default function AdminHome() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
       <p className="text-gray-600 text-sm">
-        Welcome! Use the link below to add a new portfolio item.
+        If you can see this, the middleware guard and cookie are working.
       </p>
-      <a
-        href="/admin/portfolio/new"
-        className="inline-block rounded-lg border px-3 py-1.5 text-sm hover:bg-gray-100"
-      >
-        ➕ New Portfolio Item
-      </a>
     </div>
   );
 }
