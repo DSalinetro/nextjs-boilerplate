@@ -9,6 +9,9 @@ import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 
+// 🔗 pull centralized links
+import { LINKS } from '../../lib/links';
+
 import { useState, useEffect } from 'react';
 
 export default function DesignPage() {
@@ -27,7 +30,7 @@ export default function DesignPage() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const { offsetTop, offsetHeight } = el;
+        const { offsetTop, offsetHeight } = el as HTMLElement;
         if (y >= offsetTop && y < offsetTop + offsetHeight) {
           setActiveSection(id);
           break;
@@ -57,7 +60,7 @@ export default function DesignPage() {
       image: '/images/typewriter-roses.png',
       category: 'Conceptual Art',
       // external: Medium profile
-      link: 'https://medium.com/@dsalinetro',
+      link: LINKS.medium,
     },
     {
       id: 3,
@@ -94,7 +97,7 @@ export default function DesignPage() {
       image: '/images/branding.png',
       category: 'Brand Design',
       // open the live collection directly
-      link: 'https://dsalinetro.github.io/branding-portfolio/',
+      link: LINKS.brandingCollection,
     },
     {
       id: 7,
@@ -196,13 +199,13 @@ export default function DesignPage() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <BookOpen size={20} />
               </a>
               <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <ExternalLink size={20} />
               </a>
             </div>
@@ -284,7 +287,7 @@ export default function DesignPage() {
                 View My Work
               </button>
 
-              {/* UPDATED: point to the internal /portfolio hub */}
+              {/* points to the internal /portfolio hub */}
               <a
                 href="/portfolio"
                 target="_blank"
@@ -325,7 +328,7 @@ export default function DesignPage() {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               <a
-                href="https://dsalinetro.github.io/branding-portfolio/"
+                href={LINKS.brandingCollection}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -337,7 +340,7 @@ export default function DesignPage() {
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
             <a
-              href="https://dsalinetro.github.io/danielle-portfolio/"
+              href={LINKS.portfolioCollection}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
@@ -348,7 +351,7 @@ export default function DesignPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => {
-              const isExternal = !!item.link && /^https?:\/\//.test(item.link);
+              const isExternal = !!item.link && /^https?:\/\//.test(item.link as string);
               const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
@@ -389,11 +392,11 @@ export default function DesignPage() {
                 >
                   {item.link ? (
                     isExternal ? (
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
+                      <a href={item.link as string} target="_blank" rel="noopener noreferrer" className="block">
                         {CardEl}
                       </a>
                     ) : (
-                      <Link href={item.link} className="block" aria-label={item.title}>
+                      <Link href={item.link as string} className="block" aria-label={item.title}>
                         {CardEl}
                       </Link>
                     )
@@ -459,11 +462,12 @@ export default function DesignPage() {
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
+              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
+              {/* 🔁 Empathy Audit button now pulls from LINKS.empathyAudit (Squarespace hub) */}
               <a
-                href="https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5"
+                href={LINKS.empathyAudit}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
@@ -533,7 +537,7 @@ export default function DesignPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <ExternalLink className="text-[#d4967d]" size={20} />
-                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="hover:text-[#d4967d] transition-colors">
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#d4967d] transition-colors">
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -542,13 +546,13 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <BookOpen size={20} />
                   </a>
                   <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <Linkedin size={20} />
                   </a>
-                  <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
                     <ExternalLink size={20} />
                   </a>
                 </div>
@@ -563,7 +567,8 @@ export default function DesignPage() {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outlinenone focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
+                  {/* 🛠️ fixed class typo: focus:outline-none */}
+                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
                 </div>
                 <div>
                   <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
@@ -597,8 +602,8 @@ export default function DesignPage() {
             </div>
             <div className="flex items-center gap-6">
               <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">Email</a>
-              <a href="https://medium.com/@dsalinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Medium</a>
-              <a href="https://daniellesalinetro.design" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Medium</a>
+              <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
             </div>
           </div>
         </div>
