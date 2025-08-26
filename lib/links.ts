@@ -9,3 +9,5 @@ export const LINKS = {
   // optional: keep the Medium article too
   empathyAuditMedium: 'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
 } as const;
+empathyAuditPDF: 'https://daniellesalinetro.design/empathy-audit-pdf',
+
