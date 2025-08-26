@@ -284,8 +284,9 @@ export default function DesignPage() {
                 View My Work
               </button>
 
+              {/* UPDATED: point to the internal /portfolio hub */}
               <a
-                href="https://daniellesalinetro.design"
+                href="/portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
@@ -562,7 +563,7 @@ export default function DesignPage() {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
+                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outlinenone focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
                 </div>
                 <div>
                   <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
