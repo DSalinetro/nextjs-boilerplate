@@ -12,7 +12,6 @@ import { NextResponse } from "next/server";
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Only guard /admin routes; allow the login page itself.
   const isAdminRoute = pathname.startsWith("/admin");
   const isLoginRoute = pathname.startsWith("/admin/login");
 
@@ -21,7 +20,7 @@ export function middleware(req: NextRequest) {
     if (!isAuthed) {
       const url = req.nextUrl.clone();
       url.pathname = "/admin/login";
-      url.searchParams.set("next", pathname); // optional: remember destination
+      url.searchParams.set("next", pathname);
       return NextResponse.redirect(url);
     }
   }
