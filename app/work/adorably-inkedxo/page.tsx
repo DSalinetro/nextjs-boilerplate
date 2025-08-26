@@ -1,27 +1,31 @@
 import Link from 'next/link';
-export default function AdorablyInkedxo() {
+
+export default function Page() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
       <Link href="/#portfolio" className="text-sm text-gray-500 hover:text-[#d4967d]">
-  &larr; Back to Portfolio
-</Link>
+        &larr; Back to Portfolio
+      </Link>
+
       <h1 className="mt-4 text-4xl font-bold">AdorablyInkedxo Brand Ecosystem</h1>
-      <p className="mt-3 text-gray-600">Sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.</p>
+      <p className="text-gray-600 mb-6">
+        Sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.
+      </p>
 
-      <div className="mt-8 rounded-xl overflow-hidden shadow">
-        <img src="/images/adorably-inked-xo-brand-ecosystem.png" alt="AdorablyInkedxo" className="w-full h-auto" />
-      </div>
+      <img
+        src="/images/adorably-inked-xo-brand-ecosystem.png"
+        alt="AdorablyInkedxo—brand ecosystem"
+        className="w-full rounded-xl border mb-6"
+      />
 
-      <div className="mt-8">
-        <a
-          href="https://www.daniellesalinetro.design/branding-portfolio-collection"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#d4967d] text-white hover:bg-[#c47f64]"
-        >
-          View external collection
-        </a>
-      </div>
+      <a
+        href="https://linktr.ee/daniellesalinetro"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block px-4 py-2 rounded-lg border text-[#d4967d] hover:bg-[#d4967d] hover:text-white transition"
+      >
+        View my Linktree
+      </a>
     </main>
   );
 }
