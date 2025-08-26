@@ -29,7 +29,7 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/:path*"], // include the root and all subpaths
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
