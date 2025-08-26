@@ -1,20 +1,23 @@
-// app/layout.tsx
-import './globals.css';
-import type { Metadata } from 'next';
-import AccessibilitySwitcher from '../components/AccessibilitySwitcher';
+import React from "react";
+import { logoutAction } from "./actions";
 
-export const metadata: Metadata = {
-  title: 'Danielle Salinetro — Empathy by Design',
-  description: 'Empathy by Design',
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        <AccessibilitySwitcher />
-        {children}
-      </body>
-    </html>
+    <div className="min-h-screen bg-gray-50">
+      <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur">
+        <div className="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+          <div className="text-sm font-medium">Admin</div>
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="rounded-lg border px-3 py-1.5 text-sm hover:bg-gray-100"
+            >
+              Logout
+            </button>
+          </form>
+        </div>
+      </header>
+      <main className="mx-auto max-w-5xl px-4 py-6">{children}</main>
+    </div>
   );
 }
