@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// If you used "@/components/…", keep it.
-// With your repo structure, a safe relative import is:
+// With your repo structure, this relative import is correct:
 import AccessibilitySwitcher from "../components/ui/AccessibilitySwitcher";
 
 export const metadata: Metadata = {
