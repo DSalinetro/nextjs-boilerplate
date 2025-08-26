@@ -13,12 +13,17 @@ type GalleryItem = {
 export default function EmpathyByDesignPage() {
   // Put all artwork you want to show here.
   // Make sure each file exists in /public/images/ with the exact name & extension.
-  const gallery: GalleryItem[] = [
-    {
-  src: '/images/bubbles-and-butterflies.png',   // or '/images/bubbles-and-butterfiles.png'
-  alt: 'Bubbles and Butterflies — dreamy scene',
-  caption: 'Bubbles & Butterflies',
-},
+ // Inside app/work/empathy-by-design/page.tsx
+// ...existing imports and types...
+
+const gallery: GalleryItem[] = [
+  { src: '/images/moody-library.png',        alt: 'Moody library hero artwork', caption: 'Moody Library' },
+  { src: '/images/books-of-dreams.png',      alt: 'Books of Dreams — warm, moody library scene', caption: 'Books of Dreams' },
+  { src: '/images/field-of-flowers.png',     alt: 'Field of flowers at golden hour', caption: 'Field of Flowers' },
+
+  // ✅ New image (uses your exact filename with .png.png)
+  { src: '/images/bubbles-and-butterflies.png.png', alt: 'Bubbles and Butterflies — dreamy artwork', caption: 'Bubbles & Butterflies' },
+];
     {
       src: '/images/moody-library.png',
       alt: 'Moody library hero artwork',
