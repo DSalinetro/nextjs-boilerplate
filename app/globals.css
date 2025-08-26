@@ -1,22 +1,16 @@
-/* Tailwind v4 must come first */
-@import "tailwindcss";
-
-/* Google font (after Tailwind import) */
+/* Google font import */
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
-/* Theme tokens */
+/* Tailwind v3 directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Theme tokens ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --rose-accent: rgba(212, 150, 125, 0.85);
-}
-
-/* Optional Tailwind v4 theme variables */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 /* Dark mode (system) */
@@ -45,38 +39,40 @@ body {
   outline-offset: 2px;
 }
 
-/* ---------- Custom utilities (Tailwind v4 @utility) ---------- */
-@utility .btn-primary {
-  @apply inline-flex items-center justify-center gap-2
-         rounded-2xl px-6 py-3 font-semibold
-         bg-rose-400/90 text-neutral-900
-         shadow-lg shadow-rose-400/20
-         hover:bg-rose-300 active:bg-rose-300/90
-         focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300
-         transition;
+/* ===== Components/utilities (v3 style) ===== */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-2xl px-6 py-3 font-semibold
+           bg-rose-400/90 text-neutral-900
+           shadow-lg shadow-rose-400/20
+           hover:bg-rose-300 active:bg-rose-300/90
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300
+           transition;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-2xl px-6 py-3 font-semibold
+           border border-white/20 text-white
+           bg-white/10 hover:bg-white/15 active:bg-white/20
+           backdrop-blur-md
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
+           transition;
+  }
+
+  .glass-card {
+    @apply rounded-3xl border border-white/10
+           bg-neutral-900/60 backdrop-blur-xl
+           shadow-2xl;
+  }
+
+  .page-container {
+    @apply mx-auto max-w-7xl px-6 sm:px-8;
+  }
 }
 
-@utility .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2
-         rounded-2xl px-6 py-3 font-semibold
-         border border-white/20 text-white
-         bg-white/10 hover:bg-white/15 active:bg-white/20
-         backdrop-blur-md
-         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
-         transition;
-}
-
-@utility .glass-card {
-  @apply rounded-3xl border border-white/10
-         bg-neutral-900/60 backdrop-blur-xl
-         shadow-2xl;
-}
-
-@utility .page-container {
-  @apply mx-auto max-w-7xl px-6 sm:px-8;
-}
-
-/* ===================== Accessibility / Perspective Switcher ===================== */
+/* ================= Accessibility / Perspective Switcher ================ */
 html[data-a11y-dyslexia="on"] body {
   font-family: "Atkinson Hyperlegible", var(--font-sans, Arial, Helvetica, sans-serif);
   letter-spacing: 0.0125em;
@@ -101,4 +97,4 @@ html[data-a11y-cvd="protanopia"] body { filter: grayscale(0.9) contrast(1.1); }
 html[data-a11y-cvd="deuteranopia"] body { filter: grayscale(0.85) contrast(1.08); }
 html[data-a11y-cvd="tritanopia"] body { filter: sepia(0.35) saturate(1.25) hue-rotate(180deg) brightness(0.95); }
 html[data-a11y-cvd="none"] body { filter: none; }
-/* ============================================================================== */
+/* ====================================================================== */
