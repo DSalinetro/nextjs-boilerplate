@@ -1,100 +1,172 @@
-/* Google font import */
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+'use client';
 
-/* Tailwind v3 directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import { useEffect, useState } from 'react';
+import { Accessibility } from 'lucide-react';
 
-/* ===== Theme tokens ===== */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --rose-accent: rgba(212, 150, 125, 0.85);
+type Motion = 'system' | 'reduce';
+type Cvd = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia';
+
+type A11ySettings = {
+  dyslexia: boolean;
+  contrast: boolean;
+  motion: Motion;
+  cvd: Cvd;
+};
+
+const STORAGE_KEY = 'a11y-settings-v1';
+
+const defaultSettings: A11ySettings = {
+  dyslexia: false,
+  contrast: false,
+  motion: 'system',
+  cvd: 'none',
+};
+
+export default function AccessibilitySwitcher() {
+  const [open, setOpen] = useState(false);
+  const [s, setS] = useState<A11ySettings>(defaultSettings);
+
+  // Load saved settings
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) setS({ ...defaultSettings, ...JSON.parse(raw) });
+    } catch {}
+  }, []);
+
+  // Apply to <html> + persist
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-a11y-dyslexia', s.dyslexia ? 'on' : 'off');
+    root.setAttribute('data-a11y-contrast', s.contrast ? 'on' : 'off');
+    root.setAttribute('data-a11y-motion', s.motion === 'reduce' ? 'reduce' : 'system');
+    root.setAttribute('data-a11y-cvd', s.cvd);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+  }, [s]);
+
+  // Keyboard shortcut: Alt/Option + A toggles panel
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.altKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setOpen(v => !v);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const chip = (active: boolean) =>
+    [
+      'inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm transition',
+      'border',
+      active
+        ? 'border-rose-300/60 bg-rose-400/15 text-white'
+        : 'border-white/15 bg-white/5 hover:bg-white/10 text-white/90',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300/70',
+    ].join(' ');
+
+  return (
+    // Mobile-safe offsets using iOS safe-area vars
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-[9999]">
+      <button
+        onClick={() => setOpen(v => !v)}
+        aria-expanded={open}
+        aria-controls="a11y-panel"
+        className="btn-floating-dark"
+        title="Accessibility / Perspective Switcher (Alt/Option + A)"
+        style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
+      >
+        <Accessibility className="h-4 w-4" aria-hidden="true" />
+        Accessibility
+      </button>
+
+      {open && (
+        <div
+          id="a11y-panel"
+          role="dialog"
+          aria-label="Accessibility settings"
+          className="mt-3 w-[320px] glass-card bg-neutral-900/80 p-4 backdrop-blur-xl text-white"
+        >
+          <div className="mb-3 text-base font-semibold">Perspective Switcher</div>
+
+          {/* Dyslexia */}
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-sm">Dyslexia-friendly font</span>
+            <button
+              className={chip(s.dyslexia)}
+              aria-pressed={s.dyslexia}
+              onClick={() => setS(v => ({ ...v, dyslexia: !v.dyslexia }))}
+            >
+              {s.dyslexia ? 'On' : 'Off'}
+            </button>
+          </div>
+
+          {/* High contrast */}
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-sm">High contrast</span>
+            <button
+              className={chip(s.contrast)}
+              aria-pressed={s.contrast}
+              onClick={() => setS(v => ({ ...v, contrast: !v.contrast }))}
+            >
+              {s.contrast ? 'On' : 'Off'}
+            </button>
+          </div>
+
+          {/* Reduced motion */}
+          <div className="mb-4">
+            <div className="mb-1 text-sm">Motion</div>
+            <div className="flex gap-2">
+              {(['system', 'reduce'] as Motion[]).map(m => (
+                <button
+                  key={m}
+                  className={chip(s.motion === m)}
+                  aria-pressed={s.motion === m}
+                  onClick={() => setS(v => ({ ...v, motion: m }))}
+                >
+                  {m === 'system' ? 'Follow System' : 'Reduced'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Color-vision filter */}
+          <div className="mb-4">
+            <div className="mb-1 text-sm">Color-vision filter (preview)</div>
+            <div className="flex flex-wrap gap-2">
+              {(['none','protanopia','deuteranopia','tritanopia'] as Cvd[]).map(k => (
+                <button
+                  key={k}
+                  className={chip(s.cvd === k)}
+                  aria-pressed={s.cvd === k}
+                  onClick={() => setS(v => ({ ...v, cvd: k }))}
+                >
+                  {k[0].toUpperCase() + k.slice(1)}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-xs opacity-70">
+              Simulations are approximate—use for perspective, not testing.
+            </p>
+          </div>
+
+          <div className="flex justify-between">
+            <button
+              className="btn-secondary px-3 py-2 text-sm"
+              onClick={() => setS(defaultSettings)}
+            >
+              Reset
+            </button>
+            <button
+              className="btn-secondary px-3 py-2 text-sm"
+              onClick={() => setOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
-
-/* Dark mode (system) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #dedede;
-  }
-}
-
-/* Base */
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* { -webkit-tap-highlight-color: transparent; }
-
-:focus-visible {
-  outline: 2px solid var(--rose-accent);
-  outline-offset: 2px;
-}
-
-/* ===== Components/utilities (v3 style) ===== */
-@layer components {
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2
-           rounded-2xl px-6 py-3 font-semibold
-           bg-rose-400/90 text-neutral-900
-           shadow-lg shadow-rose-400/20
-           hover:bg-rose-300 active:bg-rose-300/90
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300
-           transition;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2
-           rounded-2xl px-6 py-3 font-semibold
-           border border-white/20 text-white
-           bg-white/10 hover:bg-white/15 active:bg-white/20
-           backdrop-blur-md
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
-           transition;
-  }
-
-  .glass-card {
-    @apply rounded-3xl border border-white/10
-           bg-neutral-900/60 backdrop-blur-xl
-           shadow-2xl;
-  }
-
-  .page-container {
-    @apply mx-auto max-w-7xl px-6 sm:px-8;
-  }
-}
-
-/* ================= Accessibility / Perspective Switcher ================ */
-html[data-a11y-dyslexia="on"] body {
-  font-family: "Atkinson Hyperlegible", var(--font-sans, Arial, Helvetica, sans-serif);
-  letter-spacing: 0.0125em;
-  word-spacing: 0.02em;
-}
-
-html[data-a11y-contrast="on"] body { background: #000 !important; color: #fff !important; }
-html[data-a11y-contrast="on"] a { color: #fff !important; text-decoration: underline; }
-html[data-a11y-contrast="on"] button,
-html[data-a11y-contrast="on"] [role="button"] {
-  background: #000 !important; color: #fff !important; border: 2px solid #fff !important;
-}
-
-html[data-a11y-motion="reduce"] * {
-  animation-duration: 0s !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0s !important;
-  scroll-behavior: auto !important;
-}
-
-html[data-a11y-cvd="protanopia"] body { filter: grayscale(0.9) contrast(1.1); }
-html[data-a11y-cvd="deuteranopia"] body { filter: grayscale(0.85) contrast(1.08); }
-html[data-a11y-cvd="tritanopia"] body { filter: sepia(0.35) saturate(1.25) hue-rotate(180deg) brightness(0.95); }
-html[data-a11y-cvd="none"] body { filter: none; }
-/* ====================================================================== */
