@@ -57,11 +57,13 @@ export default function AccessibilitySwitcher() {
   return (
     // ⬅️ moved to bottom-left
     <div className="fixed bottom-5 left-5 z-[9999]">
-  <button
+<button
   onClick={() => setOpen(v => !v)}
   aria-expanded={open}
   aria-controls="a11y-panel"
-  className="btn-floating"
+  className="flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold
+             bg-black/80 text-white border border-white/20 backdrop-blur-md shadow-lg
+             hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
   title="Accessibility / Perspective Switcher"
   style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
 >
