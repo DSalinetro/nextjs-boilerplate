@@ -1,8 +1,8 @@
-/* 1) Font import — keep this at the very top */
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
-
-/* Tailwind v4 single import */
+/* Tailwind v4 must come first */
 @import "tailwindcss";
+
+/* Google font (after Tailwind import) */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
 /* Theme tokens */
 :root {
@@ -77,30 +77,19 @@ body {
 }
 
 /* ===================== Accessibility / Perspective Switcher ===================== */
-/* Dyslexia-friendly font */
 html[data-a11y-dyslexia="on"] body {
   font-family: "Atkinson Hyperlegible", var(--font-sans, Arial, Helvetica, sans-serif);
   letter-spacing: 0.0125em;
   word-spacing: 0.02em;
 }
 
-/* High contrast */
-html[data-a11y-contrast="on"] body {
-  background: #000 !important;
-  color: #fff !important;
-}
-html[data-a11y-contrast="on"] a {
-  color: #fff !important;
-  text-decoration: underline;
-}
+html[data-a11y-contrast="on"] body { background: #000 !important; color: #fff !important; }
+html[data-a11y-contrast="on"] a { color: #fff !important; text-decoration: underline; }
 html[data-a11y-contrast="on"] button,
 html[data-a11y-contrast="on"] [role="button"] {
-  background: #000 !important;
-  color: #fff !important;
-  border: 2px solid #fff !important;
+  background: #000 !important; color: #fff !important; border: 2px solid #fff !important;
 }
 
-/* Reduced motion */
 html[data-a11y-motion="reduce"] * {
   animation-duration: 0s !important;
   animation-iteration-count: 1 !important;
@@ -108,18 +97,8 @@ html[data-a11y-motion="reduce"] * {
   scroll-behavior: auto !important;
 }
 
-/* Color-vision perspective filters (quick simulations) */
-html[data-a11y-cvd="protanopia"] body {
-  filter: grayscale(0.9) contrast(1.1);
-}
-html[data-a11y-cvd="deuteranopia"] body {
-  filter: grayscale(0.85) contrast(1.08);
-}
-html[data-a11y-cvd="tritanopia"] body {
-  filter: sepia(0.35) saturate(1.25) hue-rotate(180deg) brightness(0.95);
-}
-/* Reset */
-html[data-a11y-cvd="none"] body {
-  filter: none;
-}
+html[data-a11y-cvd="protanopia"] body { filter: grayscale(0.9) contrast(1.1); }
+html[data-a11y-cvd="deuteranopia"] body { filter: grayscale(0.85) contrast(1.08); }
+html[data-a11y-cvd="tritanopia"] body { filter: sepia(0.35) saturate(1.25) hue-rotate(180deg) brightness(0.95); }
+html[data-a11y-cvd="none"] body { filter: none; }
 /* ============================================================================== */
