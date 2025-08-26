@@ -38,7 +38,7 @@ export default function DesignPage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ---------- PORTFOLIO CARDS (updated links & images) ----------
+  // ---------- PORTFOLIO CARDS (internal links use /work/*) ----------
   const portfolioItems = [
     {
       id: 1,
@@ -47,7 +47,7 @@ export default function DesignPage() {
         'Complete sustainable fashion brand with packaging, photography, and a Shopify e-commerce experience.',
       image: '/images/adorably-inked-xo-brand-ecosystem.png',
       category: 'Brand Design',
-      link: '/design/work/adorably-inkedxo',
+      link: '/work/adorably-inkedxo',
     },
     {
       id: 2,
@@ -66,7 +66,7 @@ export default function DesignPage() {
         'Complete identity system focused on human connection and empathy-driven principles.',
       image: '/images/hearts-and-minds-logo.png',
       category: 'Brand Design',
-      link: '/design/work/hearts-and-minds',
+      link: '/work/hearts-and-minds',
     },
     {
       id: 4,
@@ -75,7 +75,7 @@ export default function DesignPage() {
         'Clean, elegant business card design with sophisticated typography and layout.',
       image: '/images/business-card.png',
       category: 'Print Design',
-      link: '/design/work/business-card',
+      link: '/work/business-card',
     },
     {
       id: 5,
@@ -84,7 +84,7 @@ export default function DesignPage() {
         'Cohesive letterhead maintaining brand cohesion and hierarchy.',
       image: '/images/letterhead.png',
       category: 'Print Design',
-      link: '/design/work/letterhead',
+      link: '/work/letterhead',
     },
     {
       id: 6,
@@ -93,7 +93,7 @@ export default function DesignPage() {
         'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
       category: 'Brand Design',
-      link: '/design/work/brand-identity',
+      link: '/work/brand-identity',
     },
     {
       id: 7,
@@ -101,7 +101,7 @@ export default function DesignPage() {
       description: 'Photography & art direction for a warm, emotive hero visual.',
       image: '/images/moody-library.png',
       category: 'Photography',
-      link: '/design/work/empathy-by-design',
+      link: '/work/empathy-by-design',
     },
   ] as const;
 
@@ -115,7 +115,7 @@ export default function DesignPage() {
       date: 'Jan 8, 2025',
       link:
         'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-      image: '/images/empathy-rose.png', // per your note
+      image: '/images/empathy-rose.png',
     },
     {
       title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
@@ -322,13 +322,20 @@ export default function DesignPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              Portfolio
+              <a
+                href="https://dsalinetro.github.io/branding-portfolio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Portfolio
+              </a>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
             <a
-              href="https://www.daniellesalinetro.design/branding-portfolio-collection"
+              href="https://dsalinetro.github.io/danielle-portfolio/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
