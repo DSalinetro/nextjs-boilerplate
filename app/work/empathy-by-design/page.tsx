@@ -15,6 +15,11 @@ export default function EmpathyByDesignPage() {
   // Make sure each file exists in /public/images/ with the exact name & extension.
   const gallery: GalleryItem[] = [
     {
+  src: '/images/bubbles-and-butterflies.png',   // or '/images/bubbles-and-butterfiles.png'
+  alt: 'Bubbles and Butterflies — dreamy scene',
+  caption: 'Bubbles & Butterflies',
+},
+    {
       src: '/images/moody-library.png',
       alt: 'Moody library hero artwork',
       caption: 'Moody Library',
