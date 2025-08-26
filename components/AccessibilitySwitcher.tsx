@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Accessibility } from 'lucide-react'; // ✅ Icon
 
 type Motion = 'system' | 'reduce';
 type Cvd = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia';
@@ -25,7 +26,7 @@ export default function AccessibilitySwitcher() {
   const [open, setOpen] = useState(false);
   const [s, setS] = useState<A11ySettings>(defaultSettings);
 
-  // Load saved settings (client only)
+  // load saved
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -33,7 +34,7 @@ export default function AccessibilitySwitcher() {
     } catch {}
   }, []);
 
-  // Apply to <html> and persist
+  // apply + persist
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-a11y-dyslexia', s.dyslexia ? 'on' : 'off');
@@ -43,19 +44,28 @@ export default function AccessibilitySwitcher() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
   }, [s]);
 
-  const chip = 'rounded-xl border border-white/15 bg-black/50 px-3 py-2 text-sm hover:bg-black/60';
-  const label = 'text-sm';
+  const chip = (active: boolean) =>
+    [
+      'inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm transition',
+      'border',
+      active
+        ? 'border-rose-300/60 bg-rose-400/15 text-white'
+        : 'border-white/15 bg-white/5 hover:bg-white/10 text-white/90',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300/70',
+    ].join(' ');
 
   return (
-    <div className="fixed bottom-5 right-5 z-[9999]">
+    // ⬅️ moved to bottom-left
+    <div className="fixed bottom-5 left-5 z-[9999]">
       <button
         onClick={() => setOpen(v => !v)}
         aria-expanded={open}
         aria-controls="a11y-panel"
-        className="rounded-2xl border border-white/20 bg-black/60 px-4 py-2 text-sm font-semibold shadow-lg hover:bg-black/70"
+        className="btn-primary shadow-lg flex items-center gap-2"
         title="Accessibility / Perspective Switcher"
         style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
       >
+        <Accessibility className="h-4 w-4" aria-hidden="true" />
         Accessibility
       </button>
 
@@ -64,15 +74,15 @@ export default function AccessibilitySwitcher() {
           id="a11y-panel"
           role="dialog"
           aria-label="Accessibility settings"
-          className="mt-3 w-[320px] rounded-2xl border border-white/15 bg-black/70 p-4 backdrop-blur-sm"
+          className="mt-3 w-[320px] glass-card bg-neutral-900/80 p-4 backdrop-blur-xl text-white"
         >
           <div className="mb-3 text-base font-semibold">Perspective Switcher</div>
 
           {/* Dyslexia */}
           <div className="mb-3 flex items-center justify-between">
-            <span className={label}>Dyslexia-friendly font</span>
+            <span className="text-sm">Dyslexia-friendly font</span>
             <button
-              className={chip}
+              className={chip(s.dyslexia)}
               aria-pressed={s.dyslexia}
               onClick={() => setS(v => ({ ...v, dyslexia: !v.dyslexia }))}
             >
@@ -82,9 +92,9 @@ export default function AccessibilitySwitcher() {
 
           {/* High contrast */}
           <div className="mb-3 flex items-center justify-between">
-            <span className={label}>High contrast</span>
+            <span className="text-sm">High contrast</span>
             <button
-              className={chip}
+              className={chip(s.contrast)}
               aria-pressed={s.contrast}
               onClick={() => setS(v => ({ ...v, contrast: !v.contrast }))}
             >
@@ -99,7 +109,7 @@ export default function AccessibilitySwitcher() {
               {(['system', 'reduce'] as Motion[]).map(m => (
                 <button
                   key={m}
-                  className={`${chip} ${s.motion === m ? 'bg-white/20' : ''}`}
+                  className={chip(s.motion === m)}
                   aria-pressed={s.motion === m}
                   onClick={() => setS(v => ({ ...v, motion: m }))}
                 >
@@ -116,7 +126,7 @@ export default function AccessibilitySwitcher() {
               {(['none','protanopia','deuteranopia','tritanopia'] as Cvd[]).map(k => (
                 <button
                   key={k}
-                  className={`${chip} ${s.cvd === k ? 'bg-white/20' : ''}`}
+                  className={chip(s.cvd === k)}
                   aria-pressed={s.cvd === k}
                   onClick={() => setS(v => ({ ...v, cvd: k }))}
                 >
@@ -125,19 +135,19 @@ export default function AccessibilitySwitcher() {
               ))}
             </div>
             <p className="mt-2 text-xs opacity-70">
-              Simulations are approximate; use for perspective, not testing.
+              Simulations are approximate—use for perspective, not testing.
             </p>
           </div>
 
           <div className="flex justify-between">
             <button
-              className="rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm hover:bg-black/55"
+              className="btn-secondary px-3 py-2 text-sm"
               onClick={() => setS(defaultSettings)}
             >
               Reset
             </button>
             <button
-              className="rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm hover:bg-black/55"
+              className="btn-secondary px-3 py-2 text-sm"
               onClick={() => setOpen(false)}
             >
               Close
