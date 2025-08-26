@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Accessibility } from 'lucide-react'; // ✅ Icon
+import { Accessibility } from 'lucide-react';
 
 type Motion = 'system' | 'reduce';
 type Cvd = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia';
@@ -26,7 +26,7 @@ export default function AccessibilitySwitcher() {
   const [open, setOpen] = useState(false);
   const [s, setS] = useState<A11ySettings>(defaultSettings);
 
-  // load saved
+  // Load saved settings
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -34,7 +34,7 @@ export default function AccessibilitySwitcher() {
     } catch {}
   }, []);
 
-  // apply + persist
+  // Apply to <html> + persist
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-a11y-dyslexia', s.dyslexia ? 'on' : 'off');
@@ -43,6 +43,18 @@ export default function AccessibilitySwitcher() {
     root.setAttribute('data-a11y-cvd', s.cvd);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
   }, [s]);
+
+  // Keyboard shortcut: Alt/Option + A toggles panel
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.altKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setOpen(v => !v);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const chip = (active: boolean) =>
     [
@@ -55,21 +67,18 @@ export default function AccessibilitySwitcher() {
     ].join(' ');
 
   return (
-    // ⬅️ moved to bottom-left
-    <div className="fixed bottom-5 left-5 z-[9999]">
-<button
-  onClick={() => setOpen(v => !v)}
-  aria-expanded={open}
-  aria-controls="a11y-panel"
-  className="flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold
-             bg-black/80 text-white border border-white/20 backdrop-blur-md shadow-lg
-             hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
-  title="Accessibility / Perspective Switcher"
-  style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
->
-  <Accessibility className="h-4 w-4" aria-hidden="true" />
-  Accessibility
-</button>
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-[9999]">
+      <button
+        onClick={() => setOpen(v => !v)}
+        aria-expanded={open}
+        aria-controls="a11y-panel"
+        className="btn-floating-dark"
+        title="Accessibility / Perspective Switcher (Alt/Option + A)"
+        style={{ boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}
+      >
+        <Accessibility className="h-4 w-4" aria-hidden="true" />
+        Accessibility
+      </button>
 
       {open && (
         <div
@@ -80,7 +89,6 @@ export default function AccessibilitySwitcher() {
         >
           <div className="mb-3 text-base font-semibold">Perspective Switcher</div>
 
-          {/* Dyslexia */}
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm">Dyslexia-friendly font</span>
             <button
@@ -92,7 +100,6 @@ export default function AccessibilitySwitcher() {
             </button>
           </div>
 
-          {/* High contrast */}
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm">High contrast</span>
             <button
@@ -104,7 +111,6 @@ export default function AccessibilitySwitcher() {
             </button>
           </div>
 
-          {/* Reduced motion */}
           <div className="mb-4">
             <div className="mb-1 text-sm">Motion</div>
             <div className="flex gap-2">
@@ -121,7 +127,6 @@ export default function AccessibilitySwitcher() {
             </div>
           </div>
 
-          {/* Color-vision filter */}
           <div className="mb-4">
             <div className="mb-1 text-sm">Color-vision filter (preview)</div>
             <div className="flex flex-wrap gap-2">
