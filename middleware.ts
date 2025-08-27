@@ -5,7 +5,6 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isAdminRoute = pathname.startsWith("/admin");
   const isLoginRoute = pathname.startsWith("/admin/login");
-
   if (isAdminRoute && !isLoginRoute) {
     const isAuthed = req.cookies.get("admin")?.value === "true";
     if (!isAuthed) {
@@ -17,5 +16,4 @@ export function middleware(req: NextRequest) {
   }
   return NextResponse.next();
 }
-
 export const config = { matcher: ["/admin", "/admin/:path*"] };
