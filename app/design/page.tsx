@@ -107,16 +107,7 @@ export default function DesignPage() {
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
-   {
-  id: 8,
-  title: 'Rainy Day',
-  description:
-    'Moody, empathy-driven artwork exploring atmosphere, texture, and quiet moments.',
-  image: '/images/rainy-day.png',
-  category: 'Conceptual Art',
-  link: '/work/rainy-day',
-},
-  ] as const;
+   ] as const;
 
   // ---------- BLOGS ----------
   const blogPosts = [
