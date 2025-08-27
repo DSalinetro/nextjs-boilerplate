@@ -19,6 +19,11 @@ export default function EmpathyByDesignPage() {
       caption: 'Moody Library',
     },
     {
+      src: '/images/rainy-day.png',
+      alt: 'Child in a red coat holding an umbrella in a rain-dappled wildflower field under dark storm clouds.',
+      caption: 'Rainy Day',
+    },
+    {
       src: '/images/books-of-dreams.png',
       alt: 'Books of Dreams — warm, moody library scene',
       caption: 'Books of Dreams',
@@ -29,7 +34,7 @@ export default function EmpathyByDesignPage() {
       caption: 'Field of Flowers',
     },
     {
-      // your new file (with the current double extension)
+      // If you rename this file to remove the double extension, update the src to '/images/bubbles-and-butterflies.png'
       src: '/images/bubbles-and-butterflies.png.png',
       alt: 'Bubbles and Butterflies — dreamy artwork',
       caption: 'Bubbles & Butterflies',
