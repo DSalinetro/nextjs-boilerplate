@@ -1,10 +1,7 @@
 'use client';
 
-import { useMemo } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Globe, BookOpen, Download } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
-import { Separator } from './ui/separator';
-import { Button } from './ui/button';
 
 type Experience = {
   title: string;
@@ -26,29 +23,26 @@ export default function Resume() {
     medium: 'medium.com/@dsalinetro',
   };
 
-  const skills = useMemo(
-    () => ({
-      core: [
-        'Brand Identity & Systems',
-        'UX/UI & Prototyping',
-        'Content & SEO Copywriting',
-        'Research & Synthesis',
-        'Design Systems',
-        'Accessibility',
-      ],
-      tools: [
-        'Figma',
-        'Adobe Creative Suite',
-        'Next.js + Tailwind',
-        'Vercel',
-        'Supabase (read-only CMS)',
-        'CMS/CRM Platforms',
-        'Data Viz (dashboards, charts)',
-      ],
-      bonus: ['Notary (MO) / RON', 'Photo Direction', 'E-commerce (Shopify)'],
-    }),
-    []
-  );
+  const skills = {
+    core: [
+      'Brand Identity & Systems',
+      'UX/UI & Prototyping',
+      'Content & SEO Copywriting',
+      'Research & Synthesis',
+      'Design Systems',
+      'Accessibility',
+    ],
+    tools: [
+      'Figma',
+      'Adobe Creative Suite',
+      'Next.js + Tailwind',
+      'Vercel',
+      'Supabase (read-only CMS)',
+      'CMS/CRM Platforms',
+      'Data Viz (dashboards, charts)',
+    ],
+    bonus: ['Notary (MO) / RON', 'Photo Direction', 'E-commerce (Shopify)'],
+  };
 
   const experiences: Experience[] = [
     {
@@ -118,102 +112,10 @@ export default function Resume() {
 
         {/* Download / Print */}
         <div className="mt-6 print:hidden">
-          <Button onClick={handlePrint} className="rounded-2xl">
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center rounded-2xl border px-4 py-2 hover:bg-accent"
+          >
             <Download className="mr-2 h-4 w-4" />
             Download PDF
-          </Button>
-        </div>
-      </header>
-
-      <Separator className="mb-8 print:mb-6" />
-
-      {/* Summary */}
-      <section className="mb-8 print:mb-6 print:break-inside-avoid">
-        <h3 className="mb-3">Professional Summary</h3>
-        <Card className="print:border-thin">
-          <CardContent className="p-6 print:p-3">
-            <p className="leading-relaxed">
-              Creative designer and researcher blending branding, UX, and content strategy to create
-              empathetic, business-ready experiences. Comfortable in structured corporate environments
-              and lean, hands-off roles. Strengths: discovery & research, systems thinking, clear visual
-              storytelling, and shipping polished work quickly.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Skills */}
-      <section className="mb-8 print:mb-6 print:break-inside-avoid">
-        <h3 className="mb-3">Skills</h3>
-        <div className="grid md:grid-cols-3 gap-4">
-          <Card className="print:border-thin">
-            <CardContent className="p-6 print:p-3">
-              <h4 className="mb-2 text-muted-foreground">Core</h4>
-              <ul className="list-disc ml-5 space-y-1">
-                {skills.core.map((s) => <li key={s}>{s}</li>)}
-              </ul>
-            </CardContent>
-          </Card>
-          <Card className="print:border-thin">
-            <CardContent className="p-6 print:p-3">
-              <h4 className="mb-2 text-muted-foreground">Tools</h4>
-              <ul className="list-disc ml-5 space-y-1">
-                {skills.tools.map((s) => <li key={s}>{s}</li>)}
-              </ul>
-            </CardContent>
-          </Card>
-          <Card className="print:border-thin">
-            <CardContent className="p-6 print:p-3">
-              <h4 className="mb-2 text-muted-foreground">Additional</h4>
-              <ul className="list-disc ml-5 space-y-1">
-                {skills.bonus.map((s) => <li key={s}>{s}</li>)}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section className="mb-8 print:mb-6">
-        <h3 className="mb-3">Experience</h3>
-        <div className="space-y-4">
-          {experiences.map((exp) => (
-            <Card key={exp.title + exp.company} className="print:border-thin print:break-inside-avoid">
-              <CardContent className="p-6 print:p-3">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <div>
-                    <h4 className="font-semibold">{exp.title}</h4>
-                    <p className="text-muted-foreground">{exp.company}{exp.location ? ` · ${exp.location}` : ''}</p>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{exp.date}</p>
-                </div>
-                <ul className="mt-3 list-disc ml-5 space-y-1">
-                  {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Education / Certs */}
-      <section className="mb-8 print:mb-6 print:break-inside-avoid">
-        <h3 className="mb-3">Education & Certifications</h3>
-        <Card className="print:border-thin">
-          <CardContent className="p-6 print:p-3">
-            <ul className="list-disc ml-5 space-y-1">
-              {educationCerts.map((e) => <li key={e}>{e}</li>)}
-            </ul>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Footer note for printing */}
-      <footer className="mt-10 text-center text-xs text-muted-foreground print:mt-6">
-        <span className="print:hidden">Tip: Use the “Download PDF” button (or Ctrl/Cmd+P) for a clean PDF export.</span>
-        <span className="hidden print:inline">Generated from daniellesalinetro.design/resume</span>
-      </footer>
-    </div>
-  );
-}
-
+          </button>
