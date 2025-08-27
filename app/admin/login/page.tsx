@@ -1,6 +1,7 @@
 // app/admin/login/page.tsx
-export default function AdminLoginPage({ searchParams }: { searchParams?: { next?: string } }) {
+export default function AdminLoginPage({ searchParams }: { searchParams?: { next?: string, error?: string } }) {
   const next = (searchParams?.next as string) || "/admin";
+  const error = searchParams?.error as string | undefined;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-6">
@@ -18,9 +19,7 @@ export default function AdminLoginPage({ searchParams }: { searchParams?: { next
               placeholder="Enter admin password"
             />
           </label>
-          {searchParams?.error && (
-            <p className="text-sm text-red-600">{searchParams.error}</p>
-          )}
+          {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             type="submit"
             className="w-full rounded-lg bg-gray-900 px-4 py-2 text-white text-sm font-medium hover:bg-gray-800"
