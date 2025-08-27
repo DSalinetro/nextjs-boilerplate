@@ -1,7 +1,12 @@
 // app/admin/login/page.tsx
-export default function AdminLoginPage({ searchParams }: { searchParams?: { next?: string, error?: string } }) {
-  const next = (searchParams?.next as string) || "/admin";
-  const error = searchParams?.error as string | undefined;
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function AdminLoginPage() {
+  const params = useSearchParams();
+  const next = params.get("next") ?? "/admin";
+  const error = params.get("error") ?? undefined;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-6">
