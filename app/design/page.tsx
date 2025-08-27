@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 
-// this file is app/design/page.tsx, so "../../" is correct for reaching app/components/*
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 
-// 🔗 pull centralized links
+// 🔗 centralized links
 import { LINKS } from '../../lib/links';
 
 import { useState, useEffect } from 'react';
@@ -59,18 +58,9 @@ export default function DesignPage() {
         'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/typewriter-roses.png',
       category: 'Conceptual Art',
-      // external: Medium profile
-      link: LINKS.medium,
+      link: LINKS.medium, // external (Medium)
     },
-    {
-      id: 3,
-      title: 'Hearts & Minds Foundation Identity',
-      description:
-        'Complete identity system focused on human connection and empathy-driven principles.',
-      image: '/images/hearts-and-minds-logo.png',
-      category: 'Brand Design',
-      link: '/work/hearts-and-minds',
-    },
+    // ❌ Hearts & Minds removed per request
     {
       id: 4,
       title: 'Professional Business Card Design',
@@ -96,8 +86,7 @@ export default function DesignPage() {
         'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
       category: 'Brand Design',
-      // open the live collection directly
-      link: LINKS.brandingCollection,
+      link: LINKS.brandingCollection, // open live collection
     },
     {
       id: 7,
@@ -107,7 +96,7 @@ export default function DesignPage() {
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
-   ] as const;
+  ] as const;
 
   // ---------- BLOGS ----------
   const blogPosts = [
@@ -190,7 +179,7 @@ export default function DesignPage() {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-colors duration-200 ${
-                    activeSection === item.id ? 'text-[#d4967d]' : 'text-white/80 hover:text-white'
+                    activeSection === item.id ? 'text-[#D49670]' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.label}
@@ -199,13 +188,13 @@ export default function DesignPage() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a aria-label="Medium" href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <BookOpen size={20} />
               </a>
-              <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a aria-label="LinkedIn" href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a aria-label="Portfolio home" href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <ExternalLink size={20} />
               </a>
             </div>
@@ -224,7 +213,7 @@ export default function DesignPage() {
           className="absolute inset-0 z-0"
           style={{
             background: `
-              radial-gradient(1000px 800px at 30% 40%, rgba(212,150,125,0.15), transparent),
+              radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent),
               linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)
             `,
           }}
@@ -277,24 +266,21 @@ export default function DesignPage() {
                 onClick={() => scrollToSection('portfolio')}
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
                 style={{
-                  background: 'linear-gradient(135deg, #d4967d, #c47f64)',
-                  boxShadow: '0 6px 20px rgba(212,150,125,.4)',
+                  background: 'linear-gradient(135deg, #D49670, #c47f64)',
+                  boxShadow: '0 6px 20px rgba(212,150,112,.4)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,125,.5)')}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,125,.4)')}
+                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,112,.5)')}
+                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,112,.4)')}
               >
                 View My Work
               </button>
 
-              {/* points to the internal /portfolio hub */}
-              <a
+              {/* internal /portfolio hub */}
+              <Link
                 href="/portfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
                 style={{
-                  border: '1.5px solid rgba(255,255,255,.7)',
                   background: 'rgba(255,255,255,.12)',
                   backdropFilter: 'saturate(120%)',
                 }}
@@ -302,7 +288,7 @@ export default function DesignPage() {
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
               >
                 Visit Portfolio Site
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -343,7 +329,7 @@ export default function DesignPage() {
               href={LINKS.portfolioCollection}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+              className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
             >
               View Complete Portfolio Collection <ExternalLink size={16} />
             </a>
@@ -369,10 +355,10 @@ export default function DesignPage() {
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
                       {item.link && (
-                        <ExternalLink size={16} className="text-gray-400 group-hover:text-[#d4967d] transition-colors" />
+                        <ExternalLink size={16} className="text-gray-400 group-hover:text-[#D49670] transition-colors" />
                       )}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#d4967d] transition-colors">
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-gray-600">{item.description}</p>
@@ -462,15 +448,15 @@ export default function DesignPage() {
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline">
+              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline">
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
-              {/* 🔁 Empathy Audit button now pulls from LINKS.empathyAudit (Squarespace hub) */}
+              {/* Empathy Audit → Squarespace hub */}
               <a
                 href={LINKS.empathyAudit}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#d4967d] font-semibold hover:underline"
+                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
               >
                 View Empathy Audit <ExternalLink size={16} />
               </a>
@@ -499,7 +485,7 @@ export default function DesignPage() {
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#d4967d] transition-colors">{post.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">{post.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
                   </CardContent>
                 </Card>
@@ -524,20 +510,20 @@ export default function DesignPage() {
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <Mail className="text-[#d4967d]" size={20} />
-                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#d4967d] transition-colors">dsalinetro@pm.me</a>
+                  <Mail className="text-[#D49670]" size={20} />
+                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#D49670] transition-colors">dsalinetro@pm.me</a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Phone className="text-[#d4967d]" size={20} />
-                  <a href="tel:636.252.5894" className="hover:text-[#d4967d] transition-colors">636.252.5894</a>
+                  <Phone className="text-[#D49670]" size={20} />
+                  <a href="tel:+16362525894" className="hover:text-[#D49670] transition-colors">636.252.5894</a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <MapPin className="text-[#d4967d]" size={20} />
+                  <MapPin className="text-[#D49670]" size={20} />
                   <span>Kansas City, MO (Remote)</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <ExternalLink className="text-[#d4967d]" size={20} />
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#d4967d] transition-colors">
+                  <ExternalLink className="text-[#D49670]" size={20} />
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#D49670] transition-colors">
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -546,13 +532,13 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
                     <BookOpen size={20} />
                   </a>
-                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
                     <Linkedin size={20} />
                   </a>
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#d4967d] transition-colors">
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
                     <ExternalLink size={20} />
                   </a>
                 </div>
@@ -563,16 +549,15 @@ export default function DesignPage() {
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                  <input id="name" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="Your name" />
+                  <input id="name" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="Your name" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  {/* 🛠️ fixed class typo: focus:outline-none */}
-                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent" placeholder="your@email.com" />
+                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="your@email.com" />
                 </div>
                 <div>
                   <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
-                  <select id="project" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent">
+                  <select id="project" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent">
                     <option value="">Select project type</option>
                     <option value="branding">Brand Identity &amp; Design</option>
                     <option value="ux">UX Research &amp; Design</option>
@@ -583,9 +568,9 @@ export default function DesignPage() {
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                  <textarea id="message" rows={4} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d4967d] focus:border-transparent resize-none" placeholder="Tell me about your project…" />
+                  <textarea id="message" rows={4} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent resize-none" placeholder="Tell me about your project…" />
                 </div>
-                <Button type="submit" className="w-full bg-[#d4967d] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
+                <Button type="submit" className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
                   Send Message
                 </Button>
               </form>
