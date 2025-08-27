@@ -1,5 +1,3 @@
-// FILE: app/admin/page.tsx
-// A placeholder protected page so you can verify the guard works.
 export default function AdminHome() {
   return (
     <div className="space-y-2">
