@@ -13,7 +13,7 @@ export async function loginAction(formData: FormData) {
   cookies().set(ADMIN_COOKIE, "true", {
     httpOnly: true, sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/", maxAge: 60 * 60 * 8
+    path: "/", maxAge: 60 * 60 * 8,
   });
   const next = (formData.get("next") as string) || "/admin";
   redirect(next);
