@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-
   const isAdminRoute = pathname.startsWith("/admin");
   const isLoginRoute = pathname.startsWith("/admin/login");
 
@@ -16,10 +15,7 @@ export function middleware(req: NextRequest) {
       return NextResponse.redirect(url);
     }
   }
-
   return NextResponse.next();
 }
 
-export const config = {
-  matcher: ["/admin", "/admin/:path*"],
-};
+export const config = { matcher: ["/admin", "/admin/:path*"] };
