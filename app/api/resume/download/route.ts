@@ -8,10 +8,11 @@ export async function GET() {
   const filePath = join(process.cwd(), 'public', 'Danielle-Salinetro-Resume.pdf');
 
   try {
-    const buffer = await fs.readFile(filePath);
-    const blob = new Blob([buffer], { type: 'application/pdf' });
+    const buf = await fs.readFile(filePath); // Node Buffer
+    // Convert Buffer -> ArrayBuffer slice (exact bytes)
+    const arrayBuffer = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
 
-    return new NextResponse(blob, {
+    return new NextResponse(arrayBuffer as ArrayBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="Danielle-Salinetro-Resume.pdf"',
