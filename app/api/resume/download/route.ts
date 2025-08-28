@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { join } from 'path';
 import { promises as fs } from 'fs';
 
-export const runtime = 'nodejs' as const; // ensure Node runtime on Vercel
+// After
+export const runtime = 'nodejs';
 
 export async function GET() {
   const filePath = join(process.cwd(), 'public', 'Danielle-Salinetro-Resume.pdf');
