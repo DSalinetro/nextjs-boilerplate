@@ -2,16 +2,16 @@ import { NextResponse } from 'next/server';
 import { join } from 'path';
 import { promises as fs } from 'fs';
 
-// After
 export const runtime = 'nodejs';
 
 export async function GET() {
   const filePath = join(process.cwd(), 'public', 'Danielle-Salinetro-Resume.pdf');
 
   try {
-    const file = await fs.readFile(filePath);
+    const buffer = await fs.readFile(filePath);
+    const blob = new Blob([buffer], { type: 'application/pdf' });
 
-    return new NextResponse(file, {
+    return new NextResponse(blob, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="Danielle-Salinetro-Resume.pdf"',
