@@ -19,7 +19,7 @@ export default function WebsiteResume() {
               Download PDF
             </a>
             <a
-              href="/Danielle-Salinetro-Resume.pdf"
+             href="/Danielle-Salinetro-Resume.pdf?v=7"
               target="_blank"
               rel="noreferrer noopener"
               className="rounded-xl px-3 py-2 border text-sm hover:bg-gray-50"
@@ -41,7 +41,7 @@ export default function WebsiteResume() {
       <main className="max-w-5xl mx-auto px-4 py-6">
         <div className="w-full h-[calc(100vh-160px)] border rounded-lg overflow-hidden">
           <object
-            data="/Danielle-Salinetro-Resume.pdf#view=FitH"
+            data="/Danielle-Salinetro-Resume.pdf?v=7#view=FitH"
             type="application/pdf"
             className="w-full h-full"
           >
