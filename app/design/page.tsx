@@ -60,6 +60,15 @@ export default function DesignPage() {
       category: 'Conceptual Art',
       link: LINKS.medium, // external (Medium)
     },
+    {
+  id: 3,
+  title: 'Hearts & Minds — Empathy Concept',
+  description:
+    'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
+  image: '/images/hearts-minds/hero.jpg',
+  category: 'UX Concept',
+  link: '/work/hearts-and-minds',
+},
     // ❌ Hearts & Minds removed per request
     {
       id: 4,
