@@ -1,11 +1,18 @@
-// app/work/hearts-and-minds/page.tsx
-import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import HeartsMinds from '../../../components/work/HeartsMinds';
 
-export const metadata = {
-  robots: { index: false, follow: false }, // don’t let search engines index the old page
-  title: 'Not found',
+export const metadata: Metadata = {
+  title: 'Hearts & Minds — Empathy Concept',
+  description:
+    'A research-driven concept exploring how design influences decisions through emotion, clarity, and trust.',
+  openGraph: {
+    title: 'Hearts & Minds — Empathy Concept',
+    description:
+      'A research-driven concept exploring how design influences decisions through emotion, clarity, and trust.',
+    images: ['/images/hearts-minds/og.jpg'],
+  },
 };
 
 export default function Page() {
-  notFound(); // return a 404 for this path
+  return <HeartsMinds />;
 }
