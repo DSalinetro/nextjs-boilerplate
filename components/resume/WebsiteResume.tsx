@@ -37,28 +37,28 @@ export default function WebsiteResume() {
         </div>
       </header>
 
-      {/* Simple body placeholder (we'll replace with your optimized component later) */}
-      <main className="max-w-3xl mx-auto px-4 py-10">
-        <section className="mb-6">
-          <h2 className="text-2xl font-bold leading-tight">Danielle N. Salinetro</h2>
-          <p className="text-sm text-gray-600">
-            Kansas City, MO (Remote) · 636.252.5894 ·{' '}
-            <a href="mailto:dsalinetro@pm.me" className="underline">dsalinetro@pm.me</a>
-          </p>
-          <p className="text-sm text-gray-600">
-            <a href="https://daniellesalinetro.design" className="underline">
-              daniellesalinetro.design
-            </a>
-          </p>
-        </section>
-
-        <section className="space-y-3">
-          <h3 className="text-lg font-semibold" style={{ color: '#D49670' }}>Summary</h3>
-          <p className="text-sm leading-6 text-gray-800">
-            Creative Designer & Researcher with cross-disciplinary experience in mortgage operations,
-            brand design, and content marketing. Strengths in research, documentation, and empathetic UX.
-          </p>
-        </section>
+           {/* Resume Body (embed the exact PDF so it matches 1:1) */}
+      <main className="max-w-5xl mx-auto px-4 py-6">
+        <div className="w-full h-[calc(100vh-160px)] border rounded-lg overflow-hidden">
+          <object
+            data="/Danielle-Salinetro-Resume.pdf#view=FitH"
+            type="application/pdf"
+            className="w-full h-full"
+          >
+            {/* Fallback if PDF viewer is blocked */}
+            <div className="p-6 text-sm text-gray-700">
+              Can’t display the PDF here. Please use
+              {' '}
+              <a className="underline" href="/Danielle-Salinetro-Resume.pdf" target="_blank" rel="noreferrer">
+                Open PDF
+              </a>
+              {' '}or{' '}
+              <a className="underline" href="/api/resume/download">
+                Download PDF
+              </a>.
+            </div>
+          </object>
+        </div>
       </main>
 
       {/* Print-only footer */}
