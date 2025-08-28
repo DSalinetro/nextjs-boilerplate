@@ -12,7 +12,7 @@ type Asset = {
   caption?: string;
 };
 
-const ASSETS: Asset[] = [
+const ASSETS = [
   {
     title: 'Business Card',
     src: '/images/hearts-minds/business-card.png',
