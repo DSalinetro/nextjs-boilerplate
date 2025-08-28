@@ -276,9 +276,9 @@ export default function DesignPage() {
                 View My Work
               </button>
 
-              {/* internal /portfolio hub */}
+              {/* REPLACED: internal CTA now links to /resume */}
               <Link
-                href="/portfolio"
+                href="/resume"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
                 style={{
                   background: 'rgba(255,255,255,.12)',
@@ -287,7 +287,7 @@ export default function DesignPage() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
               >
-                Visit Portfolio Site
+                View Resume
               </Link>
             </motion.div>
           </motion.div>
@@ -325,14 +325,25 @@ export default function DesignPage() {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
-            <a
-              href={LINKS.portfolioCollection}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
-            >
-              View Complete Portfolio Collection <ExternalLink size={16} />
-            </a>
+
+            {/* FIXED CTA BLOCK */}
+            <div className="flex items-center justify-center gap-4">
+              <Link
+                href="/resume"
+                className="inline-flex items-center rounded-xl border px-4 py-2 font-medium hover:bg-white/10"
+              >
+                View Resume
+              </Link>
+
+              <a
+                href={LINKS.brandingCollection}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
+              >
+                View Complete Portfolio Collection <ExternalLink size={16} />
+              </a>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
