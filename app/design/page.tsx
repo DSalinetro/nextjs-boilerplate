@@ -69,26 +69,23 @@ export default function DesignPage() {
   category: 'UX Concept',
   link: '/work/hearts-and-minds',
 },
-    // ❌ Hearts & Minds removed per request
-    {
-      id: 4,
-      title: 'Professional Business Card Design',
-      description:
-        'Clean, elegant business card design with sophisticated typography and layout.',
-      image: '/images/business-card.png',
-      category: 'Print Design',
-      link: '/work/business-card',
-    },
-    {
-      id: 5,
-      title: 'Corporate Letterhead System',
-      description:
-        'Cohesive letterhead maintaining brand cohesion and hierarchy.',
-      image: '/images/letterhead.png',
-      category: 'Print Design',
-      link: '/work/letterhead',
-    },
-    {
+   {
+  id: 101,
+  title: 'Professional Business Card Design',
+  description: 'Clean, elegant business card design with sophisticated typography and layout.',
+  image: '/images/hearts-minds/business-card.png',
+  category: 'Print Design',
+  link: '/work/hearts-and-minds',
+},
+{
+  id: 102,
+  title: 'Corporate Letterhead System',
+  description: 'Cohesive letterhead maintaining brand cohesion and hierarchy.',
+  image: '/images/hearts-minds/letterhead.png',
+  category: 'Print Design',
+  link: '/work/hearts-and-minds',
+},
+{
       id: 6,
       title: 'Brand Identity Portfolio Collection',
       description:
