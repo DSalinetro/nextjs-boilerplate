@@ -1,14 +1,26 @@
 import { NextResponse } from 'next/server';
+import { join } from 'path';
 import { promises as fs } from 'fs';
-import path from 'path';
+
+export const runtime = 'nodejs' as const; // ensure Node runtime on Vercel
 
 export async function GET() {
-  const file = await fs.readFile(path.join(process.cwd(), 'public', 'Danielle-Salinetro-Resume.pdf'));
-  return new NextResponse(file, {
-    headers: {
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename="Danielle-Salinetro-Resume.pdf"',
-      'Cache-Control': 'public, max-age=31536000, immutable',
-    },
-  });
+  const filePath = join(process.cwd(), 'public', 'Danielle-Salinetro-Resume.pdf');
+
+  try {
+    const file = await fs.readFile(filePath);
+
+    return new NextResponse(file, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="Danielle-Salinetro-Resume.pdf"',
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    });
+  } catch {
+    return NextResponse.json(
+      { error: 'Resume PDF not found at /public/Danielle-Salinetro-Resume.pdf' },
+      { status: 404 }
+    );
+  }
 }
