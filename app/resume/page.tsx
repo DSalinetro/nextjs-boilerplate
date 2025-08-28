@@ -3,7 +3,7 @@ import WebsiteResume from '../../components/resume/WebsiteResume';
 
 export const metadata: Metadata = {
   title: 'Resume | Danielle Salinetro',
-  description: 'Website-ready resume with clean UX and PDF download.',
+  description: 'Website-ready resume with clean UX and PDF actions.',
 };
 
 export default function Page() {
