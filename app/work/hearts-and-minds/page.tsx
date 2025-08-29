@@ -3,10 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
+import { useSearchParams } from 'next/navigation';
 
 type Asset = {
   title: string;
@@ -23,14 +24,13 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
-    // Using the full image for the thumbnail so nothing 404s/crops
     src: '/images/hearts-minds/letterhead.png',
     alt: 'Hearts & Minds letterhead',
     fullSrc: '/images/hearts-minds/letterhead.png',
   },
 ];
 
-// Brand tokens used throughout page
+// Brand tokens
 const BRAND = {
   coral: '#d47d70',
   sage: '#70d496',
@@ -39,6 +39,47 @@ const BRAND = {
   neutralBorder: 'rgba(15,46,52,0.08)',
   subtleBorder: 'rgba(15,46,52,0.12)',
 };
+
+/** Suspense-wrapped child that safely reads ?business=true */
+function BusinessTools({
+  onExportLetterhead,
+  onExportCard,
+}: {
+  onExportLetterhead: () => void;
+  onExportCard: () => void;
+}) {
+  const searchParams = useSearchParams();
+  const isBusiness = searchParams.get('business') === 'true';
+  if (!isBusiness) return null;
+
+  return (
+    <section className="mb-8" aria-labelledby="business-tools">
+      <h2
+        id="business-tools"
+        className="mb-3 text-xl font-semibold tracking-tight"
+        style={{ color: BRAND.text }}
+      >
+        Business Materials
+      </h2>
+      <div className="mb-6 flex flex-wrap gap-3">
+        <button
+          onClick={onExportLetterhead}
+          className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
+          style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
+        >
+          Export Letterhead PDF
+        </button>
+        <button
+          onClick={onExportCard}
+          className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
+          style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
+        >
+          Export Business Card PDF
+        </button>
+      </div>
+    </section>
+  );
+}
 
 export default function HeartsAndMindsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -53,10 +94,6 @@ export default function HeartsAndMindsPage() {
   // Lightbox image src + fallback/error state
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [modalError, setModalError] = useState(false);
-
-  // Query flags
-  const searchParams = useSearchParams();
-  const isBusiness = searchParams.get('business') === 'true';
 
   const close = useCallback(() => {
     setOpenIndex(null);
@@ -97,7 +134,7 @@ export default function HeartsAndMindsPage() {
     }
   };
 
-  // --------- PDF exporters (business flag only) ---------
+  // --------- PDF exporters ---------
   async function exportLetterheadPDF() {
     try {
       const node = document.getElementById('print-letterhead');
@@ -321,34 +358,13 @@ export default function HeartsAndMindsPage() {
         </div>
       </section>
 
-      {/* ---------- Business tools (only with ?business=true) ---------- */}
-      {isBusiness && (
-        <section className="mb-8" aria-labelledby="business-tools">
-          <h2
-            id="business-tools"
-            className="mb-3 text-xl font-semibold tracking-tight"
-            style={{ color: BRAND.text }}
-          >
-            Business Materials
-          </h2>
-          <div className="mb-6 flex flex-wrap gap-3">
-            <button
-              onClick={exportLetterheadPDF}
-              className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
-              style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
-            >
-              Export Letterhead PDF
-            </button>
-            <button
-              onClick={exportBusinessCardPDF}
-              className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
-              style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
-            >
-              Export Business Card PDF
-            </button>
-          </div>
-        </section>
-      )}
+      {/* ---------- Business tools (Suspense-wrapped) ---------- */}
+      <Suspense fallback={null}>
+        <BusinessTools
+          onExportLetterhead={exportLetterheadPDF}
+          onExportCard={exportBusinessCardPDF}
+        />
+      </Suspense>
 
       {/* ---------- Brand Collateral (gallery) ---------- */}
       <section aria-labelledby="brand-collateral" className="mb-14">
@@ -469,7 +485,7 @@ export default function HeartsAndMindsPage() {
         </div>
       </section>
 
-      {/* ---------- Lightbox (kept at end) ---------- */}
+      {/* ---------- Lightbox ---------- */}
       <AnimatePresence>
         {openIndex !== null && (
           <motion.div
