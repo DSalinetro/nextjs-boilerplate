@@ -7,8 +7,9 @@ import { X } from 'lucide-react';
 
 type Asset = {
   title: string;
-  src: string;
+  src: string;      // thumbnail / grid image
   alt: string;
+  fullSrc?: string; // optional: used in lightbox if provided
 };
 
 const ASSETS: Asset[] = [
@@ -19,11 +20,9 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
-    // Use preview for thumbnail
-    src: '/images/hearts-minds/letterhead-preview.png',
-    alt: 'Hearts & Minds letterhead preview with coral dot, title, and header design',
-    // Add fullSrc so lightbox uses the full version
-    fullSrc: '/images/hearts-minds/letterhead.png',
+    src: '/images/hearts-minds/letterhead-preview.png', // cropped header preview
+    alt: 'Hearts & Minds letterhead header preview',
+    fullSrc: '/images/hearts-minds/letterhead.png',     // full page shown in lightbox
   },
 ];
 
@@ -148,7 +147,8 @@ export default function HeartsAndMindsPage() {
 
               {/* Lightbox image */}
               {(() => {
-                const asset = ASSETS[openIndex!]; // openIndex guarded by conditional
+                const asset = ASSETS[openIndex!]; // guarded by the conditional
+                const src = asset.fullSrc ?? asset.src; // use full if available
                 return (
                   <>
                     <div
@@ -156,13 +156,11 @@ export default function HeartsAndMindsPage() {
                       style={{ border: '1px solid rgba(15,46,52,0.12)' }}
                     >
                       <img
-                        src={asset.src}
+                        src={src}
                         alt={asset.alt}
-                        className="block max-h-[85vh] w-auto mx-auto object-contain"
+                        className="block max-w-[90vw] max-h-[85vh] mx-auto object-contain"
                       />
                     </div>
-
-                    {/* Simple footer (no downloads) */}
                     <div className="flex items-center justify-between gap-3 px-4 py-3">
                       <p className="text-sm" style={{ color: '#0F2E34' }}>
                         {asset.title}
