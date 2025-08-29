@@ -19,8 +19,11 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
-    src: '/images/hearts-minds/letterhead.png',
-    alt: 'Hearts & Minds letterhead with coral dot, title, and soft top-right gradient wash',
+    // Use preview for thumbnail
+    src: '/images/hearts-minds/letterhead-preview.png',
+    alt: 'Hearts & Minds letterhead preview with coral dot, title, and header design',
+    // Add fullSrc so lightbox uses the full version
+    fullSrc: '/images/hearts-minds/letterhead.png',
   },
 ];
 
