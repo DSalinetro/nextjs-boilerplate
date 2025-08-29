@@ -1,5 +1,7 @@
 // app/work/hearts-and-minds/page.tsx
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 // import { notFound } from "next/navigation"; // optional if you want to 404 temporarily
 
 export const metadata = {
@@ -28,6 +30,17 @@ export default async function Page({
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-12">
+      {/* Back link */}
+      <nav className="mb-6">
+        <Link
+          href="/work"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="mr-1 h-4 w-4" />
+          Back to portfolio
+        </Link>
+      </nav>
+
       <header className="mb-8">
         <h1 className="text-3xl font-semibold tracking-tight">Hearts &amp; Minds</h1>
         <p className="mt-2 text-sm text-muted-foreground">
