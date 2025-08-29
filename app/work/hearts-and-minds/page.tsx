@@ -49,16 +49,20 @@ export default function HeartsAndMindsPage() {
   className="relative w-full max-h-[85vh] bg-zinc-50"
   style={{ border: '1px solid rgba(15,46,52,0.12)' }} // subtle outline so white paper shows
 >
-  <div className="relative h-[85vh]">
-    <Image
-      src={ASSETS[openIndex].src}
-      alt={ASSETS[openIndex].alt}
-      fill
-      sizes="100vw"
-      className="object-contain"
-      priority
-    />
-  </div>
+  {/* Lightbox image (robust version) */}
+<div
+  className="relative w-full max-h-[85vh] bg-zinc-50"
+  style={{ border: '1px solid rgba(15,46,52,0.12)' }}
+>
+  <img
+    src={ASSETS[openIndex!].src}
+    alt={ASSETS[openIndex!].alt}
+    className="block max-h-[85vh] w-auto mx-auto object-contain"
+    onError={(e) => {
+      console.error('Image failed to load:', ASSETS[openIndex!].src);
+      (e.currentTarget as HTMLImageElement).alt = 'Image failed to load';
+    }}
+  />
 </div>
       </section>
 
