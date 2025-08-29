@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 
 type Asset = {
   title: string;
@@ -22,14 +22,21 @@ const ASSETS: Asset[] = [
     title: 'Letterhead',
     src: '/images/hearts-minds/letterhead-preview.png', // cropped header preview
     alt: 'Hearts & Minds letterhead header preview',
-    fullSrc: '/images/hearts-minds/letterhead.png',     // full page shown in lightbox
+    fullSrc: '/images/hearts-minds/letterhead.png',     // full page in lightbox
   },
 ];
 
 export default function HeartsAndMindsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [showHint, setShowHint] = useState(false);
 
-  const close = useCallback(() => setOpenIndex(null), []);
+  const close = useCallback(() => {
+    setOpenIndex(null);
+    setZoom(1);
+    setShowHint(false);
+  }, []);
+
   const onKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
@@ -39,10 +46,21 @@ export default function HeartsAndMindsPage() {
 
   useEffect(() => {
     if (openIndex !== null) {
+      setZoom(1);
+      setShowHint(true);
+      const t = setTimeout(() => setShowHint(false), 2200);
       window.addEventListener('keydown', onKey);
-      return () => window.removeEventListener('keydown', onKey);
+      return () => {
+        clearTimeout(t);
+        window.removeEventListener('keydown', onKey);
+      };
     }
   }, [openIndex, onKey]);
+
+  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+  const zoomIn  = () => setZoom((z) => clamp(Number((z + 0.2).toFixed(2)), 0.5, 4));
+  const zoomOut = () => setZoom((z) => clamp(Number((z - 0.2).toFixed(2)), 0.5, 4));
+  const reset   = () => setZoom(1);
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -145,34 +163,65 @@ export default function HeartsAndMindsPage() {
                 <X className="h-5 w-5" />
               </button>
 
+              {/* Zoom toolbar */}
+              <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-white/90 p-1 shadow">
+                <button
+                  onClick={zoomOut}
+                  className="rounded-full p-2 hover:bg-zinc-100 focus:outline-none"
+                  aria-label="Zoom out"
+                  title="Zoom out"
+                >
+                  <ZoomOut className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={zoomIn}
+                  className="rounded-full p-2 hover:bg-zinc-100 focus:outline-none"
+                  aria-label="Zoom in"
+                  title="Zoom in"
+                >
+                  <ZoomIn className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={reset}
+                  className="rounded-full p-2 hover:bg-zinc-100 focus:outline-none"
+                  aria-label="Reset zoom"
+                  title="Reset zoom"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </button>
+                <span className="px-2 text-xs" style={{ color: '#0F2E34' }}>
+                  {Math.round(zoom * 100)}%
+                </span>
+              </div>
+
               {/* Lightbox image */}
               {(() => {
-                const asset = ASSETS[openIndex!]; // guarded by the conditional
-                const src = asset.fullSrc ?? asset.src; // use full if available
+                const asset = ASSETS[openIndex!]; // guarded by conditional
+                const src = asset.fullSrc ?? asset.src;
                 return (
                   <>
                     <div
-                      className="relative w-full max-h-[85vh] bg-zinc-50"
+                      className="relative w-full max-h-[85vh] overflow-auto bg-zinc-50"
                       style={{ border: '1px solid rgba(15,46,52,0.12)' }}
                     >
                       <img
                         src={src}
                         alt={asset.alt}
-                        className="block max-w-[90vw] max-h-[85vh] mx-auto object-contain"
+                        className="block mx-auto"
+                        style={{
+                          transform: `scale(${zoom})`,
+                          transformOrigin: 'center center',
+                          transition: 'transform 120ms ease',
+                          maxWidth: '90vw',
+                          maxHeight: '85vh',
+                          objectFit: 'contain',
+                        }}
                       />
                     </div>
+
+                    {/* Footer with hint */}
                     <div className="flex items-center justify-between gap-3 px-4 py-3">
                       <p className="text-sm" style={{ color: '#0F2E34' }}>
                         {asset.title}
                       </p>
-                    </div>
-                  </>
-                );
-              })()}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </main>
-  );
-}
+                      {
