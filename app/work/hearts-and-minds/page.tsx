@@ -44,16 +44,22 @@ export default function HeartsAndMindsPage() {
     <main className="mx-auto max-w-6xl px-6 py-10">
       {/* Hero */}
       <section className="mb-10">
-        <div className="relative w-full overflow-hidden rounded-2xl">
-          <Image
-            src="/images/hearts-minds/hero.jpg"
-            alt="Hearts & Minds hero image"
-            width={1600}
-            height={900}
-            className="h-auto w-full object-cover"
-            priority
-          />
-        </div>
+       {/* Lightbox image */}
+<div
+  className="relative w-full max-h-[85vh] bg-zinc-50"
+  style={{ border: '1px solid rgba(15,46,52,0.12)' }} // subtle outline so white paper shows
+>
+  <div className="relative h-[85vh]">
+    <Image
+      src={ASSETS[openIndex].src}
+      alt={ASSETS[openIndex].alt}
+      fill
+      sizes="100vw"
+      className="object-contain"
+      priority
+    />
+  </div>
+</div>
       </section>
 
       {/* Brand Collateral */}
