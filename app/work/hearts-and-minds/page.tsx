@@ -90,12 +90,17 @@ export default function HeartsAndMindsPage() {
                 />
               </div>
 
-              {/* Modal footer */}
-<div className="flex items-center justify-between gap-3 px-4 py-3">
-  <p className="text-sm" style={{ color: '#0F2E34' }}>
-    {ASSETS[openIndex].title}
-  </p>
-</div>
+              <div className="flex items-center justify-between p-4">
+                <p className="text-base font-medium" style={{ color: '#0F2E34' }}>
+                  {a.title}
+                </p>
+                <span
+                  className="rounded-full px-3 py-1 text-xs font-medium"
+                  style={{ backgroundColor: 'rgba(112,212,150,0.14)', color: '#0F2E34' }}
+                >
+                  Click to enlarge
+                </span>
+              </div>
 
               {/* subtle top border accent */}
               <div
@@ -138,49 +143,31 @@ export default function HeartsAndMindsPage() {
                 <X className="h-5 w-5" />
               </button>
 
-              {/* Lightbox image (robust version) */}
-              <div
-                className="relative w-full max-h-[85vh] bg-zinc-50"
-                style={{ border: '1px solid rgba(15,46,52,0.12)' }}
-              >
-                <img
-                  src={ASSETS[openIndex].src}
-                  alt={ASSETS[openIndex].alt}
-                  className="block max-h-[85vh] w-auto mx-auto object-contain"
-                  onError={(e) => {
-                    console.error('Image failed to load:', ASSETS[openIndex].src);
-                    (e.currentTarget as HTMLImageElement).alt = 'Image failed to load';
-                  }}
-                />
-              </div>
-
-              {/* Modal footer with downloads (only for Letterhead) */}
-              <div className="flex items-center justify-between gap-3 px-4 py-3">
-                <p className="text-sm" style={{ color: '#0F2E34' }}>
-                  {ASSETS[openIndex].title}
-                </p>
-
-                {ASSETS[openIndex].title === 'Letterhead' && (
-                  <div className="flex items-center gap-2">
-                    <a
-                      href="/files/Hearts-Minds-Letterhead.pdf"
-                      download
-                      className="rounded-full px-3 py-2 text-sm font-medium underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-                      style={{ color: '#70d496' }}
+              {/* Lightbox image */}
+              {(() => {
+                const asset = ASSETS[openIndex!]; // openIndex guarded by conditional
+                return (
+                  <>
+                    <div
+                      className="relative w-full max-h-[85vh] bg-zinc-50"
+                      style={{ border: '1px solid rgba(15,46,52,0.12)' }}
                     >
-                      Download PDF
-                    </a>
-                    <a
-                      href="/files/Hearts-Minds-Letterhead.docx"
-                      download
-                      className="rounded-full px-3 py-2 text-sm font-medium underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-                      style={{ color: '#70d496' }}
-                    >
-                      Download .DOCX
-                    </a>
-                  </div>
-                )}
-              </div>
+                      <img
+                        src={asset.src}
+                        alt={asset.alt}
+                        className="block max-h-[85vh] w-auto mx-auto object-contain"
+                      />
+                    </div>
+
+                    {/* Simple footer (no downloads) */}
+                    <div className="flex items-center justify-between gap-3 px-4 py-3">
+                      <p className="text-sm" style={{ color: '#0F2E34' }}>
+                        {asset.title}
+                      </p>
+                    </div>
+                  </>
+                );
+              })()}
             </motion.div>
           </motion.div>
         )}
