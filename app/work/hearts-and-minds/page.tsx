@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import { toast } from 'sonner';
 
 type Asset = {
   title: string;
@@ -21,7 +23,7 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
-    // using full image for the thumbnail so there’s no crop/404
+    // Using the full image for the thumbnail so nothing 404s/crops
     src: '/images/hearts-minds/letterhead.png',
     alt: 'Hearts & Minds letterhead',
     fullSrc: '/images/hearts-minds/letterhead.png',
@@ -51,6 +53,10 @@ export default function HeartsAndMindsPage() {
   // Lightbox image src + fallback/error state
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [modalError, setModalError] = useState(false);
+
+  // Query flags
+  const searchParams = useSearchParams();
+  const isBusiness = searchParams.get('business') === 'true';
 
   const close = useCallback(() => {
     setOpenIndex(null);
@@ -90,6 +96,57 @@ export default function HeartsAndMindsPage() {
       setModalError(true);   // both failed
     }
   };
+
+  // --------- PDF exporters (business flag only) ---------
+  async function exportLetterheadPDF() {
+    try {
+      const node = document.getElementById('print-letterhead');
+      if (!node) throw new Error('Letterhead print node not found');
+
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
+
+      const canvas = await html2canvas(node as HTMLElement, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+      });
+      const img = canvas.toDataURL('image/png');
+
+      // US Letter in points: 612 x 792
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+      pdf.addImage(img, 'PNG', 0, 0, 612, 792);
+      pdf.save('Hearts-Minds-Letterhead.pdf');
+      toast.success('Letterhead PDF downloaded');
+    } catch (e: any) {
+      console.error(e);
+      toast.error(e?.message || 'Failed to export letterhead');
+    }
+  }
+
+  async function exportBusinessCardPDF() {
+    try {
+      const node = document.getElementById('print-card');
+      if (!node) throw new Error('Business card print node not found');
+
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
+
+      const canvas = await html2canvas(node as HTMLElement, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+      });
+      const img = canvas.toDataURL('image/png');
+
+      // 90 x 50 mm card
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [90, 50] });
+      pdf.addImage(img, 'PNG', 0, 0, 90, 50);
+      pdf.save('Hearts-Minds-Business-Card.pdf');
+      toast.success('Business card PDF downloaded');
+    } catch (e: any) {
+      console.error(e);
+      toast.error(e?.message || 'Failed to export business card');
+    }
+  }
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -263,6 +320,35 @@ export default function HeartsAndMindsPage() {
           </p>
         </div>
       </section>
+
+      {/* ---------- Business tools (only with ?business=true) ---------- */}
+      {isBusiness && (
+        <section className="mb-8" aria-labelledby="business-tools">
+          <h2
+            id="business-tools"
+            className="mb-3 text-xl font-semibold tracking-tight"
+            style={{ color: BRAND.text }}
+          >
+            Business Materials
+          </h2>
+          <div className="mb-6 flex flex-wrap gap-3">
+            <button
+              onClick={exportLetterheadPDF}
+              className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
+              style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
+            >
+              Export Letterhead PDF
+            </button>
+            <button
+              onClick={exportBusinessCardPDF}
+              className="rounded-xl border px-4 py-2 text-sm font-medium hover:bg-zinc-50"
+              style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
+            >
+              Export Business Card PDF
+            </button>
+          </div>
+        </section>
+      )}
 
       {/* ---------- Brand Collateral (gallery) ---------- */}
       <section aria-labelledby="brand-collateral" className="mb-14">
@@ -491,6 +577,47 @@ export default function HeartsAndMindsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Off-screen print nodes for high-quality capture */}
+      <div
+        id="print-letterhead"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: -99999,
+          top: 0,
+          width: 816,   // ≈ 8.5" at ~96dpi
+          height: 1056, // ≈ 11" at ~96dpi
+          background: '#fff',
+        }}
+      >
+        <img
+          src="/images/hearts-minds/letterhead.png"
+          alt=""
+          aria-hidden="true"
+          style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#fff' }}
+        />
+      </div>
+
+      <div
+        id="print-card"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: -99999,
+          top: 0,
+          width: 1050,  // generous pixels for crisp export
+          height: 600,
+          background: '#fff',
+        }}
+      >
+        <img
+          src="/images/hearts-minds/business-card.png"
+          alt=""
+          aria-hidden="true"
+          style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#fff' }}
+        />
+      </div>
     </main>
   );
 }
