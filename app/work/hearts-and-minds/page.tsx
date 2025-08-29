@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 
 import Image from 'next/image';
 import { useState, useCallback, useEffect } from 'react';
@@ -121,51 +121,43 @@ export default function HeartsAndMindsPage() {
 
       {/* Lightbox */}
       <AnimatePresence>
-        {openIndex !== null && (
-          <motion.div
-            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={close}
-          >
-            <motion.div
-              className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-white"
-              initial={{ scale: 0.98, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.98, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 240, damping: 26 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={close}
-                aria-label="Close preview"
-                className="absolute right-3 top-3 inline-flex items-center justify-center rounded-full p-2 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2"
-                style={{ color: '#0F2E34' }}
-              >
-                <X className="h-5 w-5" />
-              </button>
-              <div className="relative w-full">
-                <Image
-                  src={ASSETS[openIndex].src}
-                  alt={ASSETS[openIndex].alt}
-                  width={2400}
-                  height={1600}
-                  className="h-auto w-full object-contain"
-                  priority
-                />
-              </div>
-              <div className="flex items-center justify-between px-4 py-3">
-                <p className="text-sm" style={{ color: '#0F2E34' }}>
-                  {ASSETS[openIndex].title}
-                </p>
-                {/* Optional: download link if you add files in /public/files */}
-                {/* <a href="/files/Hearts-Minds-Letterhead.pdf" className="text-sm underline" style={{ color: '#70d496' }}>Download PDF</a> */}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+  {openIndex !== null && (
+    <motion.div
+      className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={close}
+    >
+      <motion.div
+        className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-white"
+        initial={{ scale: 0.98, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.98, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 26 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button ...>...</button>
+
+        {/* Lightbox image (robust version) */}
+        <div
+          className="relative w-full max-h-[85vh] bg-zinc-50"
+          style={{ border: '1px solid rgba(15,46,52,0.12)' }}
+        >
+          <img
+            src={ASSETS[openIndex!].src}
+            alt={ASSETS[openIndex!].alt}
+            className="block max-h-[85vh] w-auto mx-auto object-contain"
+          />
+        </div>
+
+        <div className="flex items-center justify-between px-4 py-3">
+          {/* footer / download buttons */}
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </main>
   );
 }
