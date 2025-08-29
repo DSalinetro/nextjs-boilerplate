@@ -1,22 +1,30 @@
 // app/work/hearts-and-minds/page.tsx
 import Image from "next/image";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation"; // optional, only if you use it
 
 export const metadata = {
   title: "Hearts & Minds | Danielle Salinetro",
   description: "Branding case study preview for Hearts & Minds.",
 };
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
-  searchParams: Record<string, string>;
+  searchParams?:
+    | { [key: string]: string | string[] | undefined }
+    | Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  // Normalize searchParams whether it's an object or a Promise (Next 15 behavior)
+  const sp =
+    (await Promise.resolve(
+      searchParams
+    )) as { [key: string]: string | string[] | undefined } | undefined;
+
   // 🔒 Single on/off switch for *any* business artifacts or dev tools
   const SHOW_BUSINESS = false;
 
-  // Optional gated tools exist, but now also require SHOW_BUSINESS = true
-  const showBusinessTools = SHOW_BUSINESS && searchParams?.business === "true";
+  // Only show dev tools when the toggle is on AND ?business=true
+  const showBusinessTools = SHOW_BUSINESS && sp?.business === "true";
 
   // If you temporarily want to 404 while iterating, uncomment:
   // return notFound();
