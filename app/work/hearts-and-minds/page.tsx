@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
@@ -20,13 +21,14 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
+    // using full image for the thumbnail so there’s no crop/404
     src: '/images/hearts-minds/letterhead.png',
     alt: 'Hearts & Minds letterhead',
     fullSrc: '/images/hearts-minds/letterhead.png',
   },
 ];
 
-// Brand tokens used in the live swatches
+// Brand tokens used throughout page
 const BRAND = {
   coral: '#d47d70',
   sage: '#70d496',
@@ -120,9 +122,8 @@ export default function HeartsAndMindsPage() {
                style={{ borderColor: BRAND.neutralBorder }}>
             <p className="leading-relaxed" style={{ color: BRAND.text }}>
               Hearts &amp; Minds is a compact brand system expressing warmth (coral) and clarity (sage)
-              across business stationery and the portfolio site. The goal was to create a
-              calm, modern voice that balances care with confidence—simple enough to scale,
-              strong enough to feel distinct.
+              across business stationery and the portfolio site. The goal: a calm, modern voice that
+              balances care with confidence—simple enough to scale, strong enough to feel distinct.
             </p>
           </div>
 
@@ -143,31 +144,65 @@ export default function HeartsAndMindsPage() {
         </div>
       </section>
 
-      {/* ---------- Goals ---------- */}
-      <section aria-labelledby="goals" className="mb-14">
+      {/* ---------- Problem ---------- */}
+      <section aria-labelledby="problem" className="mb-14">
         <h2
-          id="goals"
+          id="problem"
           className="mb-4 text-2xl font-semibold tracking-tight"
           style={{ color: BRAND.text }}
         >
-          Goals
+          Problem
         </h2>
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border bg-white p-6 leading-relaxed"
+             style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}>
+          As a Creative Director &amp; Social Impact Designer, I needed a personal identity that
+          felt warm and trustworthy without losing clarity. The previous materials were inconsistent,
+          difficult to reproduce, and didn’t translate cleanly between print and web.
+        </div>
+      </section>
+
+      {/* ---------- Process ---------- */}
+      <section aria-labelledby="process" className="mb-14">
+        <h2
+          id="process"
+          className="mb-4 text-2xl font-semibold tracking-tight"
+          style={{ color: BRAND.text }}
+        >
+          Process
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
           {[
-            'Create an approachable, modern voice that reads well in print and web.',
-            'Use a minimal system that’s easy to extend across new touchpoints.',
-            'Prioritize accessibility and clear hierarchy for professional comms.',
-            'Keep production-friendly assets (PNG/SVG) and AA/AAA contrast where possible.',
-          ].map((item) => (
-            <li
-              key={item}
-              className="rounded-2xl border bg-white p-4 leading-relaxed"
-              style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}
-            >
-              {item}
-            </li>
+            'Discovery: tone & value mapping; audit of past materials; mood exploration.',
+            'System: palette (coral + sage), deep-teal text for contrast, soft gradient motif.',
+            'Type & hierarchy: headline weight + generous body copy; spacing rhythm for calm.',
+            'Prototyping: stationery in Figma; responsive components for the portfolio site.',
+            'Accessibility: contrast checks; legible sizes; minimal ornamentation.',
+            'Production: export print-ready PNGs/SVGs; dev handoff for Next.js components.',
+          ].map((step) => (
+            <div key={step}
+                 className="rounded-2xl border bg-white p-4 leading-relaxed"
+                 style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}>
+              {step}
+            </div>
           ))}
-        </ul>
+        </div>
+      </section>
+
+      {/* ---------- Solution ---------- */}
+      <section aria-labelledby="solution" className="mb-14">
+        <h2
+          id="solution"
+          className="mb-4 text-2xl font-semibold tracking-tight"
+          style={{ color: BRAND.text }}
+        >
+          Solution
+        </h2>
+        <div className="rounded-2xl border bg-white p-6 leading-relaxed"
+             style={{ borderColor: BRAND.neutralBorder, color: BRAND.text }}>
+          A restrained system that travels well. The coral “heartbeat” dot and a clear wordmark anchor the
+          stationery; sage accents and a soft gradient provide warmth. In code, the same tokens power
+          accessible components, ensuring cohesive visuals across the site and print.
+        </div>
       </section>
 
       {/* ---------- Brand System ---------- */}
@@ -224,13 +259,12 @@ export default function HeartsAndMindsPage() {
           <p className="leading-relaxed">
             A straightforward sans-serif stack is used for clarity and accessibility.
             Headings carry weight and tight tracking, while body text stays generous and
-            readable. The system is intentionally spare—color and spacing do most of the
-            expressive work.
+            readable. Color and spacing do most of the expressive work.
           </p>
         </div>
       </section>
 
-      {/* ---------- Brand Collateral (your gallery) ---------- */}
+      {/* ---------- Brand Collateral (gallery) ---------- */}
       <section aria-labelledby="brand-collateral" className="mb-14">
         <h2
           id="brand-collateral"
@@ -294,7 +328,7 @@ export default function HeartsAndMindsPage() {
       </section>
 
       {/* ---------- Outcomes ---------- */}
-      <section aria-labelledby="outcomes" className="mb-24">
+      <section aria-labelledby="outcomes" className="mb-20">
         <h2
           id="outcomes"
           className="mb-4 text-2xl font-semibold tracking-tight"
@@ -305,9 +339,9 @@ export default function HeartsAndMindsPage() {
         <ul className="grid gap-4 sm:grid-cols-2">
           {[
             'Consistent brand across print and web with minimal tokens.',
-            'Clear hierarchy and improved readability using calm, high-contrast palette.',
+            'Clear hierarchy and improved readability using a calm, high-contrast palette.',
             'Flexible card + letterhead ready for proposals, outreach, and case studies.',
-            'Lightweight components that can expand to presentations and socials.',
+            'Lightweight components that can extend to presentations and social templates.',
           ].map((item) => (
             <li
               key={item}
@@ -320,7 +354,36 @@ export default function HeartsAndMindsPage() {
         </ul>
       </section>
 
-      {/* ---------- Lightbox (kept at end so it sits above all) ---------- */}
+      {/* ---------- Next Project CTA ---------- */}
+      <section className="mb-24">
+        <div
+          className="rounded-2xl border bg-white p-6 md:flex md:items-center md:justify-between"
+          style={{ borderColor: BRAND.neutralBorder }}
+        >
+          <div>
+            <p className="text-sm opacity-70" style={{ color: BRAND.text }}>
+              Up next
+            </p>
+            <h3 className="text-xl font-semibold" style={{ color: BRAND.text }}>
+              Brand Identity Portfolio Collection
+            </h3>
+          </div>
+          <Link
+            href="/work/brand-identity"
+            className="mt-4 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition md:mt-0"
+            style={{
+              color: BRAND.text,
+              border: `1px solid ${BRAND.neutralBorder}`,
+              background:
+                `linear-gradient(90deg, ${BRAND.coral}1A 0%, ${BRAND.sage}1A 100%)`,
+            }}
+          >
+            View project
+          </Link>
+        </div>
+      </section>
+
+      {/* ---------- Lightbox (kept at end) ---------- */}
       <AnimatePresence>
         {openIndex !== null && (
           <motion.div
