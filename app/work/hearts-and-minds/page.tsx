@@ -1,4 +1,4 @@
-  'use client';
+'use client';
 
 import Image from 'next/image';
 import { useState, useCallback, useEffect } from 'react';
@@ -9,10 +9,9 @@ type Asset = {
   title: string;
   src: string;
   alt: string;
-  caption?: string;
 };
 
-const ASSETS = [
+const ASSETS: Asset[] = [
   {
     title: 'Business Card',
     src: '/images/hearts-minds/business-card.png',
@@ -29,9 +28,12 @@ export default function HeartsAndMindsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const close = useCallback(() => setOpenIndex(null), []);
-  const onKey = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') close();
-  }, [close]);
+  const onKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    },
+    [close]
+  );
 
   useEffect(() => {
     if (openIndex !== null) {
@@ -44,26 +46,16 @@ export default function HeartsAndMindsPage() {
     <main className="mx-auto max-w-6xl px-6 py-10">
       {/* Hero */}
       <section className="mb-10">
-       {/* Lightbox image */}
-<div
-  className="relative w-full max-h-[85vh] bg-zinc-50"
-  style={{ border: '1px solid rgba(15,46,52,0.12)' }} // subtle outline so white paper shows
->
-  {/* Lightbox image (robust version) */}
-<div
-  className="relative w-full max-h-[85vh] bg-zinc-50"
-  style={{ border: '1px solid rgba(15,46,52,0.12)' }}
->
-  <img
-    src={ASSETS[openIndex!].src}
-    alt={ASSETS[openIndex!].alt}
-    className="block max-h-[85vh] w-auto mx-auto object-contain"
-    onError={(e) => {
-      console.error('Image failed to load:', ASSETS[openIndex!].src);
-      (e.currentTarget as HTMLImageElement).alt = 'Image failed to load';
-    }}
-  />
-</div>
+        <div className="relative w-full overflow-hidden rounded-2xl">
+          <Image
+            src="/images/hearts-minds/hero.jpg"
+            alt="Hearts & Minds hero image"
+            width={1600}
+            height={900}
+            className="h-auto w-full object-cover"
+            priority
+          />
+        </div>
       </section>
 
       {/* Brand Collateral */}
@@ -71,7 +63,7 @@ export default function HeartsAndMindsPage() {
         <h2
           id="brand-collateral"
           className="mb-6 text-2xl font-semibold tracking-tight"
-          style={{ color: '#0F2E34' }} // deep teal
+          style={{ color: '#0F2E34' }}
         >
           Brand Collateral
         </h2>
@@ -82,7 +74,10 @@ export default function HeartsAndMindsPage() {
               key={a.title}
               onClick={() => setOpenIndex(i)}
               className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-              style={{ borderColor: 'rgba(15,46,52,0.08)', boxShadow: '0 6px 18px rgba(15,46,52,0.06)' }}
+              style={{
+                borderColor: 'rgba(15,46,52,0.08)',
+                boxShadow: '0 6px 18px rgba(15,46,52,0.06)',
+              }}
               aria-label={`Open ${a.title} preview`}
             >
               <div className="relative aspect-[4/3] w-full">
@@ -94,6 +89,7 @@ export default function HeartsAndMindsPage() {
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
+
               <div className="flex items-center justify-between p-4">
                 <p className="text-base font-medium" style={{ color: '#0F2E34' }}>
                   {a.title}
@@ -121,43 +117,79 @@ export default function HeartsAndMindsPage() {
 
       {/* Lightbox */}
       <AnimatePresence>
-  {openIndex !== null && (
-    <motion.div
-      className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={close}
-    >
-      <motion.div
-        className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-white"
-        initial={{ scale: 0.98, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.98, opacity: 0 }}
-        transition={{ type: 'spring', stiffness: 240, damping: 26 }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button ...>...</button>
+        {openIndex !== null && (
+          <motion.div
+            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={close}
+          >
+            <motion.div
+              className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-white"
+              initial={{ scale: 0.98, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.98, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 240, damping: 26 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={close}
+                aria-label="Close preview"
+                className="absolute right-3 top-3 inline-flex items-center justify-center rounded-full p-2 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                style={{ color: '#0F2E34' }}
+              >
+                <X className="h-5 w-5" />
+              </button>
 
-        {/* Lightbox image (robust version) */}
-        <div
-          className="relative w-full max-h-[85vh] bg-zinc-50"
-          style={{ border: '1px solid rgba(15,46,52,0.12)' }}
-        >
-          <img
-            src={ASSETS[openIndex!].src}
-            alt={ASSETS[openIndex!].alt}
-            className="block max-h-[85vh] w-auto mx-auto object-contain"
-          />
-        </div>
+              {/* Lightbox image (robust version) */}
+              <div
+                className="relative w-full max-h-[85vh] bg-zinc-50"
+                style={{ border: '1px solid rgba(15,46,52,0.12)' }}
+              >
+                <img
+                  src={ASSETS[openIndex].src}
+                  alt={ASSETS[openIndex].alt}
+                  className="block max-h-[85vh] w-auto mx-auto object-contain"
+                  onError={(e) => {
+                    console.error('Image failed to load:', ASSETS[openIndex].src);
+                    (e.currentTarget as HTMLImageElement).alt = 'Image failed to load';
+                  }}
+                />
+              </div>
 
-        <div className="flex items-center justify-between px-4 py-3">
-          {/* footer / download buttons */}
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+              {/* Modal footer with downloads (only for Letterhead) */}
+              <div className="flex items-center justify-between gap-3 px-4 py-3">
+                <p className="text-sm" style={{ color: '#0F2E34' }}>
+                  {ASSETS[openIndex].title}
+                </p>
+
+                {ASSETS[openIndex].title === 'Letterhead' && (
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="/files/Hearts-Minds-Letterhead.pdf"
+                      download
+                      className="rounded-full px-3 py-2 text-sm font-medium underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+                      style={{ color: '#70d496' }}
+                    >
+                      Download PDF
+                    </a>
+                    <a
+                      href="/files/Hearts-Minds-Letterhead.docx"
+                      download
+                      className="rounded-full px-3 py-2 text-sm font-medium underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+                      style={{ color: '#70d496' }}
+                    >
+                      Download .DOCX
+                    </a>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
