@@ -90,17 +90,12 @@ export default function HeartsAndMindsPage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-4">
-                <p className="text-base font-medium" style={{ color: '#0F2E34' }}>
-                  {a.title}
-                </p>
-                <span
-                  className="rounded-full px-3 py-1 text-xs font-medium"
-                  style={{ backgroundColor: 'rgba(112,212,150,0.14)', color: '#0F2E34' }}
-                >
-                  Click to enlarge
-                </span>
-              </div>
+              {/* Modal footer */}
+<div className="flex items-center justify-between gap-3 px-4 py-3">
+  <p className="text-sm" style={{ color: '#0F2E34' }}>
+    {ASSETS[openIndex].title}
+  </p>
+</div>
 
               {/* subtle top border accent */}
               <div
