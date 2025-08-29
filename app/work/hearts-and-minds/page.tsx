@@ -7,9 +7,9 @@ import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 
 type Asset = {
   title: string;
-  src: string;      // thumbnail / grid image
+  src: string;      // thumbnail / grid image (e.g., preview)
   alt: string;
-  fullSrc?: string; // optional: used in lightbox if provided
+  fullSrc?: string; // full-size image for the lightbox (optional)
 };
 
 const ASSETS: Asset[] = [
@@ -28,13 +28,23 @@ const ASSETS: Asset[] = [
 
 export default function HeartsAndMindsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Zoom state
   const [zoom, setZoom] = useState(1);
-  const [showHint, setShowHint] = useState(false);
+  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+  const zoomIn  = () => setZoom((z) => clamp(Number((z + 0.2).toFixed(2)), 0.5, 4));
+  const zoomOut = () => setZoom((z) => clamp(Number((z - 0.2).toFixed(2)), 0.5, 4));
+  const reset   = () => setZoom(1);
+
+  // Lightbox image src + fallback/error state
+  const [modalSrc, setModalSrc] = useState<string | null>(null);
+  const [modalError, setModalError] = useState(false);
 
   const close = useCallback(() => {
     setOpenIndex(null);
     setZoom(1);
-    setShowHint(false);
+    setModalSrc(null);
+    setModalError(false);
   }, []);
 
   const onKey = useCallback(
@@ -46,21 +56,29 @@ export default function HeartsAndMindsPage() {
 
   useEffect(() => {
     if (openIndex !== null) {
-      setZoom(1);
-      setShowHint(true);
-      const t = setTimeout(() => setShowHint(false), 2200);
+      // initialize modal src (prefer fullSrc if provided)
+      const asset = ASSETS[openIndex];
+      setModalSrc(asset.fullSrc ?? asset.src);
+      setModalError(false);
+
       window.addEventListener('keydown', onKey);
-      return () => {
-        clearTimeout(t);
-        window.removeEventListener('keydown', onKey);
-      };
+      return () => window.removeEventListener('keydown', onKey);
     }
   }, [openIndex, onKey]);
 
-  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
-  const zoomIn  = () => setZoom((z) => clamp(Number((z + 0.2).toFixed(2)), 0.5, 4));
-  const zoomOut = () => setZoom((z) => clamp(Number((z - 0.2).toFixed(2)), 0.5, 4));
-  const reset   = () => setZoom(1);
+  // If the image fails to load, try fallback (full -> preview). If that also fails, show error.
+  const handleImgError = () => {
+    if (openIndex === null) return;
+    const asset = ASSETS[openIndex];
+    const primary = asset.fullSrc ?? asset.src;
+    const fallback = asset.src;
+
+    if (modalSrc === primary && primary !== fallback) {
+      setModalSrc(fallback); // try preview
+    } else {
+      setModalError(true);   // both failed
+    }
+  };
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -194,34 +212,55 @@ export default function HeartsAndMindsPage() {
                 </span>
               </div>
 
-              {/* Lightbox image */}
+              {/* Lightbox image with fallback */}
               {(() => {
                 const asset = ASSETS[openIndex!]; // guarded by conditional
-                const src = asset.fullSrc ?? asset.src;
                 return (
                   <>
                     <div
                       className="relative w-full max-h-[85vh] overflow-auto bg-zinc-50"
                       style={{ border: '1px solid rgba(15,46,52,0.12)' }}
                     >
-                      <img
-                        src={src}
-                        alt={asset.alt}
-                        className="block mx-auto"
-                        style={{
-                          transform: `scale(${zoom})`,
-                          transformOrigin: 'center center',
-                          transition: 'transform 120ms ease',
-                          maxWidth: '90vw',
-                          maxHeight: '85vh',
-                          objectFit: 'contain',
-                        }}
-                      />
+                      {!modalError ? (
+                        <img
+                          src={modalSrc ?? (asset.fullSrc ?? asset.src)}
+                          alt={asset.alt}
+                          onError={handleImgError}
+                          className="block mx-auto"
+                          style={{
+                            transform: `scale(${zoom})`,
+                            transformOrigin: 'center center',
+                            transition: 'transform 120ms ease',
+                            maxWidth: '90vw',
+                            maxHeight: '85vh',
+                            objectFit: 'contain',
+                          }}
+                        />
+                      ) : (
+                        <div className="flex h-[50vh] items-center justify-center">
+                          <p className="text-sm" style={{ color: '#0F2E34' }}>
+                            Sorry, this image couldn’t be loaded.
+                          </p>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Footer with hint */}
+                    {/* Footer */}
                     <div className="flex items-center justify-between gap-3 px-4 py-3">
                       <p className="text-sm" style={{ color: '#0F2E34' }}>
                         {asset.title}
                       </p>
-                      {
+                      <span className="text-xs" style={{ color: '#0F2E34' }}>
+                        Use + / − to zoom
+                      </span>
+                    </div>
+                  </>
+                );
+              })()}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
+  );
+}
