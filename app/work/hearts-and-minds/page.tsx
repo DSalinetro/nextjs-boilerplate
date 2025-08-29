@@ -1,6 +1,6 @@
 // app/work/hearts-and-minds/page.tsx
 import Image from "next/image";
-// import { notFound } from "next/navigation"; // optional, only if you use it
+// import { notFound } from "next/navigation"; // optional if you want to 404 temporarily
 
 export const metadata = {
   title: "Hearts & Minds | Danielle Salinetro",
@@ -10,21 +10,18 @@ export const metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?:
-    | { [key: string]: string | string[] | undefined }
-    | Promise<{ [key: string]: string | string[] | undefined }>;
+  // Next 15 can pass searchParams as a Promise — accept that shape
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  // Normalize searchParams whether it's an object or a Promise (Next 15 behavior)
-  const sp =
-    (await Promise.resolve(
-      searchParams
-    )) as { [key: string]: string | string[] | undefined } | undefined;
+  // Normalize search params (works whether Promise or undefined)
+  const sp = (await searchParams) ?? {};
+  const businessParam = Array.isArray(sp.business) ? sp.business[0] : sp.business;
 
-  // 🔒 Single on/off switch for *any* business artifacts or dev tools
+  // 🔒 Single on/off switch for any dev-only artifacts
   const SHOW_BUSINESS = false;
 
   // Only show dev tools when the toggle is on AND ?business=true
-  const showBusinessTools = SHOW_BUSINESS && sp?.business === "true";
+  const showBusinessTools = SHOW_BUSINESS && businessParam === "true";
 
   // If you temporarily want to 404 while iterating, uncomment:
   // return notFound();
@@ -39,21 +36,21 @@ export default async function Page({
       </header>
 
       <section className="overflow-hidden rounded-2xl border bg-white/50 shadow-sm">
-        <div className="relative w-full">
+        <div className="relative aspect-[16/9] w-full">
           {/* Click-to-enlarge: opens the original image in a new tab */}
           <a
             href="/images/hearts-minds/hero.jpg"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open full-size Hearts & Minds hero image"
-            className="group block"
+            className="group block h-full w-full"
           >
             <Image
               src="/images/hearts-minds/hero.jpg" // points to public/images/hearts-minds/hero.jpg
               alt="Hearts & Minds hero"
               width={1600}
               height={900}
-              className="w-full h-auto object-cover"
+              className="h-full w-full object-cover"
               priority
             />
             {/* Subtle badge appears on hover */}
@@ -73,10 +70,10 @@ export default async function Page({
         </div>
       </section>
 
-      {/* If you ever re-add letterhead/business-card blocks, wrap them like this:
+      {/* If you re-add letterhead/business-card later, wrap them like this:
       {SHOW_BUSINESS && (
         <>
-          // ...your letterhead / business-card JSX goes here...
+          // ...your letterhead / business-card JSX...
         </>
       )}
       */}
