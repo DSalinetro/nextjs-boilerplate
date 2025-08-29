@@ -1,0 +1,3 @@
+git add public/images/hearts-minds/letterhead-preview.png
+git commit -m "Add letterhead preview image"
+git push
