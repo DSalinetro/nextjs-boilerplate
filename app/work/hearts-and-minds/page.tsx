@@ -26,13 +26,13 @@ export default function Page({ searchParams }: { searchParams: Record<string, st
       <section className="overflow-hidden rounded-2xl border bg-white/50 shadow-sm">
         <div className="relative aspect-[16/9] w-full">
           <Image
-            src="/images/hearts-minds/hero.jpg"
-            alt="Hearts & Minds hero"
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 1024px"
-          />
+  src="/images/hearts-minds/hero.jpg"  // points to public/images/hearts-minds/hero.jpg
+  alt="Hearts & Minds hero"
+  width={1600}
+  height={900}
+  className="w-full h-auto object-cover"
+  priority
+/>
         </div>
         <div className="p-6">
           <h2 className="text-xl font-medium">Project Overview</h2>
