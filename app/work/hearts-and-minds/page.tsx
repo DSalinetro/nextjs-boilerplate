@@ -7,7 +7,7 @@ import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 
 type Asset = {
   title: string;
-  src: string;      // thumbnail / grid image (e.g., preview)
+  src: string;      // thumbnail / grid image
   alt: string;
   fullSrc?: string; // full-size image for the lightbox (optional)
 };
@@ -20,9 +20,10 @@ const ASSETS: Asset[] = [
   },
   {
     title: 'Letterhead',
-    src: '/images/hearts-minds/letterhead-preview.png', // cropped header preview
-    alt: 'Hearts & Minds letterhead header preview',
-    fullSrc: '/images/hearts-minds/letterhead.png',     // full page in lightbox
+    // Using the full image for the thumbnail so nothing 404s/crops
+    src: '/images/hearts-minds/letterhead.png',
+    alt: 'Hearts & Minds letterhead',
+    fullSrc: '/images/hearts-minds/letterhead.png', // lightbox uses this too
   },
 ];
 
@@ -118,13 +119,19 @@ export default function HeartsAndMindsPage() {
               }}
               aria-label={`Open ${a.title} preview`}
             >
-              <div className="relative aspect-[4/3] w-full">
+              {/* Natural-size thumbnail (no cropping) */}
+              <div
+                className="relative w-full h-64 sm:h-72 bg-zinc-50 flex items-center justify-center"
+                style={{ border: '1px solid rgba(15,46,52,0.08)' }}
+              >
                 <Image
                   src={a.src}
                   alt={a.alt}
-                  fill
+                  width={1600}
+                  height={1200}
+                  className="max-h-full max-w-full h-auto w-auto object-contain"
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
 
