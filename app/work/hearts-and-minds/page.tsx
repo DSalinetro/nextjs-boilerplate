@@ -32,15 +32,29 @@ export default function Page({
 
       <section className="overflow-hidden rounded-2xl border bg-white/50 shadow-sm">
         <div className="relative w-full">
-          <Image
-            src="/images/hearts-minds/hero.jpg" // points to public/images/hearts-minds/hero.jpg
-            alt="Hearts & Minds hero"
-            width={1600}
-            height={900}
-            className="w-full h-auto object-cover"
-            priority
-          />
+          {/* Click-to-enlarge: opens the original image in a new tab */}
+          <a
+            href="/images/hearts-minds/hero.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open full-size Hearts & Minds hero image"
+            className="group block"
+          >
+            <Image
+              src="/images/hearts-minds/hero.jpg" // points to public/images/hearts-minds/hero.jpg
+              alt="Hearts & Minds hero"
+              width={1600}
+              height={900}
+              className="w-full h-auto object-cover"
+              priority
+            />
+            {/* Subtle badge appears on hover */}
+            <span className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-black/60 px-3 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+              Click to enlarge
+            </span>
+          </a>
         </div>
+
         <div className="p-6">
           <h2 className="text-xl font-medium">Project Overview</h2>
           <p className="mt-2 text-sm text-muted-foreground">
