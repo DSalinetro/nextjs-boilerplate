@@ -7,16 +7,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-[80vh]">
-      <div className="relative w-full" style={{ paddingTop: "62vh" }}>
-        <iframe
-          src="PASTE_YOUR_FIGMA_SITE_URL_HERE"
-          className="absolute inset-0 h-full w-full border-0"
-          allow="fullscreen; clipboard-write"
-          loading="lazy"
-          title="Enhance Branding Portfolio"
-        />
-      </div>
+    <main className="min-h-screen">
+      <iframe
+        src="https://daniellesalinetrodesign.figma.site/"
+        className="w-full h-screen border-0"
+        loading="lazy"
+        allow="fullscreen; clipboard-write"
+        title="Enhance Branding Portfolio"
+      />
     </main>
   );
 }
