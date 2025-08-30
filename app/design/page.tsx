@@ -71,7 +71,7 @@ export default function DesignPage() {
     },
     {
       id: 6,
-      title: 'Enhance Branding Portfolio', // renamed
+      title: 'Enhance Branding Portfolio',
       description:
         'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
@@ -178,13 +178,31 @@ export default function DesignPage() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a aria-label="Medium" href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a
+                aria-label="Medium"
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <BookOpen size={20} />
               </a>
-              <a aria-label="LinkedIn" href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a
+                aria-label="LinkedIn"
+                href="https://linkedin.com/in/danielle-salinetro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <Linkedin size={20} />
               </a>
-              <a aria-label="Portfolio home" href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a
+                aria-label="Portfolio home"
+                href={LINKS.siteHome}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <ExternalLink size={20} />
               </a>
             </div>
@@ -329,17 +347,14 @@ export default function DesignPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => {
               const isExternal = !!item.link && /^https?:\/\//.test(item.link as string);
+
               const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
                     <img
                       src={item.image}
                       alt={item.title}
-                    className={`transition-transform duration-300 group-hover:scale-105 ${
-                        <img … className={…} />
-                          ? 'w-auto h-full max-h-full object-contain shadow-md'
-                          : 'w-full h-full object-cover'
-                      }`}
+                      className="transition-transform duration-300 group-hover:scale-105 w-full h-full object-cover"
                     />
                   </div>
                   <CardContent className="p-6">
@@ -409,10 +424,18 @@ export default function DesignPage() {
                 Currently pursuing my Google UX Certificate and CPTC, I’m passionate about translating complex data into compelling visuals.
               </p>
               <div className="flex flex-wrap gap-3">
-                {['Empathy-Driven Design','Brand Identity','UX Research','Content Strategy','Visual Storytelling','Data Visualization']
-                  .map((skill) => (
-                    <Badge key={skill} variant="outline" className="px-4 py-2">{skill}</Badge>
-                  ))}
+                {[
+                  'Empathy-Driven Design',
+                  'Brand Identity',
+                  'UX Research',
+                  'Content Strategy',
+                  'Visual Storytelling',
+                  'Data Visualization',
+                ].map((skill) => (
+                  <Badge key={skill} variant="outline" className="px-4 py-2">
+                    {skill}
+                  </Badge>
+                ))}
               </div>
             </div>
             <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
@@ -439,7 +462,12 @@ export default function DesignPage() {
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline">
+              <a
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
+              >
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
               {/* Empathy Audit → Squarespace hub */}
@@ -468,7 +496,11 @@ export default function DesignPage() {
               >
                 <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
@@ -476,7 +508,9 @@ export default function DesignPage() {
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">{post.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">
+                      {post.title}
+                    </h3>
                     <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
                   </CardContent>
                 </Card>
@@ -489,7 +523,13 @@ export default function DesignPage() {
       {/* CONTACT + FOOTER */}
       <section id="contact" className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6">
-          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Ready to create something meaningful together? I’d love to collaborate on projects that prioritize human-centered design.
@@ -497,16 +537,25 @@ export default function DesignPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Mail className="text-[#D49670]" size={20} />
-                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#D49670] transition-colors">dsalinetro@pm.me</a>
+                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#D49670] transition-colors">
+                    dsalinetro@pm.me
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="text-[#D49670]" size={20} />
-                  <a href="tel:+16362525894" className="hover:text-[#D49670] transition-colors">636.252.5894</a>
+                  <a href="tel:+16362525894" className="hover:text-[#D49670] transition-colors">
+                    636.252.5894
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#D49670]" size={20} />
@@ -514,7 +563,12 @@ export default function DesignPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <ExternalLink className="text-[#D49670]" size={20} />
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.siteHome}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#D49670] transition-colors"
+                  >
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -523,32 +577,70 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.medium}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <BookOpen size={20} />
                   </a>
-                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href="https://linkedin.com/in/danielle-salinetro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <Linkedin size={20} />
                   </a>
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.siteHome}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <ExternalLink size={20} />
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                  <input id="name" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="Your name" />
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                    placeholder="Your name"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="your@email.com" />
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
-                  <select id="project" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent">
+                  <label htmlFor="project" className="block text-sm font-medium mb-2">
+                    Project Type
+                  </label>
+                  <select
+                    id="project"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                  >
                     <option value="">Select project type</option>
                     <option value="branding">Brand Identity &amp; Design</option>
                     <option value="ux">UX Research &amp; Design</option>
@@ -558,10 +650,20 @@ export default function DesignPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                  <textarea id="message" rows={4} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent resize-none" placeholder="Tell me about your project…" />
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent resize-none"
+                    placeholder="Tell me about your project…"
+                  />
                 </div>
-                <Button type="submit" className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
+                <Button
+                  type="submit"
+                  className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors"
+                >
                   Send Message
                 </Button>
               </form>
@@ -577,9 +679,25 @@ export default function DesignPage() {
               <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
             </div>
             <div className="flex items-center gap-6">
-              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">Email</a>
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Medium</a>
-              <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">
+                Email
+              </a>
+              <a
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Medium
+              </a>
+              <a
+                href={LINKS.siteHome}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Portfolio
+              </a>
             </div>
           </div>
         </div>
