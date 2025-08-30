@@ -69,15 +69,15 @@ export default function DesignPage() {
       category: 'UX Concept',
       link: LINKS.portfolioCollection, // main portfolio collection
     },
-    {
-      id: 6,
-      title: 'Enhance Branding Portfolio',
-      description:
-        'Selected identities across music, science, sustainability, hospitality, and tech.',
-      image: '/images/branding.png',
-      category: 'Brand Design',
-      link: LINKS.brandingCollection, // /enhance-branding-portfolio
-    },
+   {
+  id: 6,
+  title: 'Enhance Branding Portfolio',
+  description:
+    'Selected identities across music, science, sustainability, hospitality, and tech.',
+  image: '/images/enhance-branding-card.png', // ← your new file
+  category: 'Brand Design',
+  link: LINKS.brandingCollection,
+},
     {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
