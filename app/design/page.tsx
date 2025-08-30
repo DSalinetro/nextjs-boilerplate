@@ -61,38 +61,22 @@ export default function DesignPage() {
       link: LINKS.medium, // external (Medium)
     },
     {
-  id: 3,
-  title: 'Hearts & Minds — Empathy Concept',
-  description:
-    'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
-  image: '/images/hearts-minds/hero.jpg',
-  category: 'UX Concept',
-  link: '/work/hearts-and-minds',
-},
-   {
-  id: 101,
-  title: 'Professional Business Card Design',
-  description: 'Clean, elegant business card design with sophisticated typography and layout.',
-  image: '/images/hearts-minds/business-card.png',
-  category: 'Print Design',
-  link: '/work/hearts-and-minds',
-},
-{
-  id: 102,
-  title: 'Corporate Letterhead System',
-  description: 'Cohesive letterhead maintaining brand cohesion and hierarchy.',
-  image: '/images/hearts-minds/letterhead.png',
-  category: 'Print Design',
-  link: '/work/hearts-and-minds',
-},
-{
+      id: 3,
+      title: 'Hearts & Minds — Empathy Concept',
+      description:
+        'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
+      image: '/images/hearts-minds/hero.jpg',
+      category: 'UX Concept',
+      link: LINKS.portfolioCollection, // main portfolio collection
+    },
+    {
       id: 6,
-      title: 'Brand Identity Portfolio Collection',
+      title: 'Enhance Branding Portfolio', // renamed
       description:
         'Selected identities across music, science, sustainability, hospitality, and tech.',
       image: '/images/branding.png',
       category: 'Brand Design',
-      link: LINKS.brandingCollection, // open live collection
+      link: LINKS.brandingCollection, // /enhance-branding-portfolio
     },
     {
       id: 7,
@@ -218,10 +202,8 @@ export default function DesignPage() {
         <motion.div
           className="absolute inset-0 z-0"
           style={{
-            background: `
-              radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent),
-              linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)
-            `,
+            background:
+              'radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent), linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)',
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -282,7 +264,6 @@ export default function DesignPage() {
                 View My Work
               </button>
 
-              {/* REPLACED: internal CTA now links to /resume */}
               <Link
                 href="/resume"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
@@ -319,14 +300,9 @@ export default function DesignPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              <a
-                href={LINKS.brandingCollection}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                Portfolio
-              </a>
+              <Link href={LINKS.brandingCollection} className="hover:underline">
+                Enhance Branding Portfolio
+              </Link>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
@@ -341,14 +317,12 @@ export default function DesignPage() {
                 View Resume
               </Link>
 
-              <a
+              <Link
                 href={LINKS.brandingCollection}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
               >
-                View Complete Portfolio Collection <ExternalLink size={16} />
-              </a>
+                Open Enhance Branding Portfolio <ExternalLink size={16} />
+              </Link>
             </div>
           </motion.div>
 
