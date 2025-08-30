@@ -335,8 +335,8 @@ export default function DesignPage() {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className={`transition-transform duration-300 group-hover:scale-105 ${
-                        item.category === 'Print Design'
+                    className={`transition-transform duration-300 group-hover:scale-105 ${
+                        <img … className={…} />
                           ? 'w-auto h-full max-h-full object-contain shadow-md'
                           : 'w-full h-full object-cover'
                       }`}
