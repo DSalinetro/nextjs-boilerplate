@@ -1,39 +1,28 @@
-// middleware.ts
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  const { pathname, search } = req.nextUrl;
+  const { pathname } = req.nextUrl;
 
-  // --- ADMIN GUARD ---
-  const isAdminRoute = pathname.startsWith("/admin");
-  const isAdminLogin = pathname.startsWith("/admin/login");
-  if (isAdminRoute && !isAdminLogin) {
-    const isAuthed = req.cookies.get("admin")?.value === "true";
-    if (!isAuthed) {
+  // --- protect /resume (but allow login and download) ---
+  if (pathname.startsWith('/resume')) {
+    if (pathname.startsWith('/resume/login') || pathname.startsWith('/resume/download')) {
+      return NextResponse.next();
+    }
+    const authed = req.cookies.get('resume')?.value === 'true';
+    if (!authed) {
       const url = req.nextUrl.clone();
-      url.pathname = "/admin/login";
-      url.searchParams.set("next", `${pathname}${search}`);
+      url.pathname = '/resume/login';
+      url.searchParams.set('next', pathname);
       return NextResponse.redirect(url);
     }
   }
 
-  // --- RESUME GUARD ---
-  const isResumeRoute = pathname.startsWith("/resume");
-  const isResumeLogin = pathname.startsWith("/resume/login");
-  if (isResumeRoute && !isResumeLogin) {
-    const resumeAuthed = req.cookies.get("resume_auth")?.value === "1";
-    if (!resumeAuthed) {
-      const url = req.nextUrl.clone();
-      url.pathname = "/resume/login";
-      url.searchParams.set("from", `${pathname}${search}`);
-      return NextResponse.redirect(url);
-    }
-  }
+  // --- keep your existing /admin block here if you have it ---
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*", "/resume", "/resume/:path*"],
+  matcher: ['/resume', '/resume/:path*', '/admin', '/admin/:path*'],
 };
