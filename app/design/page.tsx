@@ -99,8 +99,7 @@ export default function DesignPage() {
   // ---------- BLOGS ----------
   const blogPosts = [
     {
-      title:
-        "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
       excerpt:
         'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
       readTime: '10 min read',
@@ -110,8 +109,7 @@ export default function DesignPage() {
       image: '/images/empathy-rose.png',
     },
     {
-      title:
-        'Designing for Mental Health: Toolkit for Compassionate Creativity',
+      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
       excerpt:
         'Strategies for moving beyond surface-level design thinking to support mental wellness.',
       readTime: '6 min read',
@@ -466,7 +464,9 @@ export default function DesignPage() {
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Currently pursuing my Google UX Certificate and CPTC, I’m passionate about translating complex data into compelling visuals.
               </p>
-              <div className="flex flex-wrap gap-3">
+
+              {/* ▲ Updated chips for strong contrast */}
+              <div className="flex flex-wrap gap-2">
                 {[
                   'Empathy-Driven Design',
                   'Brand Identity',
@@ -475,12 +475,16 @@ export default function DesignPage() {
                   'Visual Storytelling',
                   'Data Visualization',
                 ].map((skill) => (
-                  <Badge key={skill} variant="outline" className="px-4 py-2">
+                  <Badge
+                    key={skill}
+                    className="px-3.5 py-2 rounded-full bg-[#D49670] text-white border-transparent shadow-sm hover:bg-[#c47f64] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
+                  >
                     {skill}
                   </Badge>
                 ))}
               </div>
             </div>
+
             <motion.div
               className="relative"
               whileHover={{ scale: 1.05 }}
