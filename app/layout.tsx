@@ -1,4 +1,5 @@
 // app/layout.tsx
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
@@ -18,6 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Suspense fallback={null}>
           <AdminBar />
         </Suspense>
+        <body>
+  {children}
+  <Analytics />
+</body>
       </body>
     </html>
   );
