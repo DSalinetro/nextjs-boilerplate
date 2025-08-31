@@ -1,105 +1,97 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState, FormEvent } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { Lock, ChevronLeft } from 'lucide-react';
 
-export default function ResumeLoginPage() {
+function LoginInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/resume';
 
   const [password, setPassword] = useState('');
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
-    setSubmitting(true);
+    setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/resume', {
+      const res = await fetch('/api/resume/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       });
 
-      if (res.ok) {
-        router.replace(next);
-      } else {
+      if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        setError(data?.error || 'Invalid password. Please try again.');
-        setSubmitting(false);
+        throw new Error(data?.message || 'Invalid password');
       }
-    } catch {
-      setError('Something went wrong. Please try again.');
-      setSubmitting(false);
+
+      // Success → go to the originally requested page (or /resume)
+      router.push(next);
+      router.refresh();
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <main className="mx-auto max-w-md px-6 py-16">
-      {/* Back link */}
-      <div className="mb-8">
-        <Link
-          href="/design"
-          className="inline-flex items-center gap-1 text-[#D49670] hover:underline"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back
-        </Link>
-      </div>
+    <main className="min-h-[60vh] flex items-center justify-center px-6 py-16">
+      <div className="w-full max-w-md rounded-2xl border border-neutral-200/70 bg-white p-6 shadow-sm">
+        <h1 className="text-2xl font-semibold tracking-tight">Resume Access</h1>
+        <p className="mt-2 text-sm text-neutral-600">
+          Enter the access password to view the private resume.
+        </p>
 
-      <section className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm overflow-hidden">
-        <div className="p-6 sm:p-8">
-          <div className="mb-4 flex items-center gap-2">
-            <Lock className="h-5 w-5 text-[#D49670]" />
-            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">
-              Enter resume password
-            </h1>
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-neutral-800">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="mt-2 w-full rounded-xl border border-neutral-300 px-4 py-2 outline-none focus:ring-2 focus:ring-[#D49670]/40"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              required
+            />
           </div>
-          <p className="text-sm sm:text-base text-neutral-600 mb-6">
-            This area is restricted. Authorized employers only.
-          </p>
 
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-neutral-700 mb-1"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-neutral-300 px-4 py-2.5 outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
-                placeholder="Enter password"
-              />
+          {error && (
+            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+              {error}
             </div>
+          )}
 
-            {error && (
-              <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-                {error}
-              </div>
-            )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-[#D49670] px-4 py-2 font-semibold text-white shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? 'Checking…' : 'Unlock Resume'}
+          </button>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-[#D49670] px-4 py-2.5 font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
-            >
-              {submitting ? 'Checking…' : 'Unlock Resume'}
-            </button>
-          </form>
-        </div>
-      </section>
+          {/* Small note showing where you’ll land after login */}
+          <p className="text-xs text-neutral-500 text-center">
+            You’ll be redirected to <span className="font-medium">{next}</span> after login.
+          </p>
+        </form>
+      </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  // Wrap hook-using content in Suspense to satisfy Next's CSR bailout rule.
+  return (
+    <Suspense fallback={<main className="p-6">Loading…</main>}>
+      <LoginInner />
+    </Suspense>
   );
 }
