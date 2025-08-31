@@ -1,21 +1,16 @@
 // lib/links.ts
 export const LINKS = {
-  medium: "https://medium.com/@dsalinetro",
-  linktree: "https://linktr.ee/daniellesalinetro",
-  siteHome: "https://daniellesalinetro.design",
+  medium: 'https://medium.com/@dsalinetro',
+  linktree: 'https://linktr.ee/daniellesalinetro',
+  siteHome: 'https://daniellesalinetro.design',
 
-  // in-site branding page
-  brandingCollection: "/enhance-branding-portfolio",
+  // internal route used by the card and heading on /design
+  brandingCollection: '/enhance-branding-portfolio',
 
-  // Hearts & Minds (Figma site)
-  heartsMindsPortfolio: "https://daniellesalinetrodesign2.figma.site/",
+  // external
+  heartsMindsPortfolio: 'https://daniellesalinetrodesign2.figma.site/',
+  empathyAudit: 'https://daniellesalinetro.design/empathy-audit',
 
-  // legacy main portfolio collection
-  portfolioCollection: "https://dsalinetro.github.io/danielle-portfolio/",
-
-  empathyAudit:
-    "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
-  empathyAuditMedium:
-    "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
-  empathyAuditPdf: "https://daniellesalinetro.design/empathy-audit.pdf",
+  // TODO: replace with your public Figma page for this collection
+  enhanceBrandingSite: '#',
 } as const;
