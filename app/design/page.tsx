@@ -1,110 +1,16 @@
-// lib/links.ts
-// Centralized links (prefer relative imports in app files)
-export const LINKS = {
-  medium: 'https://medium.com/@dsalinetro',
-  linktree: 'https://linktr.ee/daniellesalinetro',
-  siteHome: 'https://daniellesalinetro.design',
-
-  // 👇 The "Portfolio" heading on /design should use this
-  brandingCollection: '/enhance-branding-portfolio',
-
-  // Figma site root (per memory)
-  heartsMindsPortfolio: 'https://daniellesalinetrodesign2.figma.site/',
-
-  // Complete collection (GH Pages)
-  portfolioCollection: 'https://dsalinetro.github.io/danielle-portfolio/',
-
-  // Canonical Empathy Audit page
-  empathyAudit: 'https://daniellesalinetro.design/empathy-audit',
-  empathyAuditMedium:
-    'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-
-  // 🔗 TODO: Replace with the exact public URL of your "Enhance Branding Portfolio" on Figma Site
-  enhanceBrandingSite: '#',
-} as const;
-
-// -------------------------------------------------------------------
-// app/enhance-branding-portfolio/page.tsx
-
-'use client';
-
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronLeft, ExternalLink } from 'lucide-react';
-import { LINKS } from '../../lib/links';
-
-export const metadata: Metadata = {
-  title: 'Enhance Branding Portfolio | Danielle Salinetro',
-  description: 'A focused hub for Danielle’s Enhance Branding Portfolio.',
-};
-
-export default function EnhanceBrandingPortfolioPage() {
-  return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
-      {/* Top bar with Back home link only */}
-      <div className="mb-6">
-        <Link
-          href="/design"
-          className="inline-flex items-center gap-1 text-[#D49670] hover:underline"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back home
-        </Link>
-      </div>
-
-      {/* Header */}
-      <header className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Enhance Branding Portfolio</h1>
-        <p className="mt-2 max-w-2xl text-sm sm:text-base text-neutral-600">
-          A curated showcase of branding explorations and outcomes. Clean, simple, and focused—just one clear call-to-action below.
-        </p>
-      </header>
-
-      {/* Hero card */}
-      <section className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm overflow-hidden">
-        <div className="relative aspect-[16/9] w-full bg-neutral-50">
-          <Image
-            src="/images/enhance-branding-card.png"
-            alt="Enhance Branding Portfolio cover image"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        <div className="p-5 sm:p-6">
-          <p className="text-sm sm:text-base text-neutral-700">
-            Explore visual identities, systems, and artifacts developed with a human-centered lens.
-          </p>
-
-          {/* Single CTA only */}
-          <div className="mt-4">
-            <Link
-              href={LINKS.enhanceBrandingSite}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-2xl border border-transparent bg-[#D49670] px-4 py-2 text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
-            >
-              Open Enhance Branding Portfolio
-              <ExternalLink className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-
-// -------------------------------------------------------------------
-// app/design/page.tsx (updated)
-
 'use client';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ChevronDown, Mail, Phone, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
+import {
+  ChevronDown,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  Linkedin,
+  BookOpen,
+} from 'lucide-react';
 
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -169,16 +75,16 @@ export default function DesignPage() {
         'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
       image: '/images/hearts-minds/hero.jpg',
       category: 'UX Concept',
-      link: LINKS.heartsMindsPortfolio, // ← uses your Figma site
+      link: LINKS.heartsMindsPortfolio, // external Figma site
     },
     {
       id: 6,
       title: 'Enhance Branding Portfolio',
       description:
         'Selected identities across music, science, sustainability, hospitality, and tech.',
-      image: '/images/enhance-branding-card.png', // working image
+      image: '/images/enhance-branding-card.png',
       category: 'Brand Design',
-      link: LINKS.brandingCollection, // internal hub: /enhance-branding-portfolio
+      link: LINKS.brandingCollection, // internal hub route
     },
     {
       id: 7,
@@ -193,7 +99,8 @@ export default function DesignPage() {
   // ---------- BLOGS ----------
   const blogPosts = [
     {
-      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      title:
+        "The Empathy Audit: How to Evaluate Your Design's Human Impact",
       excerpt:
         'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
       readTime: '10 min read',
@@ -203,7 +110,8 @@ export default function DesignPage() {
       image: '/images/empathy-rose.png',
     },
     {
-      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
+      title:
+        'Designing for Mental Health: Toolkit for Compassionate Creativity',
       excerpt:
         'Strategies for moving beyond surface-level design thinking to support mental wellness.',
       readTime: '6 min read',
@@ -255,7 +163,10 @@ export default function DesignPage() {
       >
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <motion.div className="text-xl font-bold text-white" whileHover={{ scale: 1.05 }}>
+            <motion.div
+              className="text-xl font-bold text-white"
+              whileHover={{ scale: 1.05 }}
+            >
               Danielle Salinetro
             </motion.div>
 
@@ -271,7 +182,9 @@ export default function DesignPage() {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-colors duration-200 ${
-                    activeSection === item.id ? 'text-[#D49670]' : 'text-white/80 hover:text-white'
+                    activeSection === item.id
+                      ? 'text-[#D49670]'
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.label}
@@ -280,14 +193,32 @@ export default function DesignPage() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a aria-label="Medium" href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a
+                aria-label="Medium"
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <BookOpen size={20} />
               </a>
-              <a aria-label="LinkedIn" href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              <a
+                aria-label="LinkedIn"
+                href="https://linkedin.com/in/danielle-salinetro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <Linkedin size={20} />
               </a>
-              {/* per preference: default external icon opens Linktree */}
-              <a aria-label="Linktree" href={LINKS.linktree} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              {/* external icon → Linktree */}
+              <a
+                aria-label="Linktree"
+                href={LINKS.linktree}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
                 <ExternalLink size={20} />
               </a>
             </div>
@@ -329,7 +260,10 @@ export default function DesignPage() {
           >
             <motion.h1
               className="mb-2 text-white font-extrabold tracking-wide leading-tight [text-wrap:balance]"
-              style={{ fontSize: 'clamp(36px, 6vw, 64px)', textShadow: '0 6px 20px rgba(0,0,0,.6)' }}
+              style={{
+                fontSize: 'clamp(36px, 6vw, 64px)',
+                textShadow: '0 6px 20px rgba(0,0,0,.6)',
+              }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -339,7 +273,11 @@ export default function DesignPage() {
 
             <motion.p
               className="mx-auto mb-5 max-w-3xl leading-relaxed"
-              style={{ color: '#f6f2ef', fontSize: 'clamp(16px, 2.2vw, 20px)', textShadow: '0 2px 8px rgba(0,0,0,.4)' }}
+              style={{
+                color: '#f6f2ef',
+                fontSize: 'clamp(16px, 2.2vw, 20px)',
+                textShadow: '0 2px 8px rgba(0,0,0,.4)',
+              }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -361,8 +299,14 @@ export default function DesignPage() {
                   boxShadow: '0 6px 20px rgba(212,150,112,.4)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,112,.5)')}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,112,.4)')}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.boxShadow =
+                    '0 10px 30px rgba(212,150,112,.5)')
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.boxShadow =
+                    '0 6px 20px rgba(212,150,112,.4)')
+                }
               >
                 View My Work
               </button>
@@ -374,8 +318,12 @@ export default function DesignPage() {
                   background: 'rgba(255,255,255,.12)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = 'rgba(255,255,255,.18)')
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = 'rgba(255,255,255,.12)')
+                }
               >
                 View Resume
               </Link>
@@ -388,7 +336,11 @@ export default function DesignPage() {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="text-white/70" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
+          <ChevronDown
+            className="text-white/70"
+            size={32}
+            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
+          />
         </motion.div>
       </section>
 
@@ -431,7 +383,8 @@ export default function DesignPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => {
-              const isExternal = !!item.link && /^https?:\/\//.test(item.link as string);
+              const isExternal =
+                !!item.link && /^https?:\/\//.test(item.link as string);
 
               const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
@@ -446,7 +399,10 @@ export default function DesignPage() {
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
                       {item.link && (
-                        <ExternalLink size={16} className="text-gray-400 group-hover:text-[#D49670] transition-colors" />
+                        <ExternalLink
+                          size={16}
+                          className="text-gray-400 group-hover:text-[#D49670] transition-colors"
+                        />
                       )}
                     </div>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors">
@@ -469,11 +425,20 @@ export default function DesignPage() {
                 >
                   {item.link ? (
                     isExternal ? (
-                      <a href={item.link as string} target="_blank" rel="noopener noreferrer" className="block">
+                      <a
+                        href={item.link as string}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
                         {CardEl}
                       </a>
                     ) : (
-                      <Link href={item.link as string} className="block" aria-label={item.title}>
+                      <Link
+                        href={item.link as string}
+                        className="block"
+                        aria-label={item.title}
+                      >
                         {CardEl}
                       </Link>
                     )
@@ -523,9 +488,17 @@ export default function DesignPage() {
                 ))}
               </div>
             </div>
-            <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/images/portrait.png" alt="Danielle Salinetro" className="w-full h-full object-cover" />
+                <img
+                  src="/images/portrait.png"
+                  alt="Danielle Salinetro"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
           </motion.div>
@@ -547,7 +520,12 @@ export default function DesignPage() {
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline">
+              <a
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
+              >
                 Read all posts on Medium <ExternalLink size={16} />
               </a>
               <a
@@ -575,7 +553,11 @@ export default function DesignPage() {
               >
                 <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
@@ -583,7 +565,9 @@ export default function DesignPage() {
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">{post.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">
+                      {post.title}
+                    </h3>
                     <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
                   </CardContent>
                 </Card>
@@ -596,7 +580,13 @@ export default function DesignPage() {
       {/* CONTACT + FOOTER */}
       <section id="contact" className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6">
-          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Ready to create something meaningful together? I’d love to collaborate on projects that prioritize human-centered design.
@@ -604,16 +594,31 @@ export default function DesignPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Mail className="text-[#D49670]" size={20} />
-                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#D49670] transition-colors">dsalinetro@pm.me</a>
+                  <a
+                    href="mailto:dsalinetro@pm.me"
+                    className="hover:text-[#D49670] transition-colors"
+                  >
+                    dsalinetro@pm.me
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="text-[#D49670]" size={20} />
-                  <a href="tel:+16362525894" className="hover:text-[#D49670] transition-colors">636.252.5894</a>
+                  <a
+                    href="tel:+16362525894"
+                    className="hover:text-[#D49670] transition-colors"
+                  >
+                    636.252.5894
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#D49670]" size={20} />
@@ -621,7 +626,12 @@ export default function DesignPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <ExternalLink className="text-[#D49670]" size={20} />
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.siteHome}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#D49670] transition-colors"
+                  >
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -630,32 +640,70 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.medium}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <BookOpen size={20} />
                   </a>
-                  <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href="https://linkedin.com/in/danielle-salinetro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <Linkedin size={20} />
                   </a>
-                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
+                  <a
+                    href={LINKS.siteHome}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
+                  >
                     <ExternalLink size={20} />
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                  <input id="name" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="Your name" />
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                    placeholder="Your name"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                  <input id="email" type="email" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent" placeholder="your@email.com" />
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="project" className="block text-sm font-medium mb-2">Project Type</label>
-                  <select id="project" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent">
+                  <label htmlFor="project" className="block text-sm font-medium mb-2">
+                    Project Type
+                  </label>
+                  <select
+                    id="project"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent"
+                  >
                     <option value="">Select project type</option>
                     <option value="branding">Brand Identity &amp; Design</option>
                     <option value="ux">UX Research &amp; Design</option>
@@ -665,10 +713,20 @@ export default function DesignPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                  <textarea id="message" rows={4} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent resize-none" placeholder="Tell me about your project…" />
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D49670] focus:border-transparent resize-none"
+                    placeholder="Tell me about your project…"
+                  />
                 </div>
-                <Button type="submit" className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
+                <Button
+                  type="submit"
+                  className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors"
+                >
                   Send Message
                 </Button>
               </form>
@@ -681,12 +739,33 @@ export default function DesignPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
+              <p className="text-gray-400">
+                © 2025 Danielle Salinetro. All rights reserved.
+              </p>
             </div>
             <div className="flex items-center gap-6">
-              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">Email</a>
-              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Medium</a>
-              <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+              <a
+                href="mailto:dsalinetro@pm.me"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Email
+              </a>
+              <a
+                href={LINKS.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Medium
+              </a>
+              <a
+                href={LINKS.siteHome}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Portfolio
+              </a>
             </div>
           </div>
         </div>
