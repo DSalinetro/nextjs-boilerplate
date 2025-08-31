@@ -1,27 +1,22 @@
-// app/api/resume/login/route.ts
 import { NextResponse } from 'next/server';
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs'; // ensure env vars are available
 
 export async function POST(req: Request) {
-  // Accept JSON or form posts (with a safe fallback)
+  // Accept JSON or form posts
   let provided = '';
   const ct = req.headers.get('content-type') || '';
-
   if (ct.includes('application/json')) {
     const body = await req.json().catch(() => ({} as any));
-    provided = String(body?.password ?? '');
+    provided = String(body.password ?? '');
   } else if (ct.includes('application/x-www-form-urlencoded')) {
     const form = await req.formData();
     provided = String(form.get('password') ?? '');
   } else {
     try {
       const raw = await req.text();
-      provided = String((JSON.parse(raw) as any)?.password ?? '');
-    } catch {
-      provided = '';
-    }
+      provided = String(JSON.parse(raw).password ?? '');
+    } catch {}
   }
 
   const expected = (process.env.RESUME_PASSWORD || '').trim();
@@ -33,20 +28,19 @@ export async function POST(req: Request) {
   }
 
   if (provided.trim() !== expected) {
-    return NextResponse.json(
-      { ok: false, message: 'Invalid password' },
-      { status: 401 }
-    );
+    return NextResponse.json({ ok: false, message: 'Invalid password' }, { status: 401 });
   }
 
-  // Set cookie read by middleware
+  // ✅ Set cookie for the whole site so middleware will see it on /resume
   const res = NextResponse.json({ ok: true });
-  res.cookies.set('resume', 'true', {
-    path: '/',
+  res.cookies.set({
+    name: 'resumeAuthed',
+    value: 'true',
     httpOnly: true,
-    sameSite: 'lax',
     secure: true,
-    maxAge: 60 * 60 * 8, // 8 hours
+    sameSite: 'lax',
+    path: '/',              // <-- important change
+    maxAge: 60 * 60 * 8,    // 8h
   });
   return res;
 }
