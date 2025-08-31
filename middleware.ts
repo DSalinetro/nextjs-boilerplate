@@ -9,7 +9,7 @@ export function middleware(req: NextRequest) {
     if (pathname.startsWith('/resume/login') || pathname.startsWith('/resume/download')) {
       return NextResponse.next();
     }
-    const authed = req.cookies.get('resume')?.value === 'true';
+    const authed = req.cookies.get('resumeAuthed')?.value === 'true';
     if (!authed) {
       const url = req.nextUrl.clone();
       url.pathname = '/resume/login';
