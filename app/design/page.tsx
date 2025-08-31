@@ -1,3 +1,105 @@
+// lib/links.ts
+// Centralized links (prefer relative imports in app files)
+export const LINKS = {
+  medium: 'https://medium.com/@dsalinetro',
+  linktree: 'https://linktr.ee/daniellesalinetro',
+  siteHome: 'https://daniellesalinetro.design',
+
+  // 👇 The "Portfolio" heading on /design should use this
+  brandingCollection: '/enhance-branding-portfolio',
+
+  // Figma site root (per memory)
+  heartsMindsPortfolio: 'https://daniellesalinetrodesign2.figma.site/',
+
+  // Complete collection (GH Pages)
+  portfolioCollection: 'https://dsalinetro.github.io/danielle-portfolio/',
+
+  // Canonical Empathy Audit page
+  empathyAudit: 'https://daniellesalinetro.design/empathy-audit',
+  empathyAuditMedium:
+    'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+
+  // 🔗 TODO: Replace with the exact public URL of your "Enhance Branding Portfolio" on Figma Site
+  enhanceBrandingSite: '#',
+} as const;
+
+// -------------------------------------------------------------------
+// app/enhance-branding-portfolio/page.tsx
+
+'use client';
+
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ChevronLeft, ExternalLink } from 'lucide-react';
+import { LINKS } from '../../lib/links';
+
+export const metadata: Metadata = {
+  title: 'Enhance Branding Portfolio | Danielle Salinetro',
+  description: 'A focused hub for Danielle’s Enhance Branding Portfolio.',
+};
+
+export default function EnhanceBrandingPortfolioPage() {
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
+      {/* Top bar with Back home link only */}
+      <div className="mb-6">
+        <Link
+          href="/design"
+          className="inline-flex items-center gap-1 text-[#D49670] hover:underline"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back home
+        </Link>
+      </div>
+
+      {/* Header */}
+      <header className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Enhance Branding Portfolio</h1>
+        <p className="mt-2 max-w-2xl text-sm sm:text-base text-neutral-600">
+          A curated showcase of branding explorations and outcomes. Clean, simple, and focused—just one clear call-to-action below.
+        </p>
+      </header>
+
+      {/* Hero card */}
+      <section className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm overflow-hidden">
+        <div className="relative aspect-[16/9] w-full bg-neutral-50">
+          <Image
+            src="/images/enhance-branding-card.png"
+            alt="Enhance Branding Portfolio cover image"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        <div className="p-5 sm:p-6">
+          <p className="text-sm sm:text-base text-neutral-700">
+            Explore visual identities, systems, and artifacts developed with a human-centered lens.
+          </p>
+
+          {/* Single CTA only */}
+          <div className="mt-4">
+            <Link
+              href={LINKS.enhanceBrandingSite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl border border-transparent bg-[#D49670] px-4 py-2 text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
+            >
+              Open Enhance Branding Portfolio
+              <ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+
+// -------------------------------------------------------------------
+// app/design/page.tsx (updated)
+
 'use client';
 
 import Link from 'next/link';
@@ -60,23 +162,23 @@ export default function DesignPage() {
       category: 'Conceptual Art',
       link: LINKS.medium, // external (Medium)
     },
-   {
-  id: 3,
-  title: 'Hearts & Minds — Empathy Concept',
-  description:
-    'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
-  image: '/images/hearts-minds/hero.jpg',
-  category: 'UX Concept',
-  link: LINKS.heartsMindsPortfolio, // ← uses your new Figma site
-},
+    {
+      id: 3,
+      title: 'Hearts & Minds — Empathy Concept',
+      description:
+        'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
+      image: '/images/hearts-minds/hero.jpg',
+      category: 'UX Concept',
+      link: LINKS.heartsMindsPortfolio, // ← uses your Figma site
+    },
     {
       id: 6,
       title: 'Enhance Branding Portfolio',
       description:
         'Selected identities across music, science, sustainability, hospitality, and tech.',
-      image: '/images/enhance-branding-card.png', // your new file
+      image: '/images/enhance-branding-card.png', // working image
       category: 'Brand Design',
-      link: LINKS.brandingCollection,
+      link: LINKS.brandingCollection, // internal hub: /enhance-branding-portfolio
     },
     {
       id: 7,
@@ -184,7 +286,8 @@ export default function DesignPage() {
               <a aria-label="LinkedIn" href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a aria-label="Portfolio home" href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+              {/* per preference: default external icon opens Linktree */}
+              <a aria-label="Linktree" href={LINKS.linktree} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
                 <ExternalLink size={20} />
               </a>
             </div>
