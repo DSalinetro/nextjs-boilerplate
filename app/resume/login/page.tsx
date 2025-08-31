@@ -1,66 +1,105 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { Lock, ChevronLeft } from 'lucide-react';
 
 export default function ResumeLoginPage() {
-  const params = useSearchParams();
-  const hasError = params.get('error') === '1';
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams.get('next') || '/resume';
 
-  return (
-    <main className="min-h-screen grid place-items-center bg-black">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg">
-        <h1 className="text-xl font-semibold">Enter resume password</h1>
-        <p className="mt-1 text-sm text-neutral-600">
-          This area is private for employers with access.
-        </p>
+  const [password, setPassword] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-        {hasError && (
-          <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
-            Incorrect password. Please try again.
-          </div>
-        )}
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
 
-        <form action={authenticate} className="mt-5 space-y-4">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-[#D49670]"
-          />
-          <button
-            type="submit"
-            className="w-full rounded-xl bg-[#D49670] px-4 py-2 font-semibold text-white transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
-          >
-            Unlock Resume
-          </button>
-        </form>
-      </div>
-    </main>
-  );
-}
+    try {
+      const res = await fetch('/api/auth/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
 
-// ----- server action -----
-async function authenticate(formData: FormData) {
-  'use server';
-
-  const { cookies } = await import('next/headers');
-  const { redirect } = await import('next/navigation');
-
-  const submitted = (formData.get('password') || '').toString();
-  const expected = process.env.RESUME_PASSWORD || '';
-
-  if (expected && submitted === expected) {
-    // set a short-lived, httpOnly cookie that middleware will check
-    cookies().set('resume_auth', '1', {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    });
-    redirect('/resume');
+      if (res.ok) {
+        router.replace(next);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data?.error || 'Invalid password. Please try again.');
+        setSubmitting(false);
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+      setSubmitting(false);
+    }
   }
 
-  redirect('/resume/login?error=1');
+  return (
+    <main className="mx-auto max-w-md px-6 py-16">
+      {/* Back link */}
+      <div className="mb-8">
+        <Link
+          href="/design"
+          className="inline-flex items-center gap-1 text-[#D49670] hover:underline"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back
+        </Link>
+      </div>
+
+      <section className="rounded-2xl border border-neutral-200/70 bg-white shadow-sm overflow-hidden">
+        <div className="p-6 sm:p-8">
+          <div className="mb-4 flex items-center gap-2">
+            <Lock className="h-5 w-5 text-[#D49670]" />
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">
+              Enter resume password
+            </h1>
+          </div>
+          <p className="text-sm sm:text-base text-neutral-600 mb-6">
+            This area is restricted. Authorized employers only.
+          </p>
+
+          <form onSubmit={onSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-neutral-700 mb-1"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                required
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-xl border border-neutral-300 px-4 py-2.5 outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
+                placeholder="Enter password"
+              />
+            </div>
+
+            {error && (
+              <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-[#D49670] px-4 py-2.5 font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D49670]/40"
+            >
+              {submitting ? 'Checking…' : 'Unlock Resume'}
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+  );
 }
