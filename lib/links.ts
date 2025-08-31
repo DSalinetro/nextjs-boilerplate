@@ -1,16 +1,21 @@
-// lib/links.ts
+// Centralized links for the site
 export const LINKS = {
   medium: 'https://medium.com/@dsalinetro',
   linktree: 'https://linktr.ee/daniellesalinetro',
   siteHome: 'https://daniellesalinetro.design',
 
-  // internal route used by the card and heading on /design
+  // internal route to the hub page
   brandingCollection: '/enhance-branding-portfolio',
 
-  // external
+  // other external collections (optional)
   heartsMindsPortfolio: 'https://daniellesalinetrodesign2.figma.site/',
-  empathyAudit: 'https://daniellesalinetro.design/empathy-audit',
+  portfolioCollection: 'https://dsalinetro.github.io/danielle-portfolio/',
 
-  // TODO: replace with your public Figma page for this collection
-  enhanceBrandingSite: '#',
+  // Empathy Audit
+  empathyAudit: 'https://daniellesalinetro.design/empathy-audit',
+  empathyAuditMedium:
+    'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+
+  // ✅ used by both "Open in Figma" and the CTA button
+  enhanceBrandingSite: 'https://daniellesalinetrodesign.figma.site/',
 } as const;
