@@ -13,29 +13,19 @@ export const metadata: Metadata = {
 export default function EnhanceBrandingPortfolioPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
-      {/* top bar */}
-      <div className="mb-8 grid grid-cols-3 items-center">
+      {/* top bar (no "Open in Figma" link) */}
+      <div className="relative mb-8 flex items-center justify-center">
         <Link
           href="/design"
-          className="inline-flex items-center gap-1 text-[#D49670] hover:underline"
+          className="absolute left-0 inline-flex items-center gap-1 text-[#D49670] hover:underline"
         >
           <ChevronLeft className="h-4 w-4" />
           Back home
         </Link>
 
-        {/* your name in coral */}
-        <span className="justify-self-center text-sm font-semibold tracking-wide text-[#D49670]">
+        <span className="text-sm font-semibold tracking-wide text-[#D49670]">
           Danielle Salinetro
         </span>
-
-        <a
-          href={LINKS.enhanceBrandingSite}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="justify-self-end inline-flex items-center gap-1 text-[#D49670] hover:underline"
-        >
-          Open in Figma <ExternalLink className="h-4 w-4" />
-        </a>
       </div>
 
       {/* header */}
