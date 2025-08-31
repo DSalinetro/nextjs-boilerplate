@@ -1,12 +1,14 @@
 'use client';
 
 import { Suspense, useState, FormEvent } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 function LoginInner() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get('next') || '/resume';
+
+  // Only allow internal paths for safety; default to /resume
+  const rawNext = searchParams.get('next') || '/resume';
+  const next = rawNext.startsWith('/') ? rawNext : '/resume';
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +24,9 @@ function LoginInner() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
+        // be explicit so the browser accepts Set-Cookie
+        credentials: 'same-origin',
+        cache: 'no-store',
       });
 
       if (!res.ok) {
@@ -29,11 +34,10 @@ function LoginInner() {
         throw new Error(data?.message || 'Invalid password');
       }
 
-      // Success → go to the originally requested page (or /resume)
-     router.replace(next); // avoids the back button returning to the login page
+      // Force a full navigation so middleware runs with the new cookie
+      window.location.assign(next);
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
-    } finally {
       setLoading(false);
     }
   }
@@ -76,7 +80,6 @@ function LoginInner() {
             {loading ? 'Checking…' : 'Unlock Resume'}
           </button>
 
-          {/* Small note showing where you’ll land after login */}
           <p className="text-xs text-neutral-500 text-center">
             You’ll be redirected to <span className="font-medium">{next}</span> after login.
           </p>
@@ -87,7 +90,6 @@ function LoginInner() {
 }
 
 export default function LoginPage() {
-  // Wrap hook-using content in Suspense to satisfy Next's CSR bailout rule.
   return (
     <Suspense fallback={<main className="p-6">Loading…</main>}>
       <LoginInner />
