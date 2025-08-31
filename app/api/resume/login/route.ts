@@ -1,74 +1,50 @@
-// app/api/resume/login/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs'; // ensure env vars are available
 
-function isInternalPath(p: string) {
-  return p.startsWith('/') && !p.startsWith('//');
-}
-
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const url = new URL(req.url);
-  const next = isInternalPath(url.searchParams.get('next') || '')
-    ? (url.searchParams.get('next') as string)
-    : '/resume';
+  const next = url.searchParams.get('next') || '/resume';
 
+  // Read password from JSON or form posts
   const ct = req.headers.get('content-type') || '';
-  const isForm = ct.includes('application/x-www-form-urlencoded');
-  const isJson = ct.includes('application/json');
-
-  // Read password from JSON or form
   let provided = '';
-  if (isJson) {
-    const body = await req.json().catch(() => ({} as any));
-    provided = (body.password ?? '').toString();
-  } else if (isForm) {
+
+  if (ct.includes('application/x-www-form-urlencoded')) {
     const form = await req.formData();
     provided = (form.get('password') ?? '').toString();
+  } else if (ct.includes('application/json')) {
+    const body = await req.json().catch(() => ({} as any));
+    provided = (body.password ?? '').toString();
   } else {
+    const raw = await req.text().catch(() => '');
     try {
-      const raw = await req.text();
-      provided = (JSON.parse(raw).password ?? '').toString();
-    } catch {}
+      const data = JSON.parse(raw || '{}');
+      provided = (data.password ?? '').toString();
+    } catch {
+      // ignore
+    }
   }
 
   const expected = (process.env.RESUME_PASSWORD || '').trim();
-  if (!expected) {
-    return NextResponse.json(
-      { ok: false, error: 'Server password not configured' },
-      { status: 500 }
+
+  // If no server password or wrong password → send back to login with error flag
+  if (!expected || provided.trim() !== expected) {
+    const back = new URL(
+      `/resume/login?error=1&next=${encodeURIComponent(next)}`,
+      url.origin
     );
+    return NextResponse.redirect(back, { status: 303 });
   }
 
-  if (provided.trim() !== expected) {
-    // For form posts, bounce back to the login page with an error flag.
-    if (isForm) {
-      const back = new URL('/resume/login', url.origin);
-      back.searchParams.set('error', '1');
-      return NextResponse.redirect(back, { status: 303 });
-    }
-    return NextResponse.json({ ok: false, error: 'Invalid password' }, { status: 401 });
-  }
-
-  // Success: set the auth cookie
-  const cookieOptions = {
-    name: 'resumeAuthed',
-    value: 'true',
+  // Success → set auth cookie and redirect to the target page
+  const res = NextResponse.redirect(new URL(next, url), { status: 303 });
+  res.cookies.set('resumeAuthed', 'true', {
     httpOnly: true,
     secure: true,
-    sameSite: 'lax' as const,
-    path: '/',                 // <-- broader path to avoid scoping issues
-    maxAge: 60 * 60 * 8,       // 8 hours
-  };
-
-  if (isForm) {
-    const res = NextResponse.redirect(new URL(next, url.origin), { status: 303 });
-    res.cookies.set(cookieOptions);
-    return res;
-  }
-
-  // JSON/XHR callers still get JSON; client can navigate after.
-  const res = NextResponse.json({ ok: true, next });
-  res.cookies.set(cookieOptions);
+    sameSite: 'lax',
+    path: '/',            // readable on /resume and anywhere else
+    maxAge: 60 * 60 * 8,  // 8 hours
+  });
   return res;
 }
