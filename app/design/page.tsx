@@ -60,15 +60,15 @@ export default function DesignPage() {
       category: 'Conceptual Art',
       link: LINKS.medium, // external (Medium)
     },
-    {
-      id: 3,
-      title: 'Hearts & Minds — Empathy Concept',
-      description:
-        'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
-      image: '/images/hearts-minds/hero.jpg',
-      category: 'UX Concept',
-      link: LINKS.heartsMindsPortfolio, // opens the Figma site
-    },
+   {
+  id: 3,
+  title: 'Hearts & Minds — Empathy Concept',
+  description:
+    'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
+  image: '/images/hearts-minds/hero.jpg',
+  category: 'UX Concept',
+  link: LINKS.heartsMindsPortfolio, // ← uses your new Figma site
+},
     {
       id: 6,
       title: 'Enhance Branding Portfolio',
