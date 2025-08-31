@@ -30,8 +30,7 @@ function LoginInner() {
       }
 
       // Success → go to the originally requested page (or /resume)
-      router.push(next);
-      router.refresh();
+     router.replace(next); // avoids the back button returning to the login page
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
     } finally {
