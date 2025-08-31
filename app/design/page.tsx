@@ -363,15 +363,8 @@ export default function DesignPage() {
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
 
-            {/* FIXED CTA BLOCK */}
+            {/* FIXED CTA BLOCK — resume button removed */}
             <div className="flex items-center justify-center gap-4">
-              <Link
-                href="/resume"
-                className="inline-flex items-center rounded-xl border px-4 py-2 font-medium hover:bg-white/10"
-              >
-                View Resume
-              </Link>
-
               <Link
                 href={LINKS.brandingCollection}
                 className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
