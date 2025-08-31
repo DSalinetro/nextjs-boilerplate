@@ -1,14 +1,12 @@
 'use client';
 
 import { Suspense, useState, FormEvent } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function LoginInner() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-
-  // Only allow internal paths for safety; default to /resume
-  const rawNext = searchParams.get('next') || '/resume';
-  const next = rawNext.startsWith('/') ? rawNext : '/resume';
+  const next = searchParams.get('next') || '/resume';
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -23,10 +21,10 @@ function LoginInner() {
       const res = await fetch('/api/resume/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-        // be explicit so the browser accepts Set-Cookie
-        credentials: 'same-origin',
+        // Make sure the browser accepts Set-Cookie from the response
+        credentials: 'include',
         cache: 'no-store',
+        body: JSON.stringify({ password }),
       });
 
       if (!res.ok) {
@@ -34,8 +32,9 @@ function LoginInner() {
         throw new Error(data?.message || 'Invalid password');
       }
 
-      // Force a full navigation so middleware runs with the new cookie
-      window.location.assign(next);
+      // ✅ Force a full-page navigation so the new cookie is sent to /resume
+      const target = next.startsWith('/') ? next : '/resume';
+      window.location.assign(target);
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
       setLoading(false);
@@ -81,7 +80,7 @@ function LoginInner() {
           </button>
 
           <p className="text-xs text-neutral-500 text-center">
-            You’ll be redirected to <span className="font-medium">{next}</span> after login.
+            You’ll be redirected to <span className="font-medium">{next || '/resume'}</span> after login.
           </p>
         </form>
       </div>
