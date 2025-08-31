@@ -1,10 +1,9 @@
 'use client';
 
 import { Suspense, useState, FormEvent } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 function LoginInner() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/resume';
 
@@ -21,18 +20,17 @@ function LoginInner() {
       const res = await fetch('/api/resume/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Make sure the browser accepts Set-Cookie from the response
-        credentials: 'include',
+        credentials: 'include', // allow Set-Cookie
         cache: 'no-store',
         body: JSON.stringify({ password }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.message || 'Invalid password');
+      const data = await res.json().catch(() => ({} as any));
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || 'Invalid password');
       }
 
-      // ✅ Force a full-page navigation so the new cookie is sent to /resume
+      // Hard redirect so the cookie is sent on the next request
       const target = next.startsWith('/') ? next : '/resume';
       window.location.assign(target);
     } catch (err: any) {
