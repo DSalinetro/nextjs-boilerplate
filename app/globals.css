@@ -73,4 +73,3 @@ html[data-a11y-cvd="protanopia"] body { filter: grayscale(0.9) contrast(1.1); }
 html[data-a11y-cvd="deuteranopia"] body { filter: grayscale(0.85) contrast(1.08); }
 html[data-a11y-cvd="tritanopia"] body { filter: sepia(0.35) saturate(1.25) hue-rotate(180deg) brightness(0.95); }
 html[data-a11y-cvd="none"] body { filter: none; }
-
