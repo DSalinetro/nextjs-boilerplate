@@ -1,3 +1,4 @@
+// app/design/page.tsx
 'use client';
 
 import Link from 'next/link';
@@ -5,7 +6,7 @@ import Image from 'next/image';
 
 export default function DesignPage() {
   return (
-    <main className="min-h-screen px-6 py-12">
+    <main className="min-h-screen bg-white px-6 py-12">
       {/* Hero */}
       <header className="mx-auto mb-10 max-w-4xl text-center">
         <h1 className="text-4xl font-semibold tracking-tight">Portfolio</h1>
