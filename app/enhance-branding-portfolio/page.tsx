@@ -1,5 +1,4 @@
 // app/enhance-branding-portfolio/page.tsx
-import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,28 +10,19 @@ export const metadata: Metadata = {
   description: 'A focused hub for Danielle’s Enhance Branding Portfolio.',
 };
 
-export default function Page(): JSX.Element {
+export default function Page() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
       <div className="relative mb-8 flex items-center justify-center">
-        <Link
-          href="/design"
-          className="absolute left-0 inline-flex items-center gap-1 text-[#D49670] hover:underline"
-          aria-label="Back to portfolio home"
-        >
+        <Link href="/design" className="absolute left-0 inline-flex items-center gap-1 text-[#D49670] hover:underline" aria-label="Back to portfolio home">
           <ChevronLeft className="h-4 w-4" />
           Back home
         </Link>
-
-        <span className="text-sm font-semibold tracking-wide text-[#D49670]">
-          Danielle Salinetro
-        </span>
+        <span className="text-sm font-semibold tracking-wide text-[#D49670]">Danielle Salinetro</span>
       </div>
 
       <header className="mb-6 text-center sm:mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-          Enhance Branding Portfolio
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">Enhance Branding Portfolio</h1>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-neutral-600 sm:text-base">
           A collection of empathy-driven branding work hosted on Figma.
         </p>
@@ -54,7 +44,6 @@ export default function Page(): JSX.Element {
           <p className="text-sm text-neutral-700 sm:text-base">
             Explore visual identities, systems, and artifacts developed with a human-centered lens.
           </p>
-
           <div className="mt-4">
             <a
               href={LINKS.enhanceBrandingSite}
