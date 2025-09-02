@@ -1,4 +1,5 @@
 // app/enhance-branding-portfolio/page.tsx
+import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,10 +11,9 @@ export const metadata: Metadata = {
   description: 'A focused hub for Danielle’s Enhance Branding Portfolio.',
 };
 
-export default function Page() {
+export default function Page(): JSX.Element {
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
-      {/* Top bar */}
       <div className="relative mb-8 flex items-center justify-center">
         <Link
           href="/design"
@@ -29,7 +29,6 @@ export default function Page() {
         </span>
       </div>
 
-      {/* Header */}
       <header className="mb-6 text-center sm:mb-8">
         <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
           Enhance Branding Portfolio
@@ -39,11 +38,10 @@ export default function Page() {
         </p>
       </header>
 
-      {/* Hero card */}
       <section className="overflow-hidden rounded-2xl border border-neutral-200/70 bg-white shadow-sm">
         <div className="relative aspect-[16/9] w-full bg-neutral-50">
           <Image
-            src="/images/enhance-branding-card.png" // update to -v2.png if you exported a new image
+            src="/images/enhance-branding-card.png"
             alt="Enhance Branding Portfolio cover image"
             fill
             className="object-cover"
@@ -57,7 +55,6 @@ export default function Page() {
             Explore visual identities, systems, and artifacts developed with a human-centered lens.
           </p>
 
-          {/* Brand-colored CTA */}
           <div className="mt-4">
             <a
               href={LINKS.enhanceBrandingSite}
@@ -67,4 +64,11 @@ export default function Page() {
               aria-label="Open Enhance Branding Portfolio (opens in a new tab)"
             >
               Open Enhance Branding Portfolio
-              <Exter
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
