@@ -613,7 +613,7 @@ export default function DesignPage() {
                     href="tel:+16362525894"
                     className="hover:text-[#D49670] transition-colors"
                   >
-                    636.252.5894
+                 {/* <Phone className="h-4 w-4" /> 636.252.5894 */}
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
