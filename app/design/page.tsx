@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import {
   ChevronDown,
   Mail,
-  Phone,
   MapPin,
   ExternalLink,
   Linkedin,
@@ -511,7 +510,7 @@ export default function DesignPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Latest Insights</h2>
+            <h2 className="text-4xl md:text-5xl font-bold">Latest Insights</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
@@ -607,15 +606,9 @@ export default function DesignPage() {
                     dsalinetro@pm.me
                   </a>
                 </div>
-                <div className="flex items-center gap-4">
-  <Phone className="text-[#D49670]" size={20} />
-  <a
-    href="tel:+16362525894"
-    className="hover:text-[#D49670] transition-colors"
-  >
-    {/* <Phone className="h-4 w-4" /> 636.252.5894 */}
-  </a>
-</div>
+
+                {/* Removed phone icon & number */}
+
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#D49670]" size={20} />
                   <span>Kansas City, MO (Remote)</span>
