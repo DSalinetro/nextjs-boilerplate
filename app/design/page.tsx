@@ -608,14 +608,14 @@ export default function DesignPage() {
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Phone className="text-[#D49670]" size={20} />
-                  <a
-                    href="tel:+16362525894"
-                    className="hover:text-[#D49670] transition-colors"
-                  >
-                 {/* <Phone className="h-4 w-4" /> 636.252.5894 */}
-                  </a>
-                </div>
+  <Phone className="text-[#D49670]" size={20} />
+  <a
+    href="tel:+16362525894"
+    className="hover:text-[#D49670] transition-colors"
+  >
+    {/* <Phone className="h-4 w-4" /> 636.252.5894 */}
+  </a>
+</div>
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#D49670]" size={20} />
                   <span>Kansas City, MO (Remote)</span>
