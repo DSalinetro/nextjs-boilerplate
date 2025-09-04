@@ -50,7 +50,17 @@ export default function DesignPage() {
   }, []);
 
   // ---------- PORTFOLIO CARDS ----------
-  const portfolioItems = [
+  type PortfolioItem = {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    category: string;
+    link?: string;
+    imageClass?: string; // optional, per-tile image tuning
+  };
+
+  const portfolioItems: readonly PortfolioItem[] = [
     {
       id: 1,
       title: 'AdorablyInkedxo Brand Ecosystem',
@@ -59,6 +69,8 @@ export default function DesignPage() {
       image: '/images/adorably-inked-xo-brand-ecosystem.png',
       category: 'Brand Design',
       link: '/work/adorably-inkedxo',
+      // Flower PNG has transparent padding — keep contained (adjust scale if desired)
+      imageClass: 'object-contain',
     },
     {
       id: 2,
@@ -90,88 +102,78 @@ export default function DesignPage() {
     {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
-      description: 'Photography & art direction for a warm, emotive hero visual.',
+      description:
+        'Photography & art direction for a warm, emotive hero visual.',
       image: '/images/moody-library.png',
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
-    // NEW: Medium article as a portfolio tile (external image + link)
-    {
-      id: 8,
-      title: 'Invisible Barriers: Designing for Users Society Forgets',
-      description:
-        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
-      image: 'https://imgur.com/SPlMkgL.png',
-      category: 'Writing',
-      link:
-        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-    },
   ] as const;
 
   // ---------- BLOGS ----------
- // ---------- BLOGS ----------
-const blogPosts = [
-  {
-    title: 'Invisible Barriers: Designing for Users Society Forgets',
-    excerpt:
-      'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
-    readTime: '7 min read',
-    date: 'Aug 23, 2025',
-    link:
-      'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-    image: 'https://imgur.com/SPlMkgL.png',
-  },
-  {
-    title:
-      "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-    excerpt:
-      'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-    readTime: '10 min read',
-    date: 'Jan 8, 2025',
-    link:
-      'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-    image: '/images/empathy-rose.png',
-  },
-  {
-    title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-    excerpt:
-      'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-    readTime: '6 min read',
-    date: 'Dec 15, 2024',
-    link:
-      'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
-    image: '/images/designing-for-mental-health.png',
-  },
-  {
-    title: "Beyond 'Why Didn't They Just Leave?'",
-    excerpt:
-      'How design can change the conversation around complex human experiences.',
-    readTime: '8 min read',
-    date: 'Nov 20, 2024',
-    link:
-      'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
-    image: '/images/beyond-why-didnt-they-just-leave.webp',
-  },
-  {
-    title: 'Every Child Deserves a Fair Start',
-    excerpt: 'Turning awareness into action through empathy-driven design.',
-    readTime: '7 min read',
-    date: 'Oct 15, 2024',
-    link:
-      'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393',
-    image: '/images/every-child-deserves-a-fair-start.webp',
-  },
-  {
-    title: 'Designing with Empathy: My Creative Journey',
-    excerpt:
-      'A reflection on empathy in design and building authentic connections.',
-    readTime: '9 min read',
-    date: 'Sep 28, 2024',
-    link:
-      'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
-    image: '/images/designing-with-empathy-red-chair.jpg',
-  },
-] as const;
+  const blogPosts = [
+    {
+      title: 'Invisible Barriers: Designing for Users Society Forgets',
+      excerpt:
+        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
+      readTime: '7 min read',
+      date: 'Aug 23, 2025',
+      link:
+        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
+      image: 'https://imgur.com/SPlMkgL.png',
+    },
+    {
+      title:
+        "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+      excerpt:
+        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
+      readTime: '10 min read',
+      date: 'Jan 8, 2025',
+      link:
+        'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+      image: '/images/empathy-rose.png',
+    },
+    {
+      title:
+        'Designing for Mental Health: Toolkit for Compassionate Creativity',
+      excerpt:
+        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
+      readTime: '6 min read',
+      date: 'Dec 15, 2024',
+      link:
+        'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
+      image: '/images/designing-for-mental-health.png',
+    },
+    {
+      title: "Beyond 'Why Didn't They Just Leave?'",
+      excerpt:
+        'How design can change the conversation around complex human experiences.',
+      readTime: '8 min read',
+      date: 'Nov 20, 2024',
+      link:
+        'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
+      image: '/images/beyond-why-didnt-they-just-leave.webp',
+    },
+    {
+      title: 'Every Child Deserves a Fair Start',
+      excerpt: 'Turning awareness into action through empathy-driven design.',
+      readTime: '7 min read',
+      date: 'Oct 15, 2024',
+      link:
+        'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393',
+      image: '/images/every-child-deserves-a-fair-start.webp',
+    },
+    {
+      title: 'Designing with Empathy: My Creative Journey',
+      excerpt:
+        'A reflection on empathy in design and building authentic connections.',
+      readTime: '9 min read',
+      date: 'Sep 28, 2024',
+      link:
+        'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
+      image: '/images/designing-with-empathy-red-chair.jpg',
+    },
+  ] as const;
 
   return (
     <div className="min-h-screen">
@@ -399,13 +401,13 @@ const blogPosts = [
               const isExternal = !!item.link && /^https?:\/\//.test(item.link as string);
 
               const CardEl = (
-                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Card className="h-full flex flex-col overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-50 rounded-xl">
                     {String(item.image).startsWith('http') ? (
                       <img
                         src={item.image as string}
                         alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${item.imageClass ?? 'object-cover'}`}
                         loading="lazy"
                       />
                     ) : (
@@ -413,14 +415,14 @@ const blogPosts = [
                         src={item.image as string}
                         alt={item.title}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className={`transition-transform duration-300 group-hover:scale-105 ${item.imageClass ?? 'object-cover'}`}
                         sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                         priority={false}
                       />
                     )}
                   </div>
 
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
                       {item.link && (
@@ -430,11 +432,11 @@ const blogPosts = [
                         />
                       )}
                     </div>
-                    {/* Min-heights keep cards uniform */}
+                    {/* Uniform heights */}
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors min-h-[2.75rem]">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 min-h-[3.5rem]">
+                    <p className="text-gray-600 min-h-[3.5rem] [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] overflow-hidden">
                       {item.description}
                     </p>
                   </CardContent>
@@ -449,7 +451,7 @@ const blogPosts = [
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   whileHover={{ y: -10 }}
-                  className="group"
+                  className="group h-full"
                 >
                   {item.link ? (
                     isExternal ? (
@@ -574,27 +576,30 @@ const blogPosts = [
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group cursor-pointer"
+                className="group cursor-pointer h-full"
                 onClick={() => window.open(post.link, '_blank')}
               >
-                <Card className="h-full border-0 shadow-md hover:shadow-lg transition-all duration-300">
+                <Card className="h-full flex flex-col border-0 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="aspect-[16/10] overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
                     />
                   </div>
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
                       <span>{post.date}</span>
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors">
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#D49670] transition-colors min-h-[3.25rem] [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
                       {post.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
+                    <p className="text-gray-600 leading-relaxed [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] overflow-hidden">
+                      {post.excerpt}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.article>
