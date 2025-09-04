@@ -1,6 +1,7 @@
 // app/design/page.tsx
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -98,6 +99,17 @@ export default function DesignPage() {
 
   // ---------- BLOGS ----------
   const blogPosts = [
+    // NEW: Invisible Barriers post
+    {
+      title: 'Invisible Barriers: Designing for Users Society Forgets',
+      excerpt:
+        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
+      readTime: '7 min read',
+      date: 'Aug 23, 2025',
+      link:
+        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
+      image: '/images/invisible-barriers-cover.jpg', // replace if your file uses a different name
+    },
     {
       title:
         "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -378,11 +390,14 @@ export default function DesignPage() {
 
               const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-4">
-                    <img
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-50 rounded-xl">
+                    <Image
                       src={item.image}
                       alt={item.title}
-                      className="transition-transform duration-300 group-hover:scale-105 w-full h-full object-cover"
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                      priority={false}
                     />
                   </div>
                   <CardContent className="p-6">
@@ -395,10 +410,13 @@ export default function DesignPage() {
                         />
                       )}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors">
+                    {/* Min-heights added to keep cards uniform */}
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors min-h-[2.75rem]">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600">{item.description}</p>
+                    <p className="text-gray-600 min-h-[3.5rem]">
+                      {item.description}
+                    </p>
                   </CardContent>
                 </Card>
               );
