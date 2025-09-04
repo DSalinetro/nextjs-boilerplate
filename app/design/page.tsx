@@ -95,72 +95,83 @@ export default function DesignPage() {
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
+    // NEW: Medium article as a portfolio tile (external image + link)
+    {
+      id: 8,
+      title: 'Invisible Barriers: Designing for Users Society Forgets',
+      description:
+        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
+      image: 'https://imgur.com/SPlMkgL.png',
+      category: 'Writing',
+      link:
+        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
+    },
   ] as const;
 
   // ---------- BLOGS ----------
-  const blogPosts = [
-    // NEW: Invisible Barriers post
-    {
-      title: 'Invisible Barriers: Designing for Users Society Forgets',
-      excerpt:
-        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
-      readTime: '7 min read',
-      date: 'Aug 23, 2025',
-      link:
-        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-      image: '/images/invisible-barriers-cover.jpg', // replace if your file uses a different name
-    },
-    {
-      title:
-        "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-      excerpt:
-        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-      readTime: '10 min read',
-      date: 'Jan 8, 2025',
-      link:
-        'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-      image: '/images/empathy-rose.png',
-    },
-    {
-      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-      excerpt:
-        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-      readTime: '6 min read',
-      date: 'Dec 15, 2024',
-      link:
-        'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
-      image: '/images/designing-for-mental-health.png',
-    },
-    {
-      title: "Beyond 'Why Didn't They Just Leave?'",
-      excerpt:
-        'How design can change the conversation around complex human experiences.',
-      readTime: '8 min read',
-      date: 'Nov 20, 2024',
-      link:
-        'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
-      image: '/images/beyond-why-didnt-they-just-leave.webp',
-    },
-    {
-      title: 'Every Child Deserves a Fair Start',
-      excerpt: 'Turning awareness into action through empathy-driven design.',
-      readTime: '7 min read',
-      date: 'Oct 15, 2024',
-      link:
-        'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393',
-      image: '/images/every-child-deserves-a-fair-start.webp',
-    },
-    {
-      title: 'Designing with Empathy: My Creative Journey',
-      excerpt:
-        'A reflection on empathy in design and building authentic connections.',
-      readTime: '9 min read',
-      date: 'Sep 28, 2024',
-      link:
-        'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
-      image: '/images/designing-with-empathy-red-chair.jpg',
-    },
-  ] as const;
+ // ---------- BLOGS ----------
+const blogPosts = [
+  {
+    title: 'Invisible Barriers: Designing for Users Society Forgets',
+    excerpt:
+      'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
+    readTime: '7 min read',
+    date: 'Aug 23, 2025',
+    link:
+      'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
+    image: 'https://imgur.com/SPlMkgL.png',
+  },
+  {
+    title:
+      "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+    excerpt:
+      'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
+    readTime: '10 min read',
+    date: 'Jan 8, 2025',
+    link:
+      'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
+    image: '/images/empathy-rose.png',
+  },
+  {
+    title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
+    excerpt:
+      'Strategies for moving beyond surface-level design thinking to support mental wellness.',
+    readTime: '6 min read',
+    date: 'Dec 15, 2024',
+    link:
+      'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
+    image: '/images/designing-for-mental-health.png',
+  },
+  {
+    title: "Beyond 'Why Didn't They Just Leave?'",
+    excerpt:
+      'How design can change the conversation around complex human experiences.',
+    readTime: '8 min read',
+    date: 'Nov 20, 2024',
+    link:
+      'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
+    image: '/images/beyond-why-didnt-they-just-leave.webp',
+  },
+  {
+    title: 'Every Child Deserves a Fair Start',
+    excerpt: 'Turning awareness into action through empathy-driven design.',
+    readTime: '7 min read',
+    date: 'Oct 15, 2024',
+    link:
+      'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393',
+    image: '/images/every-child-deserves-a-fair-start.webp',
+  },
+  {
+    title: 'Designing with Empathy: My Creative Journey',
+    excerpt:
+      'A reflection on empathy in design and building authentic connections.',
+    readTime: '9 min read',
+    date: 'Sep 28, 2024',
+    link:
+      'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
+    image: '/images/designing-with-empathy-red-chair.jpg',
+  },
+] as const;
 
   return (
     <div className="min-h-screen">
@@ -385,21 +396,30 @@ export default function DesignPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => {
-              const isExternal =
-                !!item.link && /^https?:\/\//.test(item.link as string);
+              const isExternal = !!item.link && /^https?:\/\//.test(item.link as string);
 
               const CardEl = (
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-50 rounded-xl">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-                      priority={false}
-                    />
+                    {String(item.image).startsWith('http') ? (
+                      <img
+                        src={item.image as string}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <Image
+                        src={item.image as string}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                        priority={false}
+                      />
+                    )}
                   </div>
+
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
@@ -410,7 +430,7 @@ export default function DesignPage() {
                         />
                       )}
                     </div>
-                    {/* Min-heights added to keep cards uniform */}
+                    {/* Min-heights keep cards uniform */}
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors min-h-[2.75rem]">
                       {item.title}
                     </h3>
@@ -438,15 +458,12 @@ export default function DesignPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block"
+                        aria-label={item.title}
                       >
                         {CardEl}
                       </a>
                     ) : (
-                      <Link
-                        href={item.link as string}
-                        className="block"
-                        aria-label={item.title}
-                      >
+                      <Link href={item.link as string} className="block" aria-label={item.title}>
                         {CardEl}
                       </Link>
                     )
@@ -501,11 +518,7 @@ export default function DesignPage() {
               </div>
             </div>
 
-            <motion.div
-              className="relative"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/images/portrait.png"
