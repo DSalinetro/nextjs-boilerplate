@@ -234,119 +234,122 @@ export default function DesignPage() {
         </div>
       </motion.nav>
 
-      {/* HERO */}
-      <section
-        id="home"
-        ref={heroSectionRef}
-        className="relative isolate block w-full min-h-screen overflow-hidden"
-        aria-label="Empathy by Design hero"
+    {/* HERO */}
+<section
+  id="home"
+  ref={heroSectionRef}
+  className="relative isolate block w-full min-h-screen overflow-hidden"
+  aria-label="Empathy by Design hero"
+>
+  {/* Background image that moves */}
+  <motion.div style={{ y: heroY }} className="absolute inset-0 will-change-transform pointer-events-none z-0">
+    <Image
+      src="/images/field-of-flowers.png"
+      alt="Field of wildflowers in warm light"
+      fill
+      className="object-cover select-none"
+      priority
+    />
+  </motion.div>
+
+  {/* Overlay tint/gradient */}
+  <motion.div
+    className="absolute inset-0 z-10"
+    style={{
+      background:
+        'radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent), linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)',
+    }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1.2 }}
+  />
+
+  {/* bottom fade into page bg */}
+  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 z-20 bg-gradient-to-b from-transparent to-slate-50" />
+
+  {/* Foreground content */}
+  <div className="grid place-items-center min-h-screen px-6 py-12 md:py-16 relative z-20">
+    <motion.div
+      className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
+      style={{
+        background: 'rgba(0,0,0,0.35)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,.15)',
+        boxShadow: '0 20px 60px rgba(0,0,0,.4)',
+      }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+    >
+      <motion.h1
+        className="mb-2 text-white font-extrabold tracking-wide leading-tight [text-wrap:balance]"
+        style={{ fontSize: 'clamp(36px, 6vw, 64px)', textShadow: '0 6px 20px rgba(0,0,0,.6)' }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
       >
-        {/* Background image that moves */}
-        <motion.div style={{ y: heroY }} className="absolute inset-0 will-change-transform pointer-events-none z-0">
-          <Image
-            src="/images/field-of-flowers.png"
-            alt="Field of wildflowers in warm light"
-            fill
-            className="object-cover select-none"
-            priority
-          />
-        </motion.div>
+        Empathy by Design
+      </motion.h1>
 
-        {/* Overlay tint/gradient */}
-        <motion.div
-          className="absolute inset-0 z-10"
-          style={{
-            background:
-              'radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent), linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)',
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
-        />
+      <motion.p
+        className="mx-auto mb-5 max-w-3xl leading-relaxed"
+        style={{ color: '#f6f2ef', fontSize: 'clamp(16px, 2.2vw, 20px)', textShadow: '0 2px 8px rgba(0,0,0,.4)' }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+      >
+        Creative Designer & Researcher · Empathy-Driven Branding &{' '}
+        <span className="whitespace-nowrap">UX Research</span>
+      </motion.p>
 
-        {/* Foreground content */}
-        <div className="grid place-items-center min-h-screen px-6 py-12 md:py-16 relative z-20">
-          <motion.div
-            className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
-            style={{
-              background: 'rgba(0,0,0,0.35)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,.15)',
-              boxShadow: '0 20px 60px rgba(0,0,0,.4)',
-            }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <motion.h1
-              className="mb-2 text-white font-extrabold tracking-wide leading-tight [text-wrap:balance]"
-              style={{ fontSize: 'clamp(36px, 6vw, 64px)', textShadow: '0 6px 20px rgba(0,0,0,.6)' }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              Empathy by Design
-            </motion.h1>
-
-            <motion.p
-              className="mx-auto mb-5 max-w-3xl leading-relaxed"
-              style={{ color: '#f6f2ef', fontSize: 'clamp(16px, 2.2vw, 20px)', textShadow: '0 2px 8px rgba(0,0,0,.4)' }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              Creative Designer & Researcher · Empathy-Driven Branding &{' '}
-              <span className="whitespace-nowrap">UX Research</span>
-            </motion.p>
-
-            <motion.div
-              className="flex gap-3 justify-center flex-wrap mt-2"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-            >
-              <button
-                onClick={() => scrollToSection('portfolio')}
-                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
-                style={{
-                  background: 'linear-gradient(135deg, #D49670, #c47f64)',
-                  boxShadow: '0 6px 20px rgba(212,150,112,.4)',
-                  backdropFilter: 'saturate(120%)',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,112,.5)')}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,112,.4)')}
-              >
-                View My Work
-              </button>
-
-              <Link
-                href="/resume"
-                className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
-                style={{ background: 'rgba(255,255,255,.12)', backdropFilter: 'saturate(120%)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
-              >
-                View Resume
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Clickable scroll hint */}
+      <motion.div
+        className="flex gap-3 justify-center flex-wrap mt-2"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.9 }}
+      >
         <button
           onClick={() => scrollToSection('portfolio')}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 rounded-full outline-none focus:ring-2 focus:ring-white/50"
-          aria-label="Scroll to portfolio"
+          className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5"
+          style={{
+            background: 'linear-gradient(135deg, #D49670, #c47f64)',
+            boxShadow: '0 6px 20px rgba(212,150,112,.4)',
+            backdropFilter: 'saturate(120%)',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,112,.5)')}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,112,.4)')}
         >
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-            <ChevronDown className="text-white/80" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
-          </motion.div>
+          View My Work
         </button>
-      </section>
+
+        <Link
+          href="/resume"
+          className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
+          style={{ background: 'rgba(255,255,255,.12)', backdropFilter: 'saturate(120%)' }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
+        >
+          View Resume
+        </Link>
+      </motion.div>
+    </motion.div>
+  </div>
+
+  {/* Clickable scroll hint */}
+  <button
+    onClick={() => scrollToSection('portfolio')}
+    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 rounded-full outline-none focus:ring-2 focus:ring-white/50"
+    aria-label="Scroll to portfolio"
+  >
+    <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+      <ChevronDown className="text-white/80" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
+    </motion.div>
+  </button>
+</section>
 
       {/* PORTFOLIO GRID */}
-      <section id="portfolio" className="-mt-16 pt-4 pb-16 bg-gradient-to-br from-slate-50 to-white">
+      <section id="portfolio" className="scroll-mt-24 pt-8 pb-16 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             className="text-center mb-10"
