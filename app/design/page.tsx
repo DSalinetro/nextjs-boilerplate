@@ -176,40 +176,85 @@ export default function DesignPage() {
   return (
     <div className="min-h-screen">
       {/* NAV */}
-      {/* ... nav + hero unchanged ... */}
+      {/* nav remains unchanged */}
+
+      {/* HERO */}
+      <section
+        id="home"
+        className="relative isolate block w-full min-h-screen bg-cover bg-center"
+        style={{ backgroundImage: `url(/images/field-of-flowers.png)` }}
+        aria-label="Empathy by Design hero"
+      >
+        {/* ...background gradients unchanged... */}
+
+        <div className="grid place-items-center min-h-screen px-6 py-24 relative z-10">
+          <motion.div
+            className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
+            style={{
+              background: 'rgba(0,0,0,0.35)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,.15)',
+              boxShadow: '0 20px 60px rgba(0,0,0,.4)',
+            }}
+          >
+            <motion.h1
+              className="mb-2 text-white font-extrabold tracking-wide leading-tight [text-wrap:balance]"
+              style={{
+                fontSize: 'clamp(36px, 6vw, 64px)',
+                textShadow: '0 6px 20px rgba(0,0,0,.6)',
+              }}
+            >
+              Empathy by Design
+            </motion.h1>
+
+            <motion.p
+              className="mx-auto mb-5 max-w-3xl leading-relaxed"
+              style={{
+                color: '#f6f2ef',
+                fontSize: 'clamp(16px, 2.2vw, 20px)',
+                textShadow: '0 2px 8px rgba(0,0,0,.4)',
+              }}
+            >
+              Creative Designer & Researcher · Empathy-Driven Branding & UX
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
 
       {/* BLOGS */}
       <section id="blogs" className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold">Latest Insights</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Thought leadership on empathy-driven design and creating meaningful connections
             </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <a
-                href={LINKS.medium}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
-              >
-                Read all posts on Medium <ExternalLink size={16} />
-              </a>
-              {/* Removed broken "View Empathy Audit" link */}
-            </div>
+            <a
+              href={LINKS.medium}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
+            >
+              Read all posts on Medium <ExternalLink size={16} />
+            </a>
           </motion.div>
 
           {/* blog cards unchanged */}
         </div>
       </section>
 
-      {/* CONTACT + FOOTER unchanged */}
+      {/* CONTACT + FOOTER */}
+      <footer className="bg-black text-white py-8">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white">Email</a>
+            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">Medium</a>
+            <a href="https://linkedin.com/in/danielle-salinetro" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">LinkedIn</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
