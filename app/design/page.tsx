@@ -303,7 +303,7 @@ export default function DesignPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Creative Designer & Researcher · Empathy-Driven Branding & UX
+              Creative Designer & Researcher · Empathy-Driven Branding & UX&nbsp;Research
             </motion.p>
 
             <motion.div
