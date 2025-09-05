@@ -289,7 +289,7 @@ export default function DesignPage() {
         />
 
         {/* Foreground content */}
-        <div className="grid place-items-center min-h-screen px-6 py-24 relative z-20">
+        <div className="grid place-items-center min-h-screen px-6 py-12 md:py-16 relative z-20">
           <motion.div
             className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
             style={{
@@ -392,7 +392,10 @@ export default function DesignPage() {
       {/* PORTFOLIO GRID */}
       <section
         id="portfolio"
-        className="-mt-6 pt-12 pb-20 bg-gradient-to-br from-slate-50 to-white"
+        <section
+  id="portfolio"
+  className="-mt-10 pt-8 pb-16 bg-gradient-to-br from-slate-50 to-white"
+>
       >
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
