@@ -91,7 +91,7 @@ export default function DesignPage() {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
       description: 'Photography & art direction for a warm, emotive hero visual.',
-       image: '/images/books-of-dreams.png',
+      image: '/images/books-of-dreams.png',
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
@@ -107,7 +107,7 @@ export default function DesignPage() {
       date: 'Aug 23, 2025',
       link:
         'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-      image: 'https://imgur.com/SPlMkgL.png', // external, so use <img>
+      image: 'https://imgur.com/SPlMkgL.png', // external → will use <img>
     },
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -346,16 +346,16 @@ export default function DesignPage() {
       </section>
 
       {/* PORTFOLIO GRID */}
-      <section id="portfolio" className="-mt-10 pt-8 pb-16 bg-gradient-to-br from-slate-50 to-white">
+      <section id="portfolio" className="-mt-16 pt-4 pb-16 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-10"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent leading-[1.3] pb-1 inline-block overflow-visible">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent leading-[1.2] pb-0 inline-block align-baseline">
               <Link href={LINKS.brandingCollection} className="hover:underline">
                 Enhance Branding Portfolio
               </Link>
