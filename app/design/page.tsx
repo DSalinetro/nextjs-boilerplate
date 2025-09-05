@@ -1,26 +1,26 @@
-// app/design/page.tsx
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 import {
   ChevronDown,
   Mail,
+  Phone,
   MapPin,
   ExternalLink,
   Linkedin,
   BookOpen,
-} from 'lucide-react';
+} from 'lucide-react'
 
-import { Button } from '../../components/ui/button';
-import { Card, CardContent } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button'
+import { Card, CardContent } from '../../components/ui/card'
+import { Badge } from '../../components/ui/badge'
 
 // centralized links
-import { LINKS } from '../../lib/links';
+import { LINKS } from '../../lib/links'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 export default function DesignPage() {
   const [activeSection, setActiveSection] =
@@ -783,3 +783,4 @@ export default function DesignPage() {
     </div>
   );
 }
+
