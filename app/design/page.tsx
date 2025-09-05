@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import {
   ChevronDown,
   Mail,
@@ -20,7 +20,7 @@ import { Badge } from '../../components/ui/badge'
 // centralized links
 import { LINKS } from '../../lib/links'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function DesignPage() {
   const [activeSection, setActiveSection] =
@@ -173,6 +173,19 @@ export default function DesignPage() {
     },
   ] as const;
 
+  // ---------- HERO PARALLAX (flowers/hair) ----------
+  const prefersReduced = useReducedMotion()
+  const heroRef = useRef<HTMLDivElement | null>(null)
+
+  // track scrolling over the hero only
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+
+  // map progress to vertical drift (disabled if reduced motion)
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : -40])
+
   return (
     <div className="min-h-screen">
       {/* NAV */}
@@ -250,12 +263,29 @@ export default function DesignPage() {
       {/* HERO */}
       <section
         id="home"
-        className="relative isolate block w-full min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(/images/field-of-flowers.png)` }}
+        className="relative isolate block w-full min-h-screen overflow-hidden"
         aria-label="Empathy by Design hero"
       >
+        {/* Background image layer that actually animates */}
+        <div ref={heroRef} className="absolute inset-0 z-0">
+          <motion.div
+            style={{ y: heroY }}
+            className="absolute inset-0 will-change-transform pointer-events-none"
+          >
+            {/* Use Next Image so it stays crisp */}
+            <Image
+              src="/images/field-of-flowers.png"
+              alt="Field of flowers"
+              fill
+              className="object-cover select-none"
+              priority
+            />
+          </motion.div>
+        </div>
+
+        {/* Overlay tint/gradient */}
         <motion.div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-10"
           style={{
             background:
               'radial-gradient(1000px 800px at 30% 40%, rgba(212,150,112,0.15), transparent), linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.7) 50%, rgba(0,0,0,.6) 100%)',
@@ -265,7 +295,8 @@ export default function DesignPage() {
           transition={{ duration: 1.2 }}
         />
 
-        <div className="grid place-items-center min-h-screen px-6 py-24 relative z-10">
+        {/* Foreground content */}
+        <div className="grid place-items-center min-h-screen px-6 py-24 relative z-20">
           <motion.div
             className="text-center max-w-4xl mx-auto p-7 md:p-10 rounded-[20px] shadow-2xl"
             style={{
@@ -303,7 +334,8 @@ export default function DesignPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Creative Designer & Researcher · Empathy-Driven Branding & UX&nbsp;Research
+              Creative Designer & Researcher · Empathy-Driven Branding &{' '}
+              <span className="whitespace-nowrap">UX Research</span>
             </motion.p>
 
             <motion.div
@@ -353,7 +385,7 @@ export default function DesignPage() {
         </div>
 
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -376,10 +408,10 @@ export default function DesignPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent leading-[1.3] pb-1 inline-block overflow-visible">
-  <Link href={LINKS.brandingCollection} className="hover:underline">
-    Enhance Branding Portfolio
-  </Link>
-</h2>
+              <Link href={LINKS.brandingCollection} className="hover:underline">
+                Enhance Branding Portfolio
+              </Link>
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
@@ -783,4 +815,3 @@ export default function DesignPage() {
     </div>
   );
 }
-
