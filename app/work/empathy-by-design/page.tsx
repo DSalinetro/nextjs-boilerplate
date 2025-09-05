@@ -11,8 +11,13 @@ type GalleryItem = {
 };
 
 export default function EmpathyByDesignPage() {
-  // ✅ Update this list as you add more artwork to /public/images
+  // ✅ Gallery items (Books of Dreams is first; also used as hero)
   const gallery: GalleryItem[] = [
+    {
+      src: '/images/books-of-dreams.png',
+      alt: 'Books of Dreams — warm, moody library scene',
+      caption: 'Books of Dreams',
+    },
     {
       src: '/images/moody-library.png',
       alt: 'Moody library hero artwork',
@@ -24,22 +29,23 @@ export default function EmpathyByDesignPage() {
       caption: 'Rainy Day',
     },
     {
-      src: '/images/books-of-dreams.png',
-      alt: 'Books of Dreams — warm, moody library scene',
-      caption: 'Books of Dreams',
-    },
-    {
       src: '/images/field-of-flowers.png',
       alt: 'Field of flowers at golden hour',
       caption: 'Field of Flowers',
     },
     {
-      // If you rename this file to remove the double extension, update the src to '/images/bubbles-and-butterflies.png'
+      // If/when you rename the file to remove the double extension,
+      // update to '/images/bubbles-and-butterflies.png'
       src: '/images/bubbles-and-butterflies.png.png',
       alt: 'Bubbles and Butterflies — dreamy artwork',
       caption: 'Bubbles & Butterflies',
     },
   ];
+
+  // 🔹 Hero is locked to Books of Dreams by caption (falls back to first if missing)
+  const hero =
+    gallery.find((g) => g.caption?.toLowerCase() === 'books of dreams') ??
+    gallery[0];
 
   const [openSrc, setOpenSrc] = useState<string | null>(null);
 
@@ -51,9 +57,8 @@ export default function EmpathyByDesignPage() {
   }, []);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      {/* If your portfolio grid lives on /design, keep /design#portfolio.
-          If it’s on the home page, switch to "/#portfolio" instead. */}
+    <main className="max-w-6xl mx-auto px-6 py-12 md:py-16">
+      {/* Back link (adjust target to where your grid lives) */}
       <Link href="/design#portfolio" className="text-sm text-gray-500 hover:text-[#d4967d]">
         &larr; Back to Portfolio
       </Link>
@@ -65,11 +70,30 @@ export default function EmpathyByDesignPage() {
         Photography &amp; art direction for a warm, emotive hero visual.
       </p>
 
-      {/* Gallery */}
+      {/* HERO — now showing Books of Dreams */}
+      <motion.button
+        onClick={() => setOpenSrc(hero.src)}
+        whileHover={{ y: -4 }}
+        className="mt-8 block w-full text-left"
+        aria-label="Open Books of Dreams in lightbox"
+      >
+        <div className="aspect-[16/9] overflow-hidden rounded-2xl bg-gray-50 shadow-lg">
+          <img
+            src={hero.src}
+            alt={hero.alt}
+            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+        </div>
+        {hero.caption && (
+          <div className="mt-3 text-base text-gray-700 font-medium">{hero.caption}</div>
+        )}
+      </motion.button>
+
+      {/* GALLERY */}
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {gallery.map((item, i) => (
           <motion.button
-            key={i}
+            key={`${item.src}-${i}`}
             className="group text-left"
             whileHover={{ y: -4 }}
             onClick={() => setOpenSrc(item.src)}
@@ -79,6 +103,7 @@ export default function EmpathyByDesignPage() {
                 src={item.src}
                 alt={item.alt}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading={i > 2 ? 'lazy' : undefined}
               />
             </div>
             {item.caption && (
@@ -88,11 +113,13 @@ export default function EmpathyByDesignPage() {
         ))}
       </div>
 
-      {/* Lightbox */}
+      {/* LIGHTBOX */}
       {openSrc && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-6"
           onClick={() => setOpenSrc(null)}
+          role="dialog"
+          aria-modal="true"
         >
           <img
             src={openSrc}
