@@ -1,26 +1,15 @@
 'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import {
-  ChevronDown,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
-  Linkedin,
-  BookOpen,
-} from 'lucide-react'
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ChevronDown, Mail, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 
-import { Button } from '../../components/ui/button'
-import { Card, CardContent } from '../../components/ui/card'
-import { Badge } from '../../components/ui/badge'
-
-// centralized links
-import { LINKS } from '../../lib/links'
-
-import { useState, useEffect, useRef } from 'react'
+import { Button } from '../../components/ui/button';
+import { Card, CardContent } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { LINKS } from '../../lib/links';
+import { useState, useEffect, useRef } from 'react';
 
 export default function DesignPage() {
   const [activeSection, setActiveSection] =
@@ -36,9 +25,9 @@ export default function DesignPage() {
       const ids = ['home', 'portfolio', 'about', 'blogs', 'contact'] as const;
       const y = window.scrollY + 100;
       for (const id of ids) {
-        const el = document.getElementById(id);
+        const el = document.getElementById(id) as HTMLElement | null;
         if (!el) continue;
-        const { offsetTop, offsetHeight } = el as HTMLElement;
+        const { offsetTop, offsetHeight } = el;
         if (y >= offsetTop && y < offsetTop + offsetHeight) {
           setActiveSection(id);
           break;
@@ -78,7 +67,7 @@ export default function DesignPage() {
         'A poetic blend of vintage typewriter and natural beauty—empathy-driven storytelling and connection.',
       image: '/images/typewriter-roses.png',
       category: 'Conceptual Art',
-      link: LINKS.medium, // external (Medium)
+      link: LINKS.medium,
     },
     {
       id: 3,
@@ -87,7 +76,7 @@ export default function DesignPage() {
         'Research-driven concept exploring emotion → clarity → confident action. Case study + artifacts.',
       image: '/images/hearts-minds/hero.jpg',
       category: 'UX Concept',
-      link: LINKS.heartsMindsPortfolio, // external Figma site
+      link: LINKS.heartsMindsPortfolio,
     },
     {
       id: 6,
@@ -101,8 +90,7 @@ export default function DesignPage() {
     {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
-      description:
-        'Photography & art direction for a warm, emotive hero visual.',
+      description: 'Photography & art direction for a warm, emotive hero visual.',
       image: '/images/moody-library.png',
       category: 'Photography',
       link: '/work/empathy-by-design',
@@ -119,7 +107,7 @@ export default function DesignPage() {
       date: 'Aug 23, 2025',
       link:
         'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-      image: 'https://imgur.com/SPlMkgL.png',
+      image: 'https://imgur.com/SPlMkgL.png', // external, so use <img>
     },
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
@@ -132,8 +120,7 @@ export default function DesignPage() {
       image: '/images/empathy-rose.png',
     },
     {
-      title:
-        'Designing for Mental Health: Toolkit for Compassionate Creativity',
+      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
       excerpt:
         'Strategies for moving beyond surface-level design thinking to support mental wellness.',
       readTime: '6 min read',
@@ -173,30 +160,24 @@ export default function DesignPage() {
     },
   ] as const;
 
-  // ---------- HERO PARALLAX (flowers/hair) ----------
-  const prefersReduced = useReducedMotion()
-  const heroSectionRef = useRef<HTMLElement | null>(null)
-
-  // simple, reliable parallax tied to global scroll
-  const { scrollY } = useScroll()
-  const heroY = useTransform(scrollY, [0, 400], [0, prefersReduced ? 0 : -40])
+  // ---------- HERO PARALLAX ----------
+  const prefersReduced = useReducedMotion();
+  const heroSectionRef = useRef<HTMLElement | null>(null);
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 400], [0, prefersReduced ? 0 : -40]);
 
   return (
     <div className="min-h-screen">
       {/* NAV */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10"
-        style={{ background: 'rgba(0,0,0,0.5)' }}
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <motion.div
-              className="text-xl font-bold text-white"
-              whileHover={{ scale: 1.05 }}
-            >
+            <motion.div className="text-xl font-bold text-white" whileHover={{ scale: 1.05 }}>
               Danielle Salinetro
             </motion.div>
 
@@ -212,9 +193,7 @@ export default function DesignPage() {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-colors duration-200 ${
-                    activeSection === item.id
-                      ? 'text-[#D49670]'
-                      : 'text-white/80 hover:text-white'
+                    activeSection === item.id ? 'text-[#D49670]' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.label}
@@ -263,13 +242,10 @@ export default function DesignPage() {
         aria-label="Empathy by Design hero"
       >
         {/* Background image that moves */}
-        <motion.div
-          style={{ y: heroY }}
-          className="absolute inset-0 will-change-transform pointer-events-none z-0"
-        >
+        <motion.div style={{ y: heroY }} className="absolute inset-0 will-change-transform pointer-events-none z-0">
           <Image
             src="/images/field-of-flowers.png"
-            alt="Field of flowers"
+            alt="Field of wildflowers in warm light"
             fill
             className="object-cover select-none"
             priority
@@ -305,10 +281,7 @@ export default function DesignPage() {
           >
             <motion.h1
               className="mb-2 text-white font-extrabold tracking-wide leading-tight [text-wrap:balance]"
-              style={{
-                fontSize: 'clamp(36px, 6vw, 64px)',
-                textShadow: '0 6px 20px rgba(0,0,0,.6)',
-              }}
+              style={{ fontSize: 'clamp(36px, 6vw, 64px)', textShadow: '0 6px 20px rgba(0,0,0,.6)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -318,11 +291,7 @@ export default function DesignPage() {
 
             <motion.p
               className="mx-auto mb-5 max-w-3xl leading-relaxed"
-              style={{
-                color: '#f6f2ef',
-                fontSize: 'clamp(16px, 2.2vw, 20px)',
-                textShadow: '0 2px 8px rgba(0,0,0,.4)',
-              }}
+              style={{ color: '#f6f2ef', fontSize: 'clamp(16px, 2.2vw, 20px)', textShadow: '0 2px 8px rgba(0,0,0,.4)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -345,12 +314,8 @@ export default function DesignPage() {
                   boxShadow: '0 6px 20px rgba(212,150,112,.4)',
                   backdropFilter: 'saturate(120%)',
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    '0 10px 30px rgba(212,150,112,.5)')}
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    '0 6px 20px rgba(212,150,112,.4)')}
+                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 30px rgba(212,150,112,.5)')}
+                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,150,112,.4)')}
               >
                 View My Work
               </button>
@@ -358,14 +323,9 @@ export default function DesignPage() {
               <Link
                 href="/resume"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-[14px] font-bold text-white no-underline transition-all duration-200 ease-out hover:transform hover:-translate-y-0.5 border border-white/70"
-                style={{
-                  background: 'rgba(255,255,255,.12)',
-                  backdropFilter: 'saturate(120%)',
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
+                style={{ background: 'rgba(255,255,255,.12)', backdropFilter: 'saturate(120%)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
               >
                 View Resume
               </Link>
@@ -380,23 +340,13 @@ export default function DesignPage() {
           aria-label="Scroll to portfolio"
         >
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-            <ChevronDown
-              className="text-white/80"
-              size={32}
-              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
-            />
+            <ChevronDown className="text-white/80" size={32} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} />
           </motion.div>
         </button>
       </section>
 
       {/* PORTFOLIO GRID */}
-      <section
-        id="portfolio"
-        <section
-  id="portfolio"
-  className="-mt-10 pt-8 pb-16 bg-gradient-to-br from-slate-50 to-white"
->
-      >
+      <section id="portfolio" className="-mt-10 pt-8 pb-16 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             className="text-center mb-16"
@@ -415,10 +365,7 @@ export default function DesignPage() {
             </p>
 
             <div className="flex items-center justify-center gap-4">
-              <Link
-                href={LINKS.brandingCollection}
-                className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline"
-              >
+              <Link href={LINKS.brandingCollection} className="inline-flex items-center gap-2 text-[#D49670] font-semibold hover:underline">
                 Open Enhance Branding Portfolio <ExternalLink size={16} />
               </Link>
             </div>
@@ -453,12 +400,7 @@ export default function DesignPage() {
                   <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary">{item.category}</Badge>
-                      {item.link && (
-                        <ExternalLink
-                          size={16}
-                          className="text-gray-400 group-hover:text-[#D49670] transition-colors"
-                        />
-                      )}
+                      {item.link && <ExternalLink size={16} className="text-gray-400 group-hover:text-[#D49670] transition-colors" />}
                     </div>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-[#D49670] transition-colors min-h-[2.75rem]">
                       {item.title}
@@ -482,13 +424,7 @@ export default function DesignPage() {
                 >
                   {item.link ? (
                     isExternal ? (
-                      <a
-                        href={item.link as string}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block"
-                        aria-label={item.title}
-                      >
+                      <a href={item.link as string} target="_blank" rel="noopener noreferrer" className="block" aria-label={item.title}>
                         {CardEl}
                       </a>
                     ) : (
@@ -549,11 +485,7 @@ export default function DesignPage() {
 
             <motion.div className="relative" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="/images/portrait.png"
-                  alt="Danielle Salinetro"
-                  className="w-full h-full object-cover"
-                />
+                <img src="/images/portrait.png" alt="Danielle Salinetro" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </motion.div>
@@ -642,36 +574,22 @@ export default function DesignPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Mail className="text-[#D49670]" size={20} />
-                  <a
-                    href="mailto:dsalinetro@pm.me"
-                    className="hover:text-[#D49670] transition-colors"
-                  >
+                  <a href="mailto:dsalinetro@pm.me" className="hover:text-[#D49670] transition-colors">
                     dsalinetro@pm.me
                   </a>
                 </div>
-
                 <div className="flex items-center gap-4">
                   <MapPin className="text-[#D49670]" size={20} />
                   <span>Kansas City, MO (Remote)</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <ExternalLink className="text-[#D49670]" size={20} />
-                  <a
-                    href={LINKS.siteHome}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#D49670] transition-colors"
-                  >
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="hover:text-[#D49670] transition-colors">
                     daniellesalinetro.design
                   </a>
                 </div>
@@ -680,12 +598,7 @@ export default function DesignPage() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  <a
-                    href={LINKS.medium}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
-                  >
+                  <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
                     <BookOpen size={20} />
                   </a>
                   <a
@@ -696,24 +609,14 @@ export default function DesignPage() {
                   >
                     <Linkedin size={20} />
                   </a>
-                  <a
-                    href={LINKS.siteHome}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors"
-                  >
+                  <a href={LINKS.siteHome} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-lg hover:bg-[#D49670] transition-colors">
                     <ExternalLink size={20} />
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -763,10 +666,7 @@ export default function DesignPage() {
                     placeholder="Tell me about your project…"
                   />
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors"
-                >
+                <Button type="submit" className="w-full bg-[#D49670] hover:bg-[#c47f64] text-white py-3 rounded-lg font-semibold transition-colors">
                   Send Message
                 </Button>
               </form>
@@ -779,23 +679,13 @@ export default function DesignPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <p className="text-gray-400">
-                © 2025 Danielle Salinetro. All rights reserved.
-              </p>
+              <p className="text-gray-400">© 2025 Danielle Salinetro. All rights reserved.</p>
             </div>
             <div className="flex items-center gap-6">
-              <a
-                href="mailto:dsalinetro@pm.me"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
+              <a href="mailto:dsalinetro@pm.me" className="text-gray-400 hover:text-white transition-colors">
                 Email
               </a>
-              <a
-                href={LINKS.medium}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
+              <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 Medium
               </a>
               <a
