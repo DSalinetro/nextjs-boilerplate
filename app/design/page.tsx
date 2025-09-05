@@ -91,7 +91,7 @@ export default function DesignPage() {
       id: 7,
       title: 'Empathy by Design — Hero Artwork',
       description: 'Photography & art direction for a warm, emotive hero visual.',
-      image: '/images/moody-library.png',
+       image: '/images/books-of-dreams.png',
       category: 'Photography',
       link: '/work/empathy-by-design',
     },
