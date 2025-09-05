@@ -175,16 +175,11 @@ export default function DesignPage() {
 
   // ---------- HERO PARALLAX (flowers/hair) ----------
   const prefersReduced = useReducedMotion()
-  const heroRef = useRef<HTMLDivElement | null>(null)
+  const heroSectionRef = useRef<HTMLElement | null>(null)
 
-  // track scrolling over the hero only
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-
-  // map progress to vertical drift (disabled if reduced motion)
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : -40])
+  // simple, reliable parallax tied to global scroll
+  const { scrollY } = useScroll()
+  const heroY = useTransform(scrollY, [0, 400], [0, prefersReduced ? 0 : -40])
 
   return (
     <div className="min-h-screen">
@@ -263,25 +258,23 @@ export default function DesignPage() {
       {/* HERO */}
       <section
         id="home"
+        ref={heroSectionRef}
         className="relative isolate block w-full min-h-screen overflow-hidden"
         aria-label="Empathy by Design hero"
       >
-        {/* Background image layer that actually animates */}
-        <div ref={heroRef} className="absolute inset-0 z-0">
-          <motion.div
-            style={{ y: heroY }}
-            className="absolute inset-0 will-change-transform pointer-events-none"
-          >
-            {/* Use Next Image so it stays crisp */}
-            <Image
-              src="/images/field-of-flowers.png"
-              alt="Field of flowers"
-              fill
-              className="object-cover select-none"
-              priority
-            />
-          </motion.div>
-        </div>
+        {/* Background image that moves */}
+        <motion.div
+          style={{ y: heroY }}
+          className="absolute inset-0 will-change-transform pointer-events-none z-0"
+        >
+          <Image
+            src="/images/field-of-flowers.png"
+            alt="Field of flowers"
+            fill
+            className="object-cover select-none"
+            priority
+          />
+        </motion.div>
 
         {/* Overlay tint/gradient */}
         <motion.div
@@ -354,12 +347,10 @@ export default function DesignPage() {
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.boxShadow =
-                    '0 10px 30px rgba(212,150,112,.5)')
-                }
+                    '0 10px 30px rgba(212,150,112,.5)')}
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.boxShadow =
-                    '0 6px 20px rgba(212,150,112,.4)')
-                }
+                    '0 6px 20px rgba(212,150,112,.4)')}
               >
                 View My Work
               </button>
@@ -372,11 +363,9 @@ export default function DesignPage() {
                   backdropFilter: 'saturate(120%)',
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = 'rgba(255,255,255,.18)')
-                }
+                  (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = 'rgba(255,255,255,.12)')
-                }
+                  (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
               >
                 View Resume
               </Link>
@@ -384,21 +373,27 @@ export default function DesignPage() {
           </motion.div>
         </div>
 
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+        {/* Clickable scroll hint */}
+        <button
+          onClick={() => scrollToSection('portfolio')}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 rounded-full outline-none focus:ring-2 focus:ring-white/50"
+          aria-label="Scroll to portfolio"
         >
-          <ChevronDown
-            className="text-white/70"
-            size={32}
-            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
-          />
-        </motion.div>
+          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <ChevronDown
+              className="text-white/80"
+              size={32}
+              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
+            />
+          </motion.div>
+        </button>
       </section>
 
       {/* PORTFOLIO GRID */}
-      <section id="portfolio" className="py-20 bg-gradient-to-br from-slate-50 to-white">
+      <section
+        id="portfolio"
+        className="-mt-6 pt-12 pb-20 bg-gradient-to-br from-slate-50 to-white"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             className="text-center mb-16"
