@@ -375,11 +375,11 @@ export default function DesignPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              <Link href={LINKS.brandingCollection} className="hover:underline">
-                Enhance Branding Portfolio
-              </Link>
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent leading-[1.3] pb-1 inline-block overflow-visible">
+  <Link href={LINKS.brandingCollection} className="hover:underline">
+    Enhance Branding Portfolio
+  </Link>
+</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
               A collection of empathy-driven design work spanning branding, UX research, and visual storytelling
             </p>
