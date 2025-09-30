@@ -99,7 +99,15 @@ export default function DesignPage() {
 
   // ---------- BLOGS ----------
   const blogPosts = [
-    {
+  {
+  title: "Gaza’s Children and the Hunger Humanity Must End",
+  excerpt:
+    "Gaza’s famine is not a tragedy of nature—it’s a failure of humanity. Why children are starving now, and what we must do.",
+  readTime: "8 min read",
+  date: "Sep 30, 2025",
+  link: "https://medium.com/@dsalinetro/gazas-children-and-the-hunger-humanity-must-end-4b77320ad1ce",
+  image: "https://your-site.com/images/freepik__the-style-is-candid-image-photography-with-natural__2260.png", // or upload to Imgur for a shorter link
+},
       title: 'Invisible Barriers: Designing for Users Society Forgets',
       excerpt:
         'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
