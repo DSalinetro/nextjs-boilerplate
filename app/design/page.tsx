@@ -106,17 +106,17 @@ export default function DesignPage() {
   readTime: "8 min read",
   date: "Sep 30, 2025",
   link: "https://medium.com/@dsalinetro/gazas-children-and-the-hunger-humanity-must-end-4b77320ad1ce",
-  image: "https://your-site.com/images/freepik__the-style-is-candid-image-photography-with-natural__2260.png", // or upload to Imgur for a shorter link
+  image: "/images/freepik__the-style-is-candid-image-photography-with-natural__2260.png",
+},  // ✅ comma here
+{
+  title: "Invisible Barriers: Designing for Users Society Forgets",
+  excerpt:
+    "How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.",
+  readTime: "7 min read",
+  date: "Aug 23, 2025",
+  link: "https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078",
+  image: "https://imgur.com/SPlMkgL.png",
 },
-      title: 'Invisible Barriers: Designing for Users Society Forgets',
-      excerpt:
-        'How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.',
-      readTime: '7 min read',
-      date: 'Aug 23, 2025',
-      link:
-        'https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078',
-      image: 'https://imgur.com/SPlMkgL.png', // external → will use <img>
-    },
     {
       title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
       excerpt:
