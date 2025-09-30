@@ -40,14 +40,31 @@ export default function EmpathyByDesignPage() {
       alt: 'Bubbles and Butterflies — dreamy artwork',
       caption: 'Bubbles & Butterflies',
     },
-   {
-  src: "https://i.imgur.com/7WiZ7HW.png",
-  alt: "Wildflower & Willow Spa — Empathy by Design hero artwork."
-}, // ← keep the comma
-    {
-  src: "https://i.imgur.com/QYax1on.png",  // direct Imgur link
-  alt: "Wildflower & Willow Spa — Empathy by Design hero artwork."
-},
+
+    // 🔹 New Imgur items (direct links). Feel free to reorder.
+    { src: 'https://i.imgur.com/7WiZ7HW.png', alt: 'Wildflower & Willow Spa — Empathy by Design hero artwork.' },
+    { src: 'https://i.imgur.com/QYax1on.png', alt: 'Wildflower & Willow Spa — Empathy by Design hero artwork.' },
+
+    { src: 'https://i.imgur.com/JfKkTV4.png', alt: 'Empathy by Design — Hero Artwork (JfKkTV4)' },
+    { src: 'https://i.imgur.com/YXFseqs.png', alt: 'Empathy by Design — Hero Artwork (YXFseqs)' },
+    { src: 'https://i.imgur.com/bQagKo6.png', alt: 'Empathy by Design — Hero Artwork (bQagKo6)' },
+    { src: 'https://i.imgur.com/cvpLp6e.png', alt: 'Empathy by Design — Hero Artwork (cvpLp6e)' },
+    { src: 'https://i.imgur.com/tSCUORv.png', alt: 'Empathy by Design — Hero Artwork (tSCUORv)' },
+    { src: 'https://i.imgur.com/SPlMkgL.png', alt: 'Empathy by Design — Hero Artwork (SPlMkgL)' },
+    { src: 'https://i.imgur.com/OpSKBdD.png', alt: 'Empathy by Design — Hero Artwork (OpSKBdD)' },
+    { src: 'https://i.imgur.com/J7jy2ob.png', alt: 'Empathy by Design — Hero Artwork (J7jy2ob)' },
+    { src: 'https://i.imgur.com/A2YqFuX.png', alt: 'Empathy by Design — Hero Artwork (A2YqFuX)' },
+    { src: 'https://i.imgur.com/GttboQT.png', alt: 'Empathy by Design — Hero Artwork (GttboQT)' },
+    { src: 'https://i.imgur.com/VMhswmq.png', alt: 'Empathy by Design — Hero Artwork (VMhswmq)' },
+    { src: 'https://i.imgur.com/CDaEvkB.png', alt: 'Empathy by Design — Hero Artwork (CDaEvkB)' },
+    { src: 'https://i.imgur.com/2BKtXpU.png', alt: 'Empathy by Design — Hero Artwork (2BKtXpU)' },
+    { src: 'https://i.imgur.com/nn0HTzZ.png', alt: 'Empathy by Design — Hero Artwork (nn0HTzZ)' },
+    { src: 'https://i.imgur.com/tzYZbVL.png', alt: 'Empathy by Design — Hero Artwork (tzYZbVL)' },
+    { src: 'https://i.imgur.com/sXsDX6c.png', alt: 'Empathy by Design — Hero Artwork (sXsDX6c)' },
+    { src: 'https://i.imgur.com/cdOprHO.png', alt: 'Empathy by Design — Hero Artwork (cdOprHO)' },
+    { src: 'https://i.imgur.com/NhPGLAC.png', alt: 'Empathy by Design — Hero Artwork (NhPGLAC)' },
+    { src: 'https://i.imgur.com/CjeFrwt.png', alt: 'Empathy by Design — Hero Artwork (CjeFrwt)' },
+    { src: 'https://i.imgur.com/ruYw9PO.png', alt: 'Empathy by Design — Hero Artwork (ruYw9PO)' },
   ];
 
   // 🔹 Hero is locked to Books of Dreams by caption (falls back to first if missing)
