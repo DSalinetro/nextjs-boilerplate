@@ -40,6 +40,11 @@ export default function EmpathyByDesignPage() {
       alt: 'Bubbles and Butterflies — dreamy artwork',
       caption: 'Bubbles & Butterflies',
     },
+    {
+  src: "https://i.imgur.com/7WiZ7HW.png",   // direct link version of your Imgur file
+  title: "Wildflower & Willow Spa",
+  alt: "Soft, candid style visual for Wildflower & Willow Spa, part of the Empathy by Design hero artwork series."
+},
   ];
 
   // 🔹 Hero is locked to Books of Dreams by caption (falls back to first if missing)
