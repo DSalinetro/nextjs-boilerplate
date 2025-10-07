@@ -161,10 +161,20 @@ export default function DesignPage() {
       excerpt:
         'A reflection on empathy in design and building authentic connections.',
       readTime: '9 min read',
-      date: 'Sep 28, 2024',
+      date: 'Sep 28, 2025',
       link:
         'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
       image: '/images/designing-with-empathy-red-chair.jpg',
+    },
+     {
+      title: "Silent Depression and Loneliness: What We Don't Always See",
+      excerpt:
+        "Feeling unseen, unheard, and misunderstood—and how to gently show up.",
+      readTime:'6 min read',
+      date: 'Oct 07, 2025',
+      link:
+        'https://medium.com/@dsalinetro/silent-depression-and-loneliness-what-we-dont-always-see-f87d07afb5e8,
+      image: "/images/silent-depression-header.png",
     },
   ] as const;
 
