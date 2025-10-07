@@ -98,85 +98,87 @@ export default function DesignPage() {
   ] as const;
 
   // ---------- BLOGS ----------
-  const blogPosts = [
+const blogPosts = [
   {
-  title: "Gaza’s Children and the Hunger Humanity Must End",
-  excerpt:
-    "Gaza’s famine is not a tragedy of nature—it’s a failure of humanity. Why children are starving now, and what we must do.",
-  readTime: "8 min read",
-  date: "Sep 30, 2025",
-  link: "https://medium.com/@dsalinetro/gazas-children-and-the-hunger-humanity-must-end-4b77320ad1ce",
-  image: "/images/freepik__the-style-is-candid-image-photography-with-natural__2260.png",
-},  // ✅ comma here
-{
-  title: "Invisible Barriers: Designing for Users Society Forgets",
-  excerpt:
-    "How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.",
-  readTime: "7 min read",
-  date: "Aug 23, 2025",
-  link: "https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078",
-  image: "https://imgur.com/SPlMkgL.png",
-},
-    {
-      title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
-      excerpt:
-        'A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.',
-      readTime: '10 min read',
-      date: 'Jan 8, 2025',
-      link:
-        'https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5',
-      image: '/images/empathy-rose.png',
-    },
-    {
-      title: 'Designing for Mental Health: Toolkit for Compassionate Creativity',
-      excerpt:
-        'Strategies for moving beyond surface-level design thinking to support mental wellness.',
-      readTime: '6 min read',
-      date: 'Dec 15, 2024',
-      link:
-        'https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802',
-      image: '/images/designing-for-mental-health.png',
-    },
-    {
-      title: "Beyond 'Why Didn't They Just Leave?'",
-      excerpt:
-        'How design can change the conversation around complex human experiences.',
-      readTime: '8 min read',
-      date: 'Nov 20, 2024',
-      link:
-        'https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14',
-      image: '/images/beyond-why-didnt-they-just-leave.webp',
-    },
-    {
-      title: 'Every Child Deserves a Fair Start',
-      excerpt: 'Turning awareness into action through empathy-driven design.',
-      readTime: '7 min read',
-      date: 'Oct 15, 2024',
-      link:
-        'https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393',
-      image: '/images/every-child-deserves-a-fair-start.webp',
-    },
-    {
-      title: 'Designing with Empathy: My Creative Journey',
-      excerpt:
-        'A reflection on empathy in design and building authentic connections.',
-      readTime: '9 min read',
-      date: 'Sep 28, 2025',
-      link:
-        'https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5',
-      image: '/images/designing-with-empathy-red-chair.jpg',
-    },
-     {
-      title: "Silent Depression and Loneliness: What We Don't Always See",
-      excerpt:
-        "Feeling unseen, unheard, and misunderstood—and how to gently show up.",
-      readTime:'6 min read',
-      date: 'Oct 07, 2025',
-      link:
-        'https://medium.com/@dsalinetro/silent-depression-and-loneliness-what-we-dont-always-see-f87d07afb5e8,
-      image: "/images/silent-depression-header.png",
-    },
-  ] as const;
+    title: "Silent Depression and Loneliness: What We Don't Always See",
+    excerpt:
+      "Feeling unseen, unheard, and misunderstood—and how to gently show up.",
+    readTime: "6 min read",
+    date: "Oct 07, 2025",
+    link:
+      "https://medium.com/@dsalinetro/silent-depression-and-loneliness-what-we-dont-always-see-f87d07afb5e8",
+    image: "https://i.imgur.com/lCKxZhF.png",
+  },
+  {
+    title: "Gaza’s Children and the Hunger Humanity Must End",
+    excerpt:
+      "Gaza’s famine is not a tragedy of nature—it’s a failure of humanity. Why children are starving now, and what we must do.",
+    readTime: "8 min read",
+    date: "Sep 30, 2025",
+    link:
+      "https://medium.com/@dsalinetro/gazas-children-and-the-hunger-humanity-must-end-4b77320ad1ce",
+    image: "/images/freepik__the-style-is-candid-image-photography-with-natural__2260.png",
+  },
+  {
+    title: "Invisible Barriers: Designing for Users Society Forgets",
+    excerpt:
+      "How subtle design defaults create glass-wall barriers—and practical ways empathy-driven design can dismantle them.",
+    readTime: "7 min read",
+    date: "Aug 23, 2025",
+    link:
+      "https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e?sk=c35a9310f979987d96c76abae7ab8078",
+    image: "https://imgur.com/SPlMkgL.png",
+  },
+  {
+    title: "The Empathy Audit: How to Evaluate Your Design's Human Impact",
+    excerpt:
+      "A framework for measuring emotional outcomes in design and ensuring your work creates meaningful human connections.",
+    readTime: "10 min read",
+    date: "Jan 8, 2025",
+    link:
+      "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
+    image: "/images/empathy-rose.png",
+  },
+  {
+    title: "Designing for Mental Health: Toolkit for Compassionate Creativity",
+    excerpt:
+      "Strategies for moving beyond surface-level design thinking to support mental wellness.",
+    readTime: "6 min read",
+    date: "Dec 15, 2024",
+    link:
+      "https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802",
+    image: "/images/designing-for-mental-health.png",
+  },
+  {
+    title: "Beyond 'Why Didn't They Just Leave?'",
+    excerpt:
+      "How design can change the conversation around complex human experiences.",
+    readTime: "8 min read",
+    date: "Nov 20, 2024",
+    link:
+      "https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14",
+    image: "/images/beyond-why-didnt-they-just-leave.webp",
+  },
+  {
+    title: "Every Child Deserves a Fair Start",
+    excerpt: "Turning awareness into action through empathy-driven design.",
+    readTime: "7 min read",
+    date: "Oct 15, 2024",
+    link:
+      "https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393",
+    image: "/images/every-child-deserves-a-fair-start.webp",
+  },
+  {
+    title: "Designing with Empathy: My Creative Journey",
+    excerpt:
+      "A reflection on empathy in design and building authentic connections.",
+    readTime: "9 min read",
+    date: "Sep 28, 2025",
+    link:
+      "https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5",
+    image: "/images/designing-with-empathy-red-chair.jpg",
+  },
+] as const;
 
   // ---------- HERO PARALLAX ----------
   const prefersReduced = useReducedMotion();
