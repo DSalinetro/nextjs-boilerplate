@@ -1,4 +1,8 @@
 // app/layout.tsx
+// app/layout.tsx
+export const metadata = {
+  metadataBase: new URL('https://daniellesalinetro.design'),
+};
 import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
