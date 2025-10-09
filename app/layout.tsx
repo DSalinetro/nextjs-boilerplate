@@ -1,22 +1,13 @@
-// app/layout.tsx
+// app/layout.tsx  (SERVER component)
 import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
-import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 
-// local components
-import ClientToaster from '../components/ClientToaster';
-import AdminBar from '../components/AdminBar';
-import AccessibilitySwitcher from '../components/AccessibilitySwitcher';
-
+// Keep only ONE metadata export in this file
 export const metadata: Metadata = {
-  metadataBase: new URL('https://daniellesalinetro.design'),
-  title: {
-    default: 'Danielle Salinetro',
-    template: '%s — Danielle Salinetro',
-  },
+  title: 'Danielle Salinetro',
   description: 'Portfolio',
 };
 
@@ -24,10 +15,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <AccessibilitySwitcher />
-        <AdminBar />
-        <ClientToaster />
-        <Suspense>{children}</Suspense>
+        {/* Put *everything* that renders under the layout inside Suspense */}
+        <Suspense fallback={null}>
+          {children}
+        </Suspense>
         <Analytics />
       </body>
     </html>
