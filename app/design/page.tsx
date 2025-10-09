@@ -1,14 +1,13 @@
-// app/page.tsx  (SERVER file – no "use client" here)
-
-import HomeClient from './HomeClient';
+// app/design/page.tsx  (SERVER file – no "use client")
+import DesignPageClient from './DesignPageClient';
 
 export const metadata = {
-  title: 'Danielle Salinetro — Empathy-Driven Design & Marketing',
+  title: 'Design Portfolio — Danielle Salinetro',
   description:
-    'Design systems, SEO content, and analytics that turn empathy and evidence into growth.',
-  alternates: { canonical: '/' },
+    'Selected brand systems, web builds, and UX artifacts with outcomes and process notes.',
+  alternates: { canonical: '/design' },
 };
 
-export default function HomePage() {
-  return <HomeClient />;   // keep wrapper minimal
+export default function DesignPage() {
+  return <DesignPageClient />;
 }
