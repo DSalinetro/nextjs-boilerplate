@@ -1,3 +1,16 @@
+export const metadata = {
+  title: 'Design Portfolio — Danielle Salinetro',
+  description: 'Selected brand systems, web builds, and UX artifacts with outcomes and process notes.',
+  alternates: { canonical: '/design' },
+};
+
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ChevronDown, Mail, MapPin, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
+
 'use client';
 
 import Image from 'next/image';
