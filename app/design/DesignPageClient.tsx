@@ -1,4 +1,3 @@
-import BlogsSection from '../../components/BlogsSection';
 // app/design/DesignPageClient.tsx
 'use client';
 
@@ -13,8 +12,13 @@ import { Badge } from '../../components/ui/badge';
 import { LINKS } from '../../lib/links';
 import { useState, useEffect, useRef } from 'react';
 
+// ✅ put it here, with the other imports
+import BlogsSection from '../../components/BlogsSection';
+
 export default function DesignPageClient() {
-  const [activeSection, setActiveSection] = useState<'home' | 'portfolio' | 'about' | 'blogs' | 'contact'>('home');
+  const [activeSection, setActiveSection] = useState<
+    'home' | 'portfolio' | 'about' | 'blogs' | 'contact'
+  >('home');
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -28,7 +32,10 @@ export default function DesignPageClient() {
         const el = document.getElementById(id) as HTMLElement | null;
         if (el) {
           const { offsetTop, offsetHeight } = el;
-          if (window.scrollY >= offsetTop - 40 && window.scrollY < offsetTop + offsetHeight) {
+          if (
+            window.scrollY >= offsetTop - 40 &&
+            window.scrollY < offsetTop + offsetHeight
+          ) {
             setActiveSection(id);
             break;
           }
@@ -41,8 +48,9 @@ export default function DesignPageClient() {
   }, []);
 
   return (
-  <main>
-    <BlogsSection />
-  </main>
-);
-
+    <main>
+      {/* other sections can go here */}
+      <BlogsSection />
+    </main>
+  );
+}
