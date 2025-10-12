@@ -1,6 +1,6 @@
-// app/page.tsx  (SERVER component)
+// app/page.tsx (Server Component)
 
-import HomeClient from './HomeClient';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Danielle Salinetro — Empathy-Driven Design & Marketing',
@@ -10,5 +10,5 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return <HomeClient />;
+  redirect('/design');
 }
