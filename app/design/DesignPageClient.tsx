@@ -1,3 +1,4 @@
+import BlogsSection from '../../components/BlogsSection';
 // app/design/DesignPageClient.tsx
 'use client';
 
@@ -40,8 +41,8 @@ export default function DesignPageClient() {
   }, []);
 
   return (
-    <main>
-      {/* your JSX content goes here */}
-    </main>
-  );
-}
+  <main>
+    <BlogsSection />
+  </main>
+);
+
