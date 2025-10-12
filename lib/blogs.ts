@@ -15,7 +15,7 @@ export const BLOGS = [
     readTime: "6 min read",
     date: "October 2025",
     link: "https://medium.com/@dsalinetro/silent-depression-and-loneliness-what-we-dont-always-see-f87d07afb5e8",
-    image: "https://imgur.com/lCKxZhF.png", // update with your chosen image
+    image: "https://i.imgur.com/lCKxZhF.png", // update with your chosen image
   },
   {
     title: "Gaza’s Children and the Hunger Humanity Must End",
@@ -31,7 +31,7 @@ export const BLOGS = [
     readTime: "9 min read",
     date: "September 2025",
     link: "https://medium.com/@dsalinetro/when-childhood-is-interrupted-a-crisis-we-cant-ignore-87c39b1a65bf",
-    image: "https://imgur.com/j8pqMrx.png",
+    image: "https://i.imgur.com/j8pqMrx.png",
   },
   {
     title: "The Invisible Walls That Separate People from Access and Belonging",
@@ -39,7 +39,7 @@ export const BLOGS = [
     readTime: "7 min read",
     date: "September 2025",
     link: "https://medium.com/@dsalinetro/a-surreal-glass-like-barrier-with-cracks-symbolizing-the-invisible-walls-that-separate-people-from-d2a582f6707e",
-    image: "https://imgur.com/SPlMkgL.png",
+    image: "https://i.imgur.com/SPlMkgL.png",
   },
   {
     title: "The Empathy Audit: How to Evaluate Your Design’s Human Impact",
@@ -47,7 +47,7 @@ export const BLOGS = [
     readTime: "11 min read",
     date: "August 2025",
     link: "https://medium.com/@dsalinetro/the-empathy-audit-how-to-evaluate-your-designs-human-impact-267dc8af1bf5",
-    image: "https://imgur.com/J16isks.png",
+    image: "https://i.imgur.com/J16isks.png",
   },
   {
     title: "Designing for Mental Health: A Toolkit for Compassionate Creativity",
@@ -55,7 +55,7 @@ export const BLOGS = [
     readTime: "7 min read",
     date: "August 2025",
     link: "https://medium.com/@dsalinetro/designing-for-mental-health-a-toolkit-for-compassionate-creativity-5b727955a802",
-    image: "https://imgur.com/NTuGg3J.png",
+    image: "https://i.imgur.com/NTuGg3J.png",
   },
   {
     title: "Beyond “Why Didn’t They Just Leave?”: How Design Can Change the Conversation",
@@ -63,7 +63,7 @@ export const BLOGS = [
     readTime: "8 min read",
     date: "August 2025",
     link: "https://medium.com/@dsalinetro/beyond-why-didnt-they-just-leave-how-design-can-change-the-conversation-31ac8881fe14",
-    image: "https://imgur.com/BNcsAzB.png",
+    image: "https://i.imgur.com/BNcsAzB.png",
   },
   {
     title: "Every Child Deserves a Fair Start: Turning Awareness into Action",
@@ -71,7 +71,7 @@ export const BLOGS = [
     readTime: "3 min read",
     date: "August 2025",
     link: "https://medium.com/@dsalinetro/every-child-deserves-a-fair-start-turning-awareness-into-action-2ac7a73f7393",
-    image: "https://imgur.com/kwxj0S3.png",
+    image: "https://i.imgur.com/kwxj0S3.png",
   },
   {
     title: "Designing With Empathy: My Creative Journey",
@@ -79,6 +79,6 @@ export const BLOGS = [
     readTime: "4 min read",
     date: "August 2025",
     link: "https://medium.com/@dsalinetro/designing-with-empathy-my-creative-journey-ebc6ad12ceb5",
-    image: "https://imgur.com/Bh5K9tK/png",
+    image: "https://i.imgur.com/Bh5K9tK.png",
   },
 ];
